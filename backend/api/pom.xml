@@ -14,21 +14,6 @@
 
   <dependencies>
 
-    <dependency>
-      <artifactId>spring-web</artifactId>
-      <groupId>org.springframework</groupId>
-    </dependency>
-
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-    </dependency>
-
-    <dependency>
-      <artifactId>spring-context</artifactId>
-      <groupId>org.springframework</groupId>
-    </dependency>
-
   </dependencies>
 
   <build>
