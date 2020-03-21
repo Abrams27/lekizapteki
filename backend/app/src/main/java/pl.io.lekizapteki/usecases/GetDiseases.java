@@ -17,9 +17,9 @@ public class GetDiseases {
 
   private DiseaseDto mockDisease() {
     return DiseaseDto.builder()
-      .id(2137L)
-      .name("chuj")
-      .build();
+        .id(2137L)
+        .name("chuj")
+        .build();
   }
 
 }

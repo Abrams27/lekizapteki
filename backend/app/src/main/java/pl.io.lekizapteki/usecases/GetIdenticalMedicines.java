@@ -17,11 +17,11 @@ public class GetIdenticalMedicines {
 
   private MedicineDto mockMedicine() {
     return MedicineDto.builder()
-      .name("Nervosol")
-      .ean("2134567890")
-      .dose("12345")
-      .id(12345L)
-      .build();
+        .name("Nervosol")
+        .ean("2134567890")
+        .dose("12345")
+        .id(12345L)
+        .build();
   }
 
 }

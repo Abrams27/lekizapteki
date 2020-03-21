@@ -18,10 +18,10 @@ public class GetMedicines {
 
   private MedicineDto mockMedicine() {
     return MedicineDto.builder()
-      .id(2137L)
-      .ean("Mock2137")
-      .dose("Ciebiera")
-      .name("Krzysiu")
-      .build();
+        .id(2137L)
+        .ean("Mock2137")
+        .dose("Ciebiera")
+        .name("Krzysiu")
+        .build();
   }
 }
