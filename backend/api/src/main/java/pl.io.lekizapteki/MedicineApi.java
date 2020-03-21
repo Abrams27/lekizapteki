@@ -2,6 +2,7 @@ package pl.io.lekizapteki;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.io.lekizapteki.models.MedicineDto;
 
@@ -13,12 +14,11 @@ public interface MedicineApi {
 
   // TODO @CrossOrigin do usuniecia, jedynie potrzebne do testowania lokalnie
   @CrossOrigin
-  @GetMapping("medicines")
-  List<MedicineDto> getMedicines();
+  @GetMapping("/medicines/{diseaseId}")
+  List<MedicineDto> getMedicines(@PathVariable String diseaseId);
 
-  //@GetMapp
-
-
+  @GetMapping("/medicines/{medicineId}")
+  List<MedicineDto> getIdenticalMedicines(@PathVariable String medicineId);
 
 }
 

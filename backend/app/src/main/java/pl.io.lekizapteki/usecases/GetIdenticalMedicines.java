@@ -8,8 +8,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class GetMedicines {
-
+public class GetIdenticalMedicines {
 
     public List<MedicineDto> execute(String medicineId) {
 
@@ -18,10 +17,11 @@ public class GetMedicines {
 
     private MedicineDto mockMedicine() {
         return MedicineDto.builder()
-                .id(2137L)
-                .ean("Mock2137")
-                .dose("Ciebiera")
-                .name("Krzysiu")
+                .name("Nervosol")
+                .ean("2134567890")
+                .dose("12345")
+                .id(12345L)
                 .build();
     }
+
 }
