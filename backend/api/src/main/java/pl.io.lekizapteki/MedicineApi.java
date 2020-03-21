@@ -12,7 +12,7 @@ import java.util.List;
 public interface MedicineApi {
 
 
-  // TODO @CrossOrigin do usuniecia, jedynie potrzebne do testowania lokalnie
+  // TODO @CrossOrigin do ugisuniecia, jedynie potrzebne do testowania lokalnie
   @CrossOrigin
   @GetMapping("/medicines/{diseaseId}")
   List<MedicineDto> getMedicines(@PathVariable String diseaseId);

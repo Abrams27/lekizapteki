@@ -1,10 +1,10 @@
 package pl.io.lekizapteki.usecases;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.io.lekizapteki.models.DiseaseDto;
+
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -17,9 +17,9 @@ public class GetDiseases {
 
   private DiseaseDto mockDisease() {
     return DiseaseDto.builder()
-        .id(2137L)
-        .name("chuj")
-        .build();
+      .id(2137L)
+      .name("chuj")
+      .build();
   }
 
 }
