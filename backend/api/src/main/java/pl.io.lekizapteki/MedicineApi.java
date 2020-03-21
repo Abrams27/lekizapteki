@@ -1,17 +1,24 @@
 package pl.io.lekizapteki;
 
-import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.io.lekizapteki.models.DiseaseDto;
+import pl.io.lekizapteki.models.MedicineDto;
+
+import java.util.List;
 
 @RequestMapping("/lekizapteki")
-public interface DiseaseApi {
+public interface MedicineApi {
+
 
   // TODO @CrossOrigin do usuniecia, jedynie potrzebne do testowania lokalnie
   @CrossOrigin
-  @GetMapping("diseases")
-  List<DiseaseDto> getDiseases();
+  @GetMapping("medicines")
+  List<MedicineDto> getMedicines();
+
+  //@GetMapp
+
+
 
 }
+

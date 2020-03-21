@@ -2,8 +2,10 @@ package pl.io.lekizapteki.usecases;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import pl.io.lekizapteki.models.DiseaseDto;
 
+@Component
 @AllArgsConstructor
 public class GetDiseases {
 
