@@ -1,10 +1,9 @@
 package pl.io.lekizapteki.usecases;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.io.lekizapteki.models.MedicineDto;
-
-import java.util.List;
 
 @Component
 @AllArgsConstructor
