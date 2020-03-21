@@ -11,17 +11,17 @@ import java.util.List;
 public class GetMedicines {
 
 
-    public List<MedicineDto> execute(String medicineId) {
+  public List<MedicineDto> execute(String medicineId) {
 
-        return List.of(mockMedicine());
-    }
+    return List.of(mockMedicine());
+  }
 
-    private MedicineDto mockMedicine() {
-        return MedicineDto.builder()
-                .id(2137L)
-                .ean("Mock2137")
-                .dose("Ciebiera")
-                .name("Krzysiu")
-                .build();
-    }
+  private MedicineDto mockMedicine() {
+    return MedicineDto.builder()
+        .id(2137L)
+        .ean("Mock2137")
+        .dose("Ciebiera")
+        .name("Krzysiu")
+        .build();
+  }
 }

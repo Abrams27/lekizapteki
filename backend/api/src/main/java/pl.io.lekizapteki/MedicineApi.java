@@ -17,7 +17,7 @@ public interface MedicineApi {
   @GetMapping("/medicines/{diseaseId}")
   List<MedicineDto> getMedicines(@PathVariable String diseaseId);
 
-  @GetMapping("/medicines/{medicineId}")
+  @GetMapping("/medicines/identical/{medicineId}")
   List<MedicineDto> getIdenticalMedicines(@PathVariable String medicineId);
 
 }

@@ -13,16 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 public class MedicineController implements MedicineApi {
 
-    private GetMedicines getMedicines;
-    private GetIdenticalMedicines getIdenticalMedicines;
+  private GetMedicines getMedicines;
+  private GetIdenticalMedicines getIdenticalMedicines;
 
-    @Override
-    public List<MedicineDto> getMedicines(String diseaseId) {
-        return getMedicines.execute();
-    }
+  @Override
+  public List<MedicineDto> getMedicines(String diseaseId) {
+    return getMedicines.execute(diseaseId);
+  }
 
-    @Override
-    public List<MedicineDto> getIdenticalMedicines(String medicineId) {
-        return getIdenticalMedicines.execute();
-    }
+  @Override
+  public List<MedicineDto> getIdenticalMedicines(String medicineId) {
+    return getIdenticalMedicines.execute(medicineId);
+  }
 }

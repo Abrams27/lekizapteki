@@ -10,18 +10,18 @@ import java.util.List;
 @AllArgsConstructor
 public class GetIdenticalMedicines {
 
-    public List<MedicineDto> execute(String medicineId) {
+  public List<MedicineDto> execute(String medicineId) {
 
-        return List.of(mockMedicine());
-    }
+    return List.of(mockMedicine());
+  }
 
-    private MedicineDto mockMedicine() {
-        return MedicineDto.builder()
-                .name("Nervosol")
-                .ean("2134567890")
-                .dose("12345")
-                .id(12345L)
-                .build();
-    }
+  private MedicineDto mockMedicine() {
+    return MedicineDto.builder()
+        .name("Nervosol")
+        .ean("2134567890")
+        .dose("12345")
+        .id(12345L)
+        .build();
+  }
 
 }

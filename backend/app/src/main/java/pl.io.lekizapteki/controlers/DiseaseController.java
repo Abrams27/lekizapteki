@@ -1,6 +1,7 @@
 package pl.io.lekizapteki.controlers;
 
 import java.util.List;
+
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import pl.io.lekizapteki.DiseaseApi;
