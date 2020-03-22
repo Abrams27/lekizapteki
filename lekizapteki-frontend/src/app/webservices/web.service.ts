@@ -14,19 +14,18 @@ export class WebService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // TODO na razie z plusami, nie dzialalo ${this.API_URL}
   getDiseases(): Observable<DiseaseDto[]> {
     return this.httpClient
-      .get<DiseaseDto[]>(this.API_URL + '/diseases');
+    .get<DiseaseDto[]>(`${this.API_URL}/diseases`);
   }
 
   getMedicines(diseaseId): Observable<MedicineDto[]> {
     return this.httpClient
-      .get<MedicineDto[]>(this.API_URL + '/medicines/' + diseaseId)
+      .get<MedicineDto[]>(`${this.API_URL}/medicines/${diseaseId}`);
   }
 
   getIdenticalMedicines(medicineId): Observable<MedicineDto[]> {
     return this.httpClient
-      .get<MedicineDto[]>(this.API_URL + '/medicines/identical/' + medicineId)
+      .get<MedicineDto[]>(`${this.API_URL}'/medicines/identical/${medicineId}`);
   }
 }
