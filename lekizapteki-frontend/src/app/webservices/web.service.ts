@@ -10,22 +10,45 @@ import {MedicineDto} from './models/MedicineDto';
 export class WebService {
 
   // TODO dowiedziec sie czy da sie jakos to do pliku przeniesc
-  private API_URL = 'http://students.mimuw.edu.pl:2137/lekizapteki';
+  private API_URL = 'localhost:8080/lekizapteki';
+  private DISEASES_PATH = '/diesases';
+  private MEDICINES_PATH = '/medicines';
+  private IDENTICAL_PATH = '/identical';
+
+  private static createURL(origin : string, pathname : string, variable? : number) : string {
+    let url = `${origin}/${pathname}`;
+
+    if (variable != undefined) {
+      url.concat(`/${variable}`);
+    }
+    return url;
+  }
 
   constructor(private httpClient: HttpClient) {}
 
   getDiseases(): Observable<DiseaseDto[]> {
     return this.httpClient
-    .get<DiseaseDto[]>(`${this.API_URL}/diseases`);
+    .get<DiseaseDto[]>(WebService.createURL(
+      this.API_URL,
+      this.DISEASES_PATH)
+    );
   }
 
-  getMedicines(diseaseId): Observable<MedicineDto[]> {
+  getMedicines(diseaseId : number): Observable<MedicineDto[]> {
     return this.httpClient
-      .get<MedicineDto[]>(`${this.API_URL}/medicines/${diseaseId}`);
+      .get<MedicineDto[]>(WebService.createURL(
+        this.API_URL,
+        this.MEDICINES_PATH,
+        diseaseId)
+      );
   }
 
-  getIdenticalMedicines(medicineId): Observable<MedicineDto[]> {
+  getIdenticalMedicines(medicineId : number): Observable<MedicineDto[]> {
     return this.httpClient
-      .get<MedicineDto[]>(`${this.API_URL}'/medicines/identical/${medicineId}`);
+      .get<MedicineDto[]>(WebService.createURL(
+        this.API_URL,
+        this.MEDICINES_PATH + this.IDENTICAL_PATH,
+        medicineId)
+      );
   }
 }
