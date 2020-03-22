@@ -15,22 +15,13 @@ export class WebService {
   private MEDICINES_PATH = '/medicines';
   private IDENTICAL_PATH = '/identical';
 
-  private static createURL(origin : string, pathname : string, variable? : number) : string {
-    let url = `${origin}/${pathname}`;
-
-    if (variable != undefined) {
-      url.concat(`/${variable}`);
-    }
-    return url;
-  }
-
   constructor(private httpClient: HttpClient) {}
 
   getDiseases(): Observable<DiseaseDto[]> {
     return this.httpClient
     .get<DiseaseDto[]>(WebService.createURL(
       this.API_URL,
-      this.DISEASES_PATH)
+      [this.DISEASES_PATH])
     );
   }
 
@@ -38,7 +29,7 @@ export class WebService {
     return this.httpClient
       .get<MedicineDto[]>(WebService.createURL(
         this.API_URL,
-        this.MEDICINES_PATH,
+        [this.MEDICINES_PATH],
         diseaseId)
       );
   }
@@ -47,8 +38,17 @@ export class WebService {
     return this.httpClient
       .get<MedicineDto[]>(WebService.createURL(
         this.API_URL,
-        this.MEDICINES_PATH + this.IDENTICAL_PATH,
+        [this.MEDICINES_PATH, this.IDENTICAL_PATH],
         medicineId)
       );
+  }
+
+  private static createURL(origin : string, pathnames : string[], variable? : number) : string {
+    let url = `${origin}`.concat(pathnames.join(""));
+
+    if (variable != undefined) {
+      url = url.concat(`/${variable}`);
+    }
+    return url;
   }
 }
