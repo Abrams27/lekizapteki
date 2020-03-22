@@ -18,14 +18,11 @@ import lombok.Setter;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity
-@Table(name = "DISEASE")
-public class DiseaseEntity {
-
+@Table(name = "DOSE")
+public class MedicineDoseEntity {
   @Id
-  // TODO musze sprawdzic jaka strategia dla postresa powinna byc,
-  //  dodatkowo jesli przy leku zdecydujemy sie na EAN to wszedzie trzeba bedzie zmienic id na Longa
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String name;
+  private String dose;
 }

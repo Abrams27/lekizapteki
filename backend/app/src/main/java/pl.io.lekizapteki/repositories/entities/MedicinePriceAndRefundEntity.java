@@ -1,5 +1,6 @@
 package pl.io.lekizapteki.repositories.entities;
 
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,14 +19,15 @@ import lombok.Setter;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity
-@Table(name = "DISEASE")
-public class DiseaseEntity {
-
+@Table(name = "PRICING")
+public class MedicinePriceAndRefundEntity {
   @Id
-  // TODO musze sprawdzic jaka strategia dla postresa powinna byc,
-  //  dodatkowo jesli przy leku zdecydujemy sie na EAN to wszedzie trzeba bedzie zmienic id na Longa
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String name;
+  private BigDecimal salePrice;
+  private BigDecimal retailPrice;
+  private BigDecimal totalFunding;
+  private BigDecimal chargeFactor;
+  private BigDecimal refund;
 }

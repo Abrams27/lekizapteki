@@ -19,11 +19,8 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity
 @Table(name = "DISEASE")
-public class DiseaseEntity {
-
+public class MedicineFormEntity {
   @Id
-  // TODO musze sprawdzic jaka strategia dla postresa powinna byc,
-  //  dodatkowo jesli przy leku zdecydujemy sie na EAN to wszedzie trzeba bedzie zmienic id na Longa
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
