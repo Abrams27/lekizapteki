@@ -33,15 +33,15 @@ public class MedicineEntity {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "dose_id")
-  private MedicineDoseEntity dose;
+  private DoseEntity dose;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "ingredient_id")
-  private ActiveIngredientEntity ingredient;
+  private IngredientEntity ingredient;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "form_id")
-  private MedicineFormEntity form;
+  private FormEntity form;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "disease_id")
@@ -49,9 +49,9 @@ public class MedicineEntity {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "pack_id")
-  private MedicinePackageEntity pack;
+  private PackageEntity pack;
 
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "pricing_id")
-  private MedicinePriceAndRefundEntity pricing;
+  private PricingEntity pricing;
 }

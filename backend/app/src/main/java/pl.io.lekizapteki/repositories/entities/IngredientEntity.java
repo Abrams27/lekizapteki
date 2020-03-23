@@ -18,11 +18,11 @@ import lombok.Setter;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity
-@Table(name = "PACKAGE")
-public class MedicinePackageEntity {
+@Table(name = "INGREDIENT")
+public class IngredientEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String content;
+  private String name;
 }

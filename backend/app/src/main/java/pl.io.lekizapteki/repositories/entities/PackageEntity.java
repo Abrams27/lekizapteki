@@ -1,6 +1,5 @@
 package pl.io.lekizapteki.repositories.entities;
 
-import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,15 +18,11 @@ import lombok.Setter;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity
-@Table(name = "PRICING")
-public class MedicinePriceAndRefundEntity {
+@Table(name = "PACKAGE")
+public class PackageEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private BigDecimal salePrice;
-  private BigDecimal retailPrice;
-  private BigDecimal totalFunding;
-  private BigDecimal chargeFactor;
-  private BigDecimal refund;
+  private String content;
 }
