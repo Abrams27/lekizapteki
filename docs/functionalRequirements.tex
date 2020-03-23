@@ -29,30 +29,45 @@ Lekizapteki\\
   \end{tabular}
 
   \section{Opis}
-  Użytkownik ma do dyspozyji aplikacje WWW, która umożliwia mu wyszukiwanie leków identycznych do szukanego na dana jednostke chorobową.
+  Użytkownik ma do dyspozyji aplikacje WWW, która umożliwia mu wyszukiwanie leków identycznych do szukanego na dana jednostkę chorobową.
+  Serwis udostępnia przeglądanie i wyszukiwanie tylko leków, które sa w postaci tabletek.
 
   \section{Wymagania funkcjonalne}
   Użytkownik wybiera chorobę, a następnie, na podstawie wybranej jednostki chorobowej, lek.
-  Przy wyborze leku ma możliwość wybrania, czy szuka na podstawie nazwy leku, czy numeru EAN.
+  Przy wyborze leku ma możliwość zdecydowania, czy szuka na podstawie nazwy leku, czy numeru EAN.
 
-  Do wyboru chroby i leku na podstawie jego nazywy użytkownik robi to z rozwijanej listy, w której elementy są posortowane alfabetycznie.
+  Do wyboru chroby i leku na podstawie jego nazwy, użytkownik korzysta z rozwijanej listy, w której elementy są posortowane alfabetycznie.
   Znajduje się nad nią pole umożliwijące wyszukiwanie pozycji w liście, które zawierają podawaną frazę.
 
-  Jeśli użytkownik zdecyduje się na wyszukiwanie leku po numerze EAN, zamiast listy pojawia się pole na wpisanie numeru.
+  Do zmiany sposobu szukania leku służy przełącznik, po nacisnieciu którego zamiast listy pojawia się pole na wpisywanie numeru.
+  Przełącznik umożliwia również powrót do wyszukiwania po nazwie.
 
   Po wciśnięciu guzika z napisem ``szukaj'' otrzymuje listę leków na daną chorobę, które są identyczne do podanego.
   Pozycje są posortowanie po dalej zdefiniowanej ``opłacalności''.
   Są one wyświetlane w tablece, a użytkownik może je przewijać.
   Każda pozycja zawiera nazwę leku, substancję czynną i cenę detaliczną.
   Po kliknięciu na wiersz w tabeli, wysuwa się pod nim panel z inforamcją dotyczącą numeru EAN tego leku, dawką oraz postacią.
-  Pokazywane są również szczegóły dotyczące ceny oraz poziomu odpłatności, tj. ... (tu beda podane dokaldne pola)
+  Pokazywane są również szczegóły dotyczące ceny oraz poziomu odpłatności, tj.
+  `Urzędowa cena zbytu`,
+  `Cena hurtowa brutto',
+  `Cena detaliczna',
+  `Wysokość limitu finansowania',
+	'Poziom odpłatności' i
+  `Wysokość dopłaty świadczeniobiorcy'.
 
   Jeżeli użytkownik wybrał opcję wyszukiwania leku po numerze EAN i podał nieprawidowy numer zostanie wyświetlona informacja z napisem
   ``Nieprawidłowy numer EAN''.
   Jeżeli lek o danym numerze EAN istnieje, ale nie jest on przypisywany na wybrana jednostkę chorobową, wyświetli się informacja z napisem
   ``Lek o podanym numerze EAN nie jest przypisywany na wybraną jednostkę chorobową''.
 
-  ``Opłacalność'' definiujemy jako współczynnik ceny do pojedyńczej dawki leku, np. ... (tu jakis przyklad, cena leku na tabletki?)
+  Jako leki indetyczne rozumiemy leki, które są
+  \href{https://www.eupati.eu/pl/rodzaje-lekow/leki-generyczne/}{generyczne} do oryginalnego.
+
+  ``Opłacalność'' definiujemy jako współczynnik ceny do pojedyńczej dawki leku.
+  Na przykład, opakowanie leku ``LekABC'' zawiera 69 tabletek i kosztuje 12,37, wtedy współczynnk jest równy $\frac{12,37}{69} \approx 0,179$.
+  Z kolei w opakowaniu ``LekXYZ'' są 42 tabletki i można go nabyć za 17,23, więc współczynnik to $\frac{17,23}{42} \approx 0.410$.
+  Zakładając, że sa identyczne, w wyniku wyszukiwania ``LekABC'' wyświetliłby się nad ``LekXYZ'', gdyż ma mniejszy współczynnik,
+  co jest równoważne z mniejszą ceną za jedną tabletkę.
 
   \section{Wymagania niefunkcjonalne}
 
