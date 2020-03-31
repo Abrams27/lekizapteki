@@ -20,6 +20,6 @@ public interface MedicineApi {
   @GetMapping("/medicines/identical")
   List<MedicineDto> getIdenticalMedicines(
       @RequestParam(required = true) String ean,
-      @RequestParam(required = true) String diseaseId);
+      @RequestParam(required = false) String diseaseId);
 
 }
