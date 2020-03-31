@@ -7,20 +7,19 @@ import pl.io.lekizapteki.models.MedicineDto;
 
 @Component
 @AllArgsConstructor
-public class GetIdenticalMedicines {
+public class GetMedicines {
 
-  public List<MedicineDto> execute(String medicineId) {
+
+  public List<MedicineDto> execute(String diseaseId) {
 
     return List.of(mockMedicine());
   }
 
   private MedicineDto mockMedicine() {
     return MedicineDto.builder()
-        .name("Nervosol")
-        .ean("2134567890")
-        .dose("12345")
-        .id(12345L)
+        .ean("Mock2137")
+        .dose("Ciebiera")
+        .name("Krzysiu")
         .build();
   }
-
 }

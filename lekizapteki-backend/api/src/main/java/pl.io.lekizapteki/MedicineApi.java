@@ -11,13 +11,13 @@ import pl.io.lekizapteki.models.MedicineDto;
 public interface MedicineApi {
 
 
-  // TODO @CrossOrigin do ugisuniecia, jedynie potrzebne do testowania lokalnie
+  // TODO @CrossOrigin do usuniecia, jedynie potrzebne do testowania lokalnie
   @CrossOrigin
   @GetMapping("/medicines/{diseaseId}")
   List<MedicineDto> getMedicines(@PathVariable String diseaseId);
-
-  @GetMapping("/medicines/identical/{medicineId}")
-  List<MedicineDto> getIdenticalMedicines(@PathVariable String medicineId);
+  //TEAMLEADER ABRAMS proponuje żeby dodac pathparam (dla latwej rozszerzalnosci
+  @GetMapping("/medicines/identical/{ean}")
+  List<MedicineDto> getIdenticalMedicines(@PathVariable String ean);
 
 }
 
