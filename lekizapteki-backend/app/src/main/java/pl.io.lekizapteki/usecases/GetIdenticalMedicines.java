@@ -9,7 +9,7 @@ import pl.io.lekizapteki.models.MedicineDto;
 @AllArgsConstructor
 public class GetIdenticalMedicines {
 
-  public List<MedicineDto> execute(String ean) {
+  public List<MedicineDto> execute(String ean, String diseaseId) {
     return List.of(mockMedicine());
   }
 

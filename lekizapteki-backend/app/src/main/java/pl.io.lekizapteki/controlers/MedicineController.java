@@ -21,7 +21,7 @@ public class MedicineController implements MedicineApi {
   }
 
   @Override
-  public List<MedicineDto> getIdenticalMedicines(String ean) {
-    return getIdenticalMedicines.execute(ean);
+  public List<MedicineDto> getIdenticalMedicines(String ean, String diseaseId) {
+    return getIdenticalMedicines.execute(ean, diseaseId);
   }
 }
