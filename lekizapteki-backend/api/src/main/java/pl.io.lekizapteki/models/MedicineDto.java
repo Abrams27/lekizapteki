@@ -7,9 +7,7 @@ import lombok.Data;
 @Builder
 public class MedicineDto {
 
-  private Long id;
-  private String name;
-  //Może zmienimy ean na id jesli jest unikatowy
   private String ean;
+  private String name;
   private String dose;
 }

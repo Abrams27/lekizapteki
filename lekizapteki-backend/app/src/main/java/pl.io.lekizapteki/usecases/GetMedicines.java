@@ -10,14 +10,13 @@ import pl.io.lekizapteki.models.MedicineDto;
 public class GetMedicines {
 
 
-  public List<MedicineDto> execute(String medicineId) {
+  public List<MedicineDto> execute(String diseaseId) {
 
     return List.of(mockMedicine());
   }
 
   private MedicineDto mockMedicine() {
     return MedicineDto.builder()
-        .id(2137L)
         .ean("Mock2137")
         .dose("Ciebiera")
         .name("Krzysiu")
