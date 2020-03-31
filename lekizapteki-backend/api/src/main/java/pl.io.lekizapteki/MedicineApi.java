@@ -15,7 +15,7 @@ public interface MedicineApi {
   @CrossOrigin
   @GetMapping("/medicines")
   List<MedicineDto> getMedicines(
-      @RequestParam(required = true) String diseaseId);
+      @RequestParam(required = false) String diseaseId);
 
   @GetMapping("/medicines/identical")
   List<MedicineDto> getIdenticalMedicines(
@@ -23,4 +23,3 @@ public interface MedicineApi {
       @RequestParam(required = true) String diseaseId);
 
 }
-
