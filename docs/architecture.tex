@@ -63,8 +63,11 @@ Lekizapteki\\
     ]
 
 
-    GET /lekizapteki/medicines/{diseaseId}
+    GET /lekizapteki/medicines
     Accept: application/json
+
+    Parameters:
+    diseaseId: Long (optional)
 
     Responses:
     HTTP/1.1 200 (OK)
@@ -85,8 +88,12 @@ Lekizapteki\\
     TODO?
 
 
-    GET /lekizapteki/medicines/identical/{ean}
+    GET /lekizapteki/medicines/identical
     Accept: application/json
+
+    Parameters:
+    ean: String
+    diseaseId: Long (optional)
 
     Responses:
     HTTP/1.1 200 (OK)
