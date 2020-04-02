@@ -1,4 +1,6 @@
 /* Global Styles */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 
 * {
   font-family: 'Roboto', Arial, sans-serif;

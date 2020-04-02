@@ -1,0 +1,21 @@
+<label>Append dropdown to body</label>
+<ng-select
+  (open)="disapearPlaceholder()"
+  [items]="diseases"
+  bindLabel="name"
+  [virtualScroll]="true"
+  placeholder={{placeholder}}
+  appendTo="body"
+  bindValue="id"
+  [(ngModel)]="selectedDiseaseId">
+  DUPA
+</ng-select>
+<p>
+  Ean: {{selectedDiseaseId}}
+</p>
+<hr/>
+<button (click)="onClick()" class="btn btn-primary">Zatwierdź</button>
+{{potwierdzonko}}
+
+
+<div style="margin-top:300px"></div>
