@@ -12,6 +12,7 @@ export class DropdownListComponent implements OnInit {
   diseases = [];
 
   selectedDiseaseEan: number;
+  public potwierdzonko = '';
 
   constructor() {
     this.create10kDiseases();
@@ -27,8 +28,11 @@ export class DropdownListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   onClick() {
-    console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo')
+    console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
+    this.potwierdzonko = 'Jakos sie udalo. Buziaczek. EAN:' + this.selectedDiseaseEan.toString();
+
   }
 
 }
