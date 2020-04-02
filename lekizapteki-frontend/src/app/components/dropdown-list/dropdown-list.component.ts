@@ -27,6 +27,9 @@ export class DropdownListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  onClick() {
+    console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo')
+  }
 
 }
 
