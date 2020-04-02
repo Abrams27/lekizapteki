@@ -11,14 +11,17 @@ export class DropdownListComponent implements OnInit {
 
   diseases = [];
 
-  selectedDiseaseEan: number;
+  selectedDiseaseId: number;
   public potwierdzonko = '';
+  public placeholder = '';
 
   constructor() {
     this.create10kDiseases();
+    this.placeholder = 'Wybierz chorobę';
   }
 
   private create10kDiseases() {
+
     this.diseases = Array.from({length: 10000}, (value, key) => key)
     .map(val => ({
       id: val,
@@ -31,8 +34,12 @@ export class DropdownListComponent implements OnInit {
 
   onClick() {
     console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
-    this.potwierdzonko = 'Jakos sie udalo. Buziaczek. EAN:' + this.selectedDiseaseEan.toString();
+    this.potwierdzonko = 'Jakos sie udalo. Buziaczek. Id:' + this.selectedDiseaseId.toString();
 
+  }
+  disapearPlaceholder() {
+    this.placeholder = '';
+    this.selectedDiseaseId = null;
   }
 
 }
