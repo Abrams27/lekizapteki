@@ -1,0 +1,15 @@
+<!--<label>Append dropdown to body</label>-->
+<ng-select [items]="diseases"
+           bindLabel="name"
+           [virtualScroll]="true"
+           bindValue="id"
+           appendTo="body"
+           placeholder="Wybierz chorobę"
+           [(ngModel)]="selectedDiseaseEan">
+</ng-select>
+<p>
+  Ean: {{selectedDiseaseEan}}
+</p>
+<hr />
+
+<div style="margin-top:300px"></div>
