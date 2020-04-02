@@ -127,7 +127,22 @@ Lekizapteki\\
   \section{Frontend}
 
   \section{Backend}
+  Backend jest podzielony na dwa moduły: ``API'' i ``APP''.
 
+  \subsection{Modul API}
+  Zawiera wystawione endpoint'y odpowiadające tym przedstawionym w punkcie 2.1.1.
+  Są one w postaci interface'ów, klas z modelami oraz wyjatków rzucanych przy nieodpowiednich danych.
+
+  \subsection{Modul APP}
+  Zawiera implementacje interface'ów z modulu API.
+  Każdy interface jest implementowany przez kontroler.
+  Kontrolery maja wstrzykniete jedynie klasy służące do wykonywania pojedyńczy endpoint (Command Pattern).
+
+  Encje i relacje bazy danych sa odwzorowane klasami.
+  Zapytania do bazy danych odbywają się przez interface, który jest implementowany przez framework.
+
+  Dane z rozporządzeń są pobierane TODO, w serwisie który jest uruchamiany zaraz po powstaniu kontekstu aplikacji.
+  Parsuje on pliki z arkuszami Excel, waliduje oraz mapuje na encje w bazie danych.
   \section{Baza Danych}
 
   \begin{lstlisting}
