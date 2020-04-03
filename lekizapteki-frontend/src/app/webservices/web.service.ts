@@ -28,24 +28,25 @@ export class WebService {
     );
   }
 
-  getMedicines(diseaseId: number): Observable<MedicineDto[]> {
+  getMedicines(diseaseId?: string): Observable<MedicineDto[]> {
     return this.httpClient
     .get<MedicineDto[]>(this.urlBuilder
       .addOrigin(this.API_URL)
       .addPath(this.MEDICINES_PATH)
-      .addPath(diseaseId)
-      .buildUrl()
+      .addParam('diseaseId', diseaseId)   // szukałem czy da się zrobić to wywołanie jedynie gdy diseaseId != undefined
+      .buildUrl()                                // ale nic odpowiedniego nie znalazłem
     );
   }
 
-  getIdenticalMedicines(medicineId: number): Observable<MedicineDto[]> {
+  getIdenticalMedicines(ean: string, diseaseId?: string): Observable<MedicineDto[]> {
     return this.httpClient
     .get<MedicineDto[]>(this.urlBuilder
       .addOrigin(this.API_URL)
       .addPath(this.MEDICINES_PATH)
       .addPath(this.IDENTICAL_PATH)
-      .addPath(medicineId)
-      .buildUrl()
+      .addParam('ean', ean)
+      .addParam('diseaseId', diseaseId)   // tu podobnie jak poprzednio, fajnie by było móc wywołać tą funkcje
+      .buildUrl()                                // jedynie gdy diseaseId != undefined
     );
   }
 }

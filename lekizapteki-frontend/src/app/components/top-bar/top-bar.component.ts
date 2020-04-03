@@ -15,13 +15,19 @@ export class TopBarComponent implements OnInit {
       error: err => console.log('Observer got an error: ' + err),
       complete: () => console.log('Observer got a complete notification'),
     };
-    let diseases = webService.getDiseases().subscribe(observer);
+    const diseases = webService.getDiseases().subscribe(observer);
     console.log(diseases);
     console.log('test');
-    let medicine = webService.getMedicines(123).subscribe(observer);
-    console.log(medicine);
-    let identicalMedicines = webService.getIdenticalMedicines(123).subscribe(observer);
+    const medicines = webService.getMedicines('123').subscribe(observer);
+    console.log(medicines);
+    const identicalMedicines = webService.getIdenticalMedicines('123', '123').subscribe(observer);
     console.log(identicalMedicines);
+
+    const allMedicines = webService.getMedicines().subscribe(observer);
+    console.log(allMedicines);
+
+    const allIdenticalMedicines = webService.getIdenticalMedicines('123').subscribe(observer);
+    console.log(allIdenticalMedicines);
   }
 
   ngOnInit() {
