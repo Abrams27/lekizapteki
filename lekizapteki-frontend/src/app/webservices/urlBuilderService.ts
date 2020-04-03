@@ -1,12 +1,13 @@
 export class UrlBuilder {
-  private url = '';
-  private params: string[] = [];
-  constructor() {}
-
-  addOrigin(origin: string): UrlBuilder {
+  private url;
+  private params: string[];
+  constructor(origin: string) {
     this.url = origin;
     this.params = [];
-    return this;
+  }
+
+  static builder(origin: string): UrlBuilder {
+    return new UrlBuilder(origin);
   }
 
   addPath(path: string): UrlBuilder {
@@ -15,10 +16,15 @@ export class UrlBuilder {
   }
 
   addParam(name: string, value: string): UrlBuilder {
-    if (value !== undefined) {
-      this.params.push(`${name}=${value}`);
-    }
+    this.params.push(`${name}=${value}`);
     return this;
+  }
+
+  addOptionalParam(name: string, value?: string): UrlBuilder {
+    if (value === undefined) {
+      return this;
+    }
+    return this.addParam(name, value);
   }
 
   buildUrl(): string {
