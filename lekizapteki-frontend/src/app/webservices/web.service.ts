@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {DiseaseDto} from './models/DiseaseDto';
 import {MedicineDto} from './models/MedicineDto';
 import {UrlBuilder} from './urlBuilderService';
-import {HttpClientWrapper} from './httpClientWrapperService';
+import {LoggingHttpClientWrapper} from './LoggingHttpClientWrapperService';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class WebService {
       .addPath(this.DISEASES_PATH)
       .buildUrl();
 
-    return HttpClientWrapper.get<DiseaseDto[]>(
+    return LoggingHttpClientWrapper.get<DiseaseDto[]>(
       this.getDiseases.name,
       this.httpClient,
       url);
@@ -36,7 +36,7 @@ export class WebService {
       .addParam('diseaseId', diseaseId)
       .buildUrl();
 
-    return HttpClientWrapper.get<MedicineDto[]>(
+    return LoggingHttpClientWrapper.get<MedicineDto[]>(
       this.getMedicinesForDisease.name,
       this.httpClient,
       url);
@@ -50,7 +50,7 @@ export class WebService {
     .addParam('diseaseId', diseaseId)
     .buildUrl();
 
-    return HttpClientWrapper.get<MedicineDto[]>(
+    return LoggingHttpClientWrapper.get<MedicineDto[]>(
       this.getMedicinesForDiseaseIdenticalToGiven.name,
       this.httpClient,
       url);
