@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { WebService } from '../../webservices/web.service';
+import {Component, OnInit} from '@angular/core';
+import {WebService} from '../../webservices/web.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -22,12 +22,6 @@ export class TopBarComponent implements OnInit {
     console.log(medicines);
     const identicalMedicines = webService.getIdenticalMedicines('123', '123').subscribe(observer);
     console.log(identicalMedicines);
-
-    const allMedicines = webService.getMedicines().subscribe(observer);
-    console.log(allMedicines);
-
-    const allIdenticalMedicines = webService.getIdenticalMedicines('123').subscribe(observer);
-    console.log(allIdenticalMedicines);
   }
 
   ngOnInit() {

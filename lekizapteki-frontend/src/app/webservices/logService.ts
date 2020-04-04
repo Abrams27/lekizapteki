@@ -1,10 +1,12 @@
 export class Logger {
   static logRequest(funcName: string, request: string) {
-    const logMsg = this.logRequest.name + ': ' + funcName + ': ' + request;
-    console.log(logMsg);
+    this.log(this.logRequest.name, funcName, request);
   }
-  static logResponse(funcName: string, responce: string) {
-    const logMsg = this.logResponse.name + ': ' + funcName + ': ' + responce;
+  static logResponse(funcName: string, response: string) {
+    this.log(this.logResponse.name, funcName, response);
+  }
+  private static log(logName, funcName, msg) {
+    const logMsg = logName + ': ' + funcName + ': ' + msg;
     console.log(logMsg);
   }
 }

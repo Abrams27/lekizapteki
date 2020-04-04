@@ -29,10 +29,10 @@ export class WebService {
       .get<DiseaseDto[]>(url);
   }
 
-  getMedicines(diseaseId?: string): Observable<MedicineDto[]> {
+  getMedicines(diseaseId: string): Observable<MedicineDto[]> {
     const url = UrlBuilder.builder(this.API_URL)
       .addPath(this.MEDICINES_PATH)
-      .addParamIfDefined('diseaseId', diseaseId)
+      .addParam('diseaseId', diseaseId)
       .buildUrl();
 
     Logger.logRequest(this.getMedicines.name, url);
@@ -40,12 +40,12 @@ export class WebService {
       .get<MedicineDto[]>(url);
   }
 
-  getIdenticalMedicines(ean: string, diseaseId?: string): Observable<MedicineDto[]> {
+  getIdenticalMedicines(ean: string, diseaseId: string): Observable<MedicineDto[]> {
     const url = UrlBuilder.builder(this.API_URL)
       .addPath(this.MEDICINES_PATH)
       .addPath(this.IDENTICAL_PATH)
       .addParam('ean', ean)
-      .addParamIfDefined('diseaseId', diseaseId)
+      .addParam('diseaseId', diseaseId)
       .buildUrl();
 
     Logger.logRequest(this.getIdenticalMedicines.name, url);

@@ -20,19 +20,16 @@ export class UrlBuilder {
     return this;
   }
 
-  addParamIfDefined(name: string, value?: string): UrlBuilder {
-    if (value === undefined) {
-      return this;
-    }
-    return this.addParam(name, value);
-  }
-
   buildUrl(): string {
     if (this.params.length > 0) {
-      this.url = this.url
-        .concat('?')
-        .concat(this.params.join('&'));
+      this.concatParamsToUrl();
     }
     return this.url;
+  }
+
+  private concatParamsToUrl() {
+    this.url = this.url
+      .concat('?')
+      .concat(this.params.join('&'));
   }
 }
