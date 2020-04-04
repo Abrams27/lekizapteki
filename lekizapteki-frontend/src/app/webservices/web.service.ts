@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {DiseaseDto} from './models/DiseaseDto';
 import {MedicineDto} from './models/MedicineDto';
 import {UrlBuilder} from './urlBuilderService';
-import {Logger} from './logService';
+import {HttpClientWrapper} from './httpClientWrapperService';
 
 @Injectable({
   providedIn: 'root'
@@ -24,32 +24,35 @@ export class WebService {
       .addPath(this.DISEASES_PATH)
       .buildUrl();
 
-    Logger.logRequest(this.getDiseases.name, url);
-    return this.httpClient
-      .get<DiseaseDto[]>(url);
+    return HttpClientWrapper.get<DiseaseDto[]>(
+      this.getDiseases.name,
+      this.httpClient,
+      url);
   }
 
-  getMedicines(diseaseId: string): Observable<MedicineDto[]> {
+  getMedicinesForDisease(diseaseId: string): Observable<MedicineDto[]> {
     const url = UrlBuilder.builder(this.API_URL)
       .addPath(this.MEDICINES_PATH)
       .addParam('diseaseId', diseaseId)
       .buildUrl();
 
-    Logger.logRequest(this.getMedicines.name, url);
-    return this.httpClient
-      .get<MedicineDto[]>(url);
+    return HttpClientWrapper.get<MedicineDto[]>(
+      this.getMedicinesForDisease.name,
+      this.httpClient,
+      url);
   }
 
-  getIdenticalMedicines(ean: string, diseaseId: string): Observable<MedicineDto[]> {
+  getMedicinesForDiseaseIdenticalToGiven(ean: string, diseaseId: string): Observable<MedicineDto[]> {
     const url = UrlBuilder.builder(this.API_URL)
-      .addPath(this.MEDICINES_PATH)
-      .addPath(this.IDENTICAL_PATH)
-      .addParam('ean', ean)
-      .addParam('diseaseId', diseaseId)
-      .buildUrl();
+    .addPath(this.MEDICINES_PATH)
+    .addPath(this.IDENTICAL_PATH)
+    .addParam('ean', ean)
+    .addParam('diseaseId', diseaseId)
+    .buildUrl();
 
-    Logger.logRequest(this.getIdenticalMedicines.name, url);
-    return this.httpClient
-      .get<MedicineDto[]>(url);
+    return HttpClientWrapper.get<MedicineDto[]>(
+      this.getMedicinesForDiseaseIdenticalToGiven.name,
+      this.httpClient,
+      url);
   }
 }

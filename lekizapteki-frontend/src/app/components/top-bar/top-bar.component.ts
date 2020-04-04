@@ -15,12 +15,20 @@ export class TopBarComponent implements OnInit {
       error: err => console.log('Observer got an error: ' + err),
       complete: () => console.log('Observer got a complete notification'),
     };
-    const diseases = webService.getDiseases().subscribe(observer);
+
+    const diseases = webService
+      .getDiseases()
+      .subscribe(observer);
     console.log(diseases);
-    console.log('test');
-    const medicines = webService.getMedicines('123').subscribe(observer);
+
+    const medicines = webService
+      .getMedicinesForDisease('123')
+      .subscribe(observer);
     console.log(medicines);
-    const identicalMedicines = webService.getIdenticalMedicines('123', '123').subscribe(observer);
+
+    const identicalMedicines = webService
+      .getMedicinesForDiseaseIdenticalToGiven('123', '123')
+      .subscribe(observer);
     console.log(identicalMedicines);
   }
 
