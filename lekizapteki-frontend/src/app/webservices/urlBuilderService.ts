@@ -1,7 +1,7 @@
 export class UrlBuilder {
   private url;
   private params: string[];
-  constructor(origin: string) {
+  private constructor(origin: string) {
     this.url = origin;
     this.params = [];
   }
@@ -20,7 +20,7 @@ export class UrlBuilder {
     return this;
   }
 
-  addOptionalParam(name: string, value?: string): UrlBuilder {
+  addParamIfDefined(name: string, value?: string): UrlBuilder {
     if (value === undefined) {
       return this;
     }
