@@ -12,9 +12,10 @@ urlcolor=blue,
 }
 \setcounter{section}{-1}
 \lstset{
-basicstyle=\fontsize{6}{8}\selectfont\ttfamily
+basicstyle=\fontsize{7}{7}\selectfont\ttfamily,
 }
-
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 
 \title{
 Lekizapteki\\
@@ -26,192 +27,220 @@ Lekizapteki\\
   \maketitle
 
   \section{Dziennik zmian}
-  \begin{tabular}{|c|c|c|}
-    Nr iteracji & Data & Opis zmian \\
-    \hline
-    1. & 25.03.2020 & Utworzenie dokumentu oraz jego pierwsza wersja. \\
-  \end{tabular}
+    \begin{tabular}{|c|c|c|}
+      Nr iteracji & Data & Opis zmian \\
+      \hline
+      1. & 25.03.2020 & Utworzenie dokumentu oraz jego pierwsza wersja. \\
+    \end{tabular}
 
   \section{Ogólna struktura}
-  Aplikacja składa się z frontendu WWW napisanego w
-  \href{https://angular.io}{Angularze}, backendu napisanego w
-  \href{https://spring.io}{Spring Framewok} oraz bazy danych
-  \href {https://spring.io}{H2}.
+    Aplikacja składa się z frontendu WWW napisanego w
+    \href{https://angular.io}{Angularze}, backendu napisanego w
+    \href{https://spring.io}{Spring Framewok} oraz bazy danych
+    \href {https://www.h2database.com/html/main.html}{H2}.
 
   \section{Komunikacja}
-  \subsection{Frondend - Backend}
-  Komunikacja odbywa się protokołem HTTP, serwer dostarcza
-  \href{https://en.wikipedia.org/wiki/Representational_state_transfer}{RESTful API},
-  obsługując rządania w formacie
-  \href{https://en.wikipedia.org/wiki/JSON}{json}.
-  Serwer jest dostepny na
-  \href{http://students.mimuw.edu.pl:7312}{serwerze Students na porcie `7312`},
-  natomiast frontend wykonuje zapytania za pomocą
-  \href{https://angular.io/guide/http}{httpClient'a}.
+    \subsection{Backend - Baza Danych}
+    Backend komunikuje się z lokalną bazą danych dzięki
+    \href{https://hibernate.org}{Hibernate} oraz
+    \href{https://spring.io/projects/spring-data-jpa} {Spring Jpa}.
+    Framework zajmuje się konstruowaniem zapytań, oraz tworzeniem schematu bazy danych.
 
-  \subsubsection{Endpointy}
+    \subsection{Frondend - Backend}
+    Komunikacja odbywa się protokołem HTTP, serwer dostarcza
+    \href{https://en.wikipedia.org/wiki/Representational_state_transfer}{RESTful API},
+    obsługując rządania w formacie
+    \href{https://en.wikipedia.org/wiki/JSON}{json}.
+    Serwer jest dostepny na
+    \href{http://students.mimuw.edu.pl:7312}{serwerze Students na porcie `7312`},
+    natomiast frontend wykonuje zapytania za pomocą
+    \href{https://angular.io/guide/http}{httpClient'a}.
+    Nie ma stosowanych żadnych form zabezpieczeń, rządania i odpowiedzi nie sa szyfrowane, ani nie ma wymiany tokenów.
+    API backendu jest publiczne, więc każdy dysponujący linkiem może z niego korzystać.
+    Backend akceptuje jedynie zapytania w formacie \texttt{application/json},
+    a odpowiedzi również są jedynie w formacie \texttt{application/json}
+    Oznacza to, że zapytania do backendu powinny być z nagłowkiem: \texttt{Accept: application/json},
+    natomiast odpowiedzi, będą z nagłówkiem: \texttt{Content-Type: application/json}.
 
-  \begin{lstlisting}
-    GET /lekizapteki/diseases
-    Accept: application/json
+    \subsubsection{Endpointy udostepniane przez backend}
+    \noindent
+    \begin{minipage}{.45\textwidth}
+     \begin{lstlisting}
+       - GET /lekizapteki/diseases
 
-    Response:
-    HTTP/1.1 200 (OK)
-    Content-Type: application/json
-    Body:
-    [
-      {
-        "id": Long,
-        "name":"String"
-      }
-    ]
-
-
-    GET /lekizapteki/medicines
-    Accept: application/json
-
-    Parameters:
-    diseaseId: Long (optional)
-
-    Responses:
-    HTTP/1.1 200 (OK)
-    Content-Type: application/json
-    Body:
-    [
-      {
-        "ean": "String",
-        "name": "String",
-        "dose": "String"
-      }
-    ]
-
-    HTTP/1.1 404 (Not Found)
-    Content-Type: application/json
-    Message: "No medicine on such disease"
-
-    TODO?
+         Response:
+         HTTP/1.1 200 (OK)
+         Body:
+         [{
+           "id": Long,
+           "name":"String"
+         }]
 
 
-    GET /lekizapteki/medicines/identical
-    Accept: application/json
+       - GET /lekizapteki/medicines
 
-    Parameters:
-    ean: String
-    diseaseId: Long (optional)
+         Parameters:
+         diseaseId: Long (optional)
 
-    Responses:
-    HTTP/1.1 200 (OK)
-    Content-Type: application/json
-    Body:
-    [
-      {
-        "ean": "String",
-        "name": "String",
-        "dose": "String"
-      }
-    ]
+         Responses:
+         HTTP/1.1 200 (OK)
+         Body:
+         [{
+           "ean": "String",
+           "name": "String",
+           "dose": "String"
+         }]
 
-    HTTP/1.1 404 (Not Found)
-    Content-Type: application/json
-    Message: "No medicine with such EAN"
+         HTTP/1.1 404 (Not Found)
+         Message: "Nieprawidlowy numer EAN"
 
-    TODO
+         HTTP/1.1 404 (Not Found)
+         Message: "Nieprawidlowa jednostka chorobowa"
+     \end{lstlisting}
+    \end{minipage}\hfill
+    \begin{minipage}{.45\textwidth}
+      \begin{lstlisting}
+        - GET /lekizapteki/medicines/identical
 
-  \end{lstlisting}
+          Parameters:
+          ean: String
+          diseaseId: Long (optional)
 
-  \subsection{Backend - Baza Danych}
-  Backend komunikuje się z lokalną bazą danych dzięki
-  \href{https://hibernate.org}{Hibernate} oraz
-  \href{https://spring.io/projects/spring-data-jpa} {Spring Jpa}.
+          Responses:
+          HTTP/1.1 200 (OK)
+          Body:
+          [{
+            "ean": "String",
+            "name": "String",
+            "dose": "String"
+          }]
+
+          HTTP/1.1 404 (Not Found)
+          Message: "Nieprawidlowy numer EAN"
+
+          HTTP/1.1 404 (Not Found)
+          Message: "Lek o podanym numerze EAN nie jest
+            przepisywany na wybrana jednostke chorobowa"
+      \end{lstlisting}
+    \end{minipage}
 
   \section{Frontend}
+  Frontend jest dostepny
+  \href{http://students.mimuw.edu.pl:1237}{serwerze Students na porcie `1237`} i jest publiczny,
+  każdy dysponujący linkiem może z niego korzystać.
+  Użytkowanie nie wymaga zakładania konta, ani autoryzacji.
+
+  Frontend posiada web serwis oraz modele odpowiadające odbieranym danyn z backendu.
+  Do tworzenia elementów używane są wbudowane komponenty oraz odpowiednie komponenty z
+  \href{https://ng-bootstrap.github.io/#/home}{Bootstrap Widgets}.
+
+    \subsection{Makiety}
+      \subsubsection{Wybór choroby}
+      \includegraphics[width=8cm, height=5cm]{lekizapteki-wybor-choroby}
+
+      \subsubsection{Wybór leku za pomocą nazwy i numeru EAN}
+      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-wybor-leku-nazwa}
+      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-wybor-leku-ean}
+
+      \subsubsection{Wyniki i rozwinięte szczegóły dla pozycji}
+      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-leki-identyczne}
+      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-leki-identyczne-rozwiniete}
 
   \section{Backend}
   Backend jest podzielony na dwa moduły: ``API'' i ``APP''.
 
-  \subsection{Modul API}
-  Zawiera wystawione endpoint'y odpowiadające tym przedstawionym w punkcie 2.1.1.
-  Są one w postaci interface'ów, klas z modelami oraz wyjatków rzucanych przy nieodpowiednich danych.
+    \subsection{Modul API}
+    Zawiera wystawione endpoint'y odpowiadające tym przedstawionym w punkcie 2.1.1.
+    Są one w postaci interface'ów, klas z modelami oraz wyjatków rzucanych przy nieodpowiednich danych.
 
-  \subsection{Modul APP}
-  Zawiera implementacje interface'ów z modulu API.
-  Każdy interface jest implementowany przez kontroler.
-  Kontrolery maja wstrzykniete jedynie klasy służące do wykonywania pojedyńczy endpoint (Command Pattern).
+    \subsection{Modul APP}
+    Zawiera implementacje interface'ów z modulu API.
+    Każdy interface jest implementowany przez kontroler.
+    Kontrolery maja wstrzykniete jedynie klasy służące do wykonywania pojedyńczy endpoint (Command Pattern).
 
-  Encje i relacje bazy danych sa odwzorowane klasami.
-  Zapytania do bazy danych odbywają się przez interface, który jest implementowany przez framework.
+    Encje i relacje bazy danych sa odwzorowane klasami z odpowiednimi adnotacjami.
+    Zapytania do bazy danych odbywają się przez interface, implementowany przez framework,
+    w którym nazwy metod są mapowane na zapytania do bazy danych.
 
-  Dane z rozporządzeń są pobierane TODO, w serwisie który jest uruchamiany zaraz po powstaniu kontekstu aplikacji.
-  Parsuje on pliki z arkuszami Excel, waliduje oraz mapuje na encje w bazie danych.
+    Dane z rozporządzeń są pobierane TODO, w serwisie który jest uruchamiany zaraz po powstaniu kontekstu aplikacji.
+    Może on pracować w dwóch trybach, które są konfigurowane w pliku \texttt{application.properties}.
+    Pierwszym trybem jest pobieranie plików z podanego w konfiguracji linku,
+    drugim jest pobieranie z lokalnego źródła, do którego ścieżka jest podana w konfiguracji.
+    Parsuje on pliki z arkuszami Excel, waliduje, filtruje spełniające założenia serwisu oraz mapuje na encje w bazie danych.
   \section{Baza Danych}
+  \noindent
+  \begin{minipage}{.45\textwidth}
+    \begin{lstlisting}
+      CREATE TABLE DISEASE (
+      id IDENTITY NOT NULL,
+      name TEXT NOT NULL,
 
-  \begin{lstlisting}
-    CREATE TABLE DISEASE (
-    id                   IDENTITY            NOT NULL,
-    name                 TEXT                NOT NULL,
+      CONSTRAINT disease_pk PRIMARY KEY (id)
+      );
 
-    CONSTRAINT disease_pk PRIMARY KEY (id)
-    );
+      CREATE TABLE INGREDIENT (
+      id IDENTITY NOT NULL,
+      name TEXT NOT NULL,
 
-    CREATE TABLE INGREDIENT (
-    id                  IDENTITY            NOT NULL,
-    name                TEXT                NOT NULL,
+      CONSTRAINT ingredient_pky PRIMARY KEY (id)
+      );
 
-    CONSTRAINT ingredient_pky PRIMARY KEY (id)
-    );
+      CREATE TABLE DOSE (
+      id IDENTITY NOT NULL,
+      dose TEXT NOT NULL,
 
-    CREATE TABLE DOSE (
-    id                  IDENTITY            NOT NULL,
-    dose                TEXT                NOT NULL,
+      CONSTRAINT dose_pk PRIMARY KEY (id)
+      );
 
-    CONSTRAINT dose_pk PRIMARY KEY (id)
-    );
+      CREATE TABLE FORM (
+      id IDENTITY NOT NULL,
+      name TEXT NOT NULL,
 
-    CREATE TABLE FORM (
-    id                  IDENTITY            NOT NULL,
-    name                TEXT                NOT NULL,
+      CONSTRAINT form_pk PRIMARY KEY (id)
+      );
 
-    CONSTRAINT form_pk PRIMARY KEY (id)
-    );
+      CREATE TABLE PACKAGE (
+      id IDENTITY NOT NULL,
+      content TEXT NOT NULL,
 
-    CREATE TABLE PACKAGE (
-    id                  IDENTITY            NOT NULL,
-    content             TEXT                NOT NULL,
+      CONSTRAINT package_pk PRIMARY KEY (id)
+      );
+    \end{lstlisting}
+  \end{minipage}\hfill
+  \begin{minipage}{.45\textwidth}
+    \begin{lstlisting}
+      CREATE TABLE PRICING (
+      id IDENTITY NOT NULL,
+      sale_price NUMERIC NOT NULL,
+      retail_price NUMERIC NOT NULL,
+      total_funding NUMERIC NOT NULL,
+      charge_factor NUMERIC NOT NULL,
+      refund NUMERIC NOT NULL,
 
-    CONSTRAINT package_pk PRIMARY KEY (id)
-    );
+      CONSTRAINT pricing_pk PRIMARY KEY (id)
+      );
 
-    CREATE TABLE PRICING (
-    id                  IDENTITY            NOT NULL,
-    salePrice           NUMERIC             NOT NULL,
-    retailPrice         NUMERIC             NOT NULL,
-    totalFunding        NUMERIC             NOT NULL,
-    chargeFactor        NUMERIC             NOT NULL,
-    refund              NUMERIC             NOT NULL,
+      CREATE TABLE MEDICINE (
+      id IDENTITY NOT NULL,
+      ean TEXT NOT NULL,
+      name TEXT NOT NULL,
+      dose_id DECIMAL,
+      form_id DECIMAL,
+      pricing_id DECIMAL,
+      package_id DECIMAL,
+      ingredient_id DECIMAL,
+      disease_id DECIMAL,
 
-    CONSTRAINT pricing_pk PRIMARY KEY (id)
-    );
+      FOREIGN KEY (dose_id) REFERENCES DOSE (id),
+      FOREIGN KEY (form_id) REFERENCES FORM (id),
+      FOREIGN KEY (pricing_id) REFERENCES PRICING (id),
+      FOREIGN KEY (package_id) REFERENCES PACKAGE (id),
+      FOREIGN KEY (ingredient_id) REFERENCES INGREDIENT (id),
+      FOREIGN KEY (disease_id) REFERENCES DISEASE (id),
 
-    CREATE TABLE MEDICINE (
-    id                 IDENTITY            NOT NULL,
-    ean                TEXT                NOT NULL,
-    name               TEXT                NOT NULL,
-    dose_id            DECIMAL,
-    form_id            DECIMAL,
-    pricing_id         DECIMAL,
-    package_id         DECIMAL,
-    ingredient_id      DECIMAL,
-    disease_id         DECIMAL,
-
-    FOREIGN KEY (dose_id) REFERENCES DOSE (id),
-    FOREIGN KEY (form_id) REFERENCES FORM (id),
-    FOREIGN KEY (pricing_id) REFERENCES PRICING (id),
-    FOREIGN KEY (package_id) REFERENCES PACKAGE (id),
-    FOREIGN KEY (ingredient_id) REFERENCES INGREDIENT (id),
-    FOREIGN KEY (disease_id) REFERENCES DISEASE (id),
-
-    CONSTRAINT medicine_pk PRIMARY KEY (id)
-    );
-  \end{lstlisting}
+      CONSTRAINT medicine_pk PRIMARY KEY (id)
+      );
+    \end{lstlisting}
+  \end{minipage}
 
 \end{document}
