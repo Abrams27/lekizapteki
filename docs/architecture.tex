@@ -168,79 +168,82 @@ Lekizapteki\\
     drugim jest pobieranie z lokalnego źródła, do którego ścieżka jest podana w konfiguracji.
     Parsuje on pliki z arkuszami Excel, waliduje, filtruje spełniające założenia serwisu oraz mapuje na encje w bazie danych.
   \section{Baza Danych}
-  \noindent
-  \begin{minipage}{.45\textwidth}
-    \begin{lstlisting}
-      CREATE TABLE DISEASE (
-      id IDENTITY NOT NULL,
-      name TEXT NOT NULL,
+  Baza danych jest \texttt{in-memory}, czyli jest tworzona przy tworzeniu kontekstu aplikacji.
 
-      CONSTRAINT disease_pk PRIMARY KEY (id)
-      );
+  \subsection{Schemat}
+    \noindent
+    \begin{minipage}{.45\textwidth}
+      \begin{lstlisting}
+        CREATE TABLE DISEASE (
+        id IDENTITY NOT NULL,
+        name TEXT NOT NULL,
 
-      CREATE TABLE INGREDIENT (
-      id IDENTITY NOT NULL,
-      name TEXT NOT NULL,
+        CONSTRAINT disease_pk PRIMARY KEY (id)
+        );
 
-      CONSTRAINT ingredient_pky PRIMARY KEY (id)
-      );
+        CREATE TABLE INGREDIENT (
+        id IDENTITY NOT NULL,
+        name TEXT NOT NULL,
 
-      CREATE TABLE DOSE (
-      id IDENTITY NOT NULL,
-      dose TEXT NOT NULL,
+        CONSTRAINT ingredient_pky PRIMARY KEY (id)
+        );
 
-      CONSTRAINT dose_pk PRIMARY KEY (id)
-      );
+        CREATE TABLE DOSE (
+        id IDENTITY NOT NULL,
+        dose TEXT NOT NULL,
 
-      CREATE TABLE FORM (
-      id IDENTITY NOT NULL,
-      name TEXT NOT NULL,
+        CONSTRAINT dose_pk PRIMARY KEY (id)
+        );
 
-      CONSTRAINT form_pk PRIMARY KEY (id)
-      );
+        CREATE TABLE FORM (
+        id IDENTITY NOT NULL,
+        name TEXT NOT NULL,
 
-      CREATE TABLE PACKAGE (
-      id IDENTITY NOT NULL,
-      content TEXT NOT NULL,
+        CONSTRAINT form_pk PRIMARY KEY (id)
+        );
 
-      CONSTRAINT package_pk PRIMARY KEY (id)
-      );
-    \end{lstlisting}
-  \end{minipage}\hfill
-  \begin{minipage}{.45\textwidth}
-    \begin{lstlisting}
-      CREATE TABLE PRICING (
-      id IDENTITY NOT NULL,
-      sale_price NUMERIC NOT NULL,
-      retail_price NUMERIC NOT NULL,
-      total_funding NUMERIC NOT NULL,
-      charge_factor NUMERIC NOT NULL,
-      refund NUMERIC NOT NULL,
+        CREATE TABLE PACKAGE (
+        id IDENTITY NOT NULL,
+        content TEXT NOT NULL,
 
-      CONSTRAINT pricing_pk PRIMARY KEY (id)
-      );
+        CONSTRAINT package_pk PRIMARY KEY (id)
+        );
+      \end{lstlisting}
+    \end{minipage}\hfill
+    \begin{minipage}{.45\textwidth}
+      \begin{lstlisting}
+        CREATE TABLE PRICING (
+        id IDENTITY NOT NULL,
+        sale_price NUMERIC NOT NULL,
+        retail_price NUMERIC NOT NULL,
+        total_funding NUMERIC NOT NULL,
+        charge_factor NUMERIC NOT NULL,
+        refund NUMERIC NOT NULL,
 
-      CREATE TABLE MEDICINE (
-      id IDENTITY NOT NULL,
-      ean TEXT NOT NULL,
-      name TEXT NOT NULL,
-      dose_id DECIMAL,
-      form_id DECIMAL,
-      pricing_id DECIMAL,
-      package_id DECIMAL,
-      ingredient_id DECIMAL,
-      disease_id DECIMAL,
+        CONSTRAINT pricing_pk PRIMARY KEY (id)
+        );
 
-      FOREIGN KEY (dose_id) REFERENCES DOSE (id),
-      FOREIGN KEY (form_id) REFERENCES FORM (id),
-      FOREIGN KEY (pricing_id) REFERENCES PRICING (id),
-      FOREIGN KEY (package_id) REFERENCES PACKAGE (id),
-      FOREIGN KEY (ingredient_id) REFERENCES INGREDIENT (id),
-      FOREIGN KEY (disease_id) REFERENCES DISEASE (id),
+        CREATE TABLE MEDICINE (
+        id IDENTITY NOT NULL,
+        ean TEXT NOT NULL,
+        name TEXT NOT NULL,
+        dose_id DECIMAL,
+        form_id DECIMAL,
+        pricing_id DECIMAL,
+        package_id DECIMAL,
+        ingredient_id DECIMAL,
+        disease_id DECIMAL,
 
-      CONSTRAINT medicine_pk PRIMARY KEY (id)
-      );
-    \end{lstlisting}
-  \end{minipage}
+        FOREIGN KEY (dose_id) REFERENCES DOSE (id),
+        FOREIGN KEY (form_id) REFERENCES FORM (id),
+        FOREIGN KEY (pricing_id) REFERENCES PRICING (id),
+        FOREIGN KEY (package_id) REFERENCES PACKAGE (id),
+        FOREIGN KEY (ingredient_id) REFERENCES INGREDIENT (id),
+        FOREIGN KEY (disease_id) REFERENCES DISEASE (id),
+
+        CONSTRAINT medicine_pk PRIMARY KEY (id)
+        );
+      \end{lstlisting}
+    \end{minipage}
 
 \end{document}
