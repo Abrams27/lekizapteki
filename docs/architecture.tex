@@ -46,10 +46,10 @@ Lekizapteki\\
     \href{https://spring.io/projects/spring-data-jpa} {Spring Jpa}.
     Framework zajmuje się konstruowaniem zapytań, oraz tworzeniem schematu bazy danych.
 
-    \subsection{Frondend - Backend}
+    \subsection{Frontend - Backend}
     Komunikacja jest synchroniczna i odbywa się protokołem HTTP, serwer dostarcza
     \href{https://en.wikipedia.org/wiki/Representational_state_transfer}{RESTful API},
-    obsługując rządania w formacie
+    obsługując żądania w formacie
     \href{https://en.wikipedia.org/wiki/JSON}{json}.
     Serwer jest dostepny na
     \href{http://students.mimuw.edu.pl:7312}{serwerze Students na porcie `7312`},
@@ -125,14 +125,13 @@ Lekizapteki\\
     \end{minipage}
 
   \section{Frontend}
-  Frontend jest dostepny
+  Frontend jest dostępny na
   \href{http://students.mimuw.edu.pl:1237}{serwerze Students na porcie `1237`} i jest publiczny,
   każdy dysponujący linkiem może z niego korzystać.
   Użytkowanie nie wymaga zakładania konta, ani autoryzacji.
 
   Frontend posiada web serwis oraz modele odpowiadające odbieranym danyn z backendu.
-  Do tworzenia elementów używane są wbudowane komponenty oraz odpowiednie komponenty z
-  \href{https://ng-bootstrap.github.io/#/home}{Bootstrap Widgets}.
+  Do tworzenia elementów używane są wbudowane komponenty oraz odpowiednie komponenty ogólno dostępne w internecie.
 
     \subsection{Makiety}
       \subsubsection{Wybór choroby}
@@ -154,15 +153,15 @@ Lekizapteki\\
     Są one w postaci interface'ów, klas z modelami oraz wyjatków rzucanych przy nieodpowiednich danych.
 
     \subsection{Modul APP}
-    Zawiera implementacje interface'ów z modulu API.
+    Zawiera implementacje interface'ów z modułu API.
     Każdy interface jest implementowany przez kontroler.
-    Kontrolery maja wstrzykniete jedynie klasy służące do wykonywania pojedyńczy endpoint (Command Pattern).
+    Kontrolery maja wstrzyknięte jedynie klasy służące do wykonywania pojedyńczy endpoint (Command Pattern).
 
     Encje i relacje bazy danych sa odwzorowane klasami z odpowiednimi adnotacjami.
     Zapytania do bazy danych odbywają się przez interface, implementowany przez framework,
     w którym nazwy metod są mapowane na zapytania do bazy danych.
 
-    Dane z rozporządzeń są pobierane TODO, w serwisie który jest uruchamiany zaraz po powstaniu kontekstu aplikacji.
+    Dane z rozporządzeń są pobierane bezpośrednio przez aplikację, w serwisie który jest uruchamiany zaraz po powstaniu kontekstu.
     Może on pracować w dwóch trybach, które są konfigurowane w pliku \texttt{application.properties}.
     Pierwszym trybem jest pobieranie plików z podanego w konfiguracji linku,
     drugim jest pobieranie z lokalnego źródła, do którego ścieżka jest podana w konfiguracji.
