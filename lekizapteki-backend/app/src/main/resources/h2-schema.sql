@@ -35,11 +35,11 @@ CREATE TABLE PACKAGE (
 
 CREATE TABLE PRICING (
      id                  IDENTITY            NOT NULL,
-     salePrice           NUMERIC             NOT NULL,
-     retailPrice         NUMERIC             NOT NULL,
-     totalFunding        NUMERIC             NOT NULL,
-     chargeFactor        NUMERIC             NOT NULL,
-     refund              NUMERIC             NOT NULL,
+     salePrice           DECIMAL             NOT NULL,
+     retailPrice         DECIMAL             NOT NULL,
+     totalFunding        DECIMAL             NOT NULL,
+     chargeFactor        DECIMAL             NOT NULL,
+     refund              DECIMAL             NOT NULL,
 
      CONSTRAINT pricing_pk PRIMARY KEY (id)
 );
@@ -48,12 +48,12 @@ CREATE TABLE MEDICINE (
       id                 IDENTITY            NOT NULL,
       ean                TEXT                NOT NULL,
       name               TEXT                NOT NULL,
-      dose_id            DECIMAL,
-      form_id            DECIMAL,
-      pricing_id         DECIMAL,
-      package_id         DECIMAL,
-      ingredient_id      DECIMAL,
-      disease_id         DECIMAL,
+      dose_id            NUMBER              NOT NULL,
+      form_id            NUMBER              NOT NULL,
+      pricing_id         NUMBER              NOT NULL,
+      package_id         NUMBER              NOT NULL,
+      ingredient_id      NUMBER              NOT NULL,
+      disease_id         NUMBER              NOT NULL,
 
       FOREIGN KEY (dose_id) REFERENCES DOSE (id),
       FOREIGN KEY (form_id) REFERENCES FORM (id),
