@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class NoSuchMedicineException extends RuntimeException {
 
-  private final static String message = "Nieprawidłowa jednostka chorobowa";
+  private final static String MESSAGE = "Nieprawidłowa jednostka chorobowa";
 
   public NoSuchMedicineException() {
-    super(message);
+    super(MESSAGE);
   }
 }
