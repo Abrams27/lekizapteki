@@ -26,51 +26,70 @@ Lekizapteki\\
     Nr iteracji & Data & Opis zmian \\
     \hline
     1. & 23.03.2020 & Utworzenie dokumentu oraz jego pierwsza wersja. \\
+    \hline
+    2. & 21.04.2020 & Poprawki, uszczegółowienie wymagań.
   \end{tabular}
 
   \section{Opis}
   Użytkownik ma do dyspozyji aplikację WWW, która umożliwia mu wyszukiwanie leków identycznych do szukanego na daną jednostkę chorobową.
-  Serwis udostępnia przeglądanie i wyszukiwanie tylko leków, które są w postaci tabletek.
+  Serwis udostępnia przeglądanie i wyszukiwanie tylko leków, które są w niżej opisanej postaci.
 
   \section{Wymagania funkcjonalne}
-  Użytkownik wybiera chorobę.
-  Nastepnie, po zatwierdzeniu wyboru guzikiem ``Zatwierdź chorobę'' pojawia się pole do wybierania leku.
-  Użytkownik wybiera lek, sposród tych które są przypisywane na tą jednostkę chrobową.
+    \subsection{Rozpatrywane postacie leków}
+    TODO, trzeba z excelka wybrac jakie wgl dokladnie sa tam leki xd
 
-  Przy wyborze leku ma możliwość zdecydowania, czy szuka na podstawie nazwy leku, czy numeru EAN.
+    \subsection{Opis komponentu dalej nazywanego ``TODO''}
+    Komponent umożliwia wybieranie elementu ze zbioru elementów.
+    Jest on polem, na które można kliknąć.
+    Po kliknięciu rozwija się bezpośrednio pod nim lista, natomiast początkowe pole, staje się polem umożliwiającym wpisywanie tekstu.
+    Elementy w liście są posortowane alfabetycznie rosnąco (`a` jest przed `z`).
+    Wybór elemenetu odbywa się poprzez wybranie go z listy, poprzez przewijanie jej i kliknięcie na element.
+    Pole wejsciowe natomiast umożliwia filtrowanie elementów wyświetlanych w liście, są w niej wyświetlane jedynie pozycje zawierające wpisaną frazę.
 
-  Do wyboru choroby i leku na podstawie jego nazwy, użytkownik korzysta z rozwijanej listy, w której elementy są posortowane alfabetycznie.
-  Znajduje się nad nią pole umożliwijące wyszukiwanie pozycji w liście, które zawierają podawaną frazę.
+    \subsection{Opis użytkowania}
+      \subsubsection{Wybór jednostki chorobowej}
+      Użytkownik wybiera chorobę z TODO.
+      Nastepnie, zatwierdza wybór wciśnięciem guzika ``Zatwierdź chorobę''.
+      Guzik znajduje się obok komponentu do wyboru choroby,
+      Powoduje to pojawienie się komponent TODO do wybierania leku.
 
-  Do zmiany sposobu szukania leku służy przełącznik, po naciśnięciu którego zamiast listy pojawia się pole na wpisywanie numeru.
-  Przełącznik umożliwia również powrót do wyszukiwania po nazwie.
+      \subsubsection{Wybór leku}
+      Użytkownik może wyszukiwać lek podobnie jak chorobę lub po numerze EAN.
+      Wybór ten dokonuje przesuwanym guzikem ``Szukaj po numerze EAN''.
 
-  Po wciśnięciu guzika z napisem ``szukaj'' otrzymuje listę leków na daną chorobę, które są identyczne do podanego.
-  Pozycje są posortowane po dalej zdefiniowanej ``opłacalności''.
-  Są one wyświetlane w tabelce, a użytkownik może je przewijać.
-  Każda pozycja zawiera nazwę leku, substancję czynną i cenę detaliczną.
-  Po kliknięciu na wiersz w tabeli, wysuwa się pod nim panel z inforamcją dotyczącą numeru EAN tego leku, dawką oraz postacią.
-  Pokazywane są również szczegóły dotyczące ceny oraz poziomu odpłatności, tj.
-  `Urzędowa cena zbytu',
-  `Cena hurtowa brutto',
-  `Cena detaliczna',
-  `Wysokość limitu finansowania',
-  `Poziom odpłatności' i
-  `Wysokość dopłaty świadczeniobiorcy'.
+      Jeśli nie wybierze tej opcji to wybiera lek, sposród tych które są przypisywane na wybraną jednostkę chrobową.
+      Używa do tego również TODO.
 
-  Jeżeli użytkownik wybrał opcję wyszukiwania leku po numerze EAN i podał nieprawidłowy numer, zostanie wyświetlona informacja z napisem
-  ``Nieprawidłowy numer EAN''.
-  Jeżeli lek o danym numerze EAN istnieje, ale nie jest on przypisywany na wybraną jednostkę chorobową, wyświetli się informacja z napisem
-  ``Lek o podanym numerze EAN nie jest przypisywany na wybraną jednostkę chorobową''.
+      Jeśli zdecyduje się na wybieranie po numerze EAN, po przełączeniu guzika znika komponent TODO, a w jego miejsce pojawia się pole do wpisywania numeru EAN.
 
-  Jako leki indetyczne rozumiemy leki, które są
-  \href{https://www.eupati.eu/pl/rodzaje-lekow/leki-generyczne/}{generyczne} do oryginalnego.
+      Użytkownik wybór potwierdza nacisnięciem guzika ``szukaj''.
 
-  ``Opłacalność'' definiujemy jako współczynnik ceny do pojedynczej dawki leku.
-  Na przykład, opakowanie leku ``LekABC'' zawiera 69 tabletek i kosztuje 12,37, wtedy współczynnik jest równy $\frac{12,37}{69} \approx 0,179$.
-  Z kolei w opakowaniu ``LekXYZ'' są 42 tabletki i można go nabyć za 17,23, więc współczynnik to $\frac{17,23}{42} \approx 0.410$.
-  Zakładając, że są identyczne, w wyniku wyszukiwania ``LekABC'' wyświetliłby się nad ``LekXYZ'', gdyż ma mniejszy współczynnik,
-  co jest równoważne z mniejszą ceną za jedną tabletkę.
+      Pojawia się po tym tableka zawierające leki generyczne do podanego, czyli takie które zawierają tę samą substancję czynną
+      (o lekach generycznych można poczytać \href{https://pl.wikipedia.org/wiki/Lek_generyczny}{tutaj}).
+
+      Pozycje są posortowane po dalej zdefiniowanej ``opłacalności''.
+      Leki o takiej samej wartości``opłacalności' są wyświetlane posortowane alfabetycznie rosnąco.
+      Są one wyświetlane w tabelce, a użytkownik może je przewijać.
+      Każda pozycja zawiera nazwę leku, substancję czynną i cenę detaliczną.
+      Po kliknięciu na wiersz w tabeli, wysuwa się pod nim panel z inforamcją dotyczącą numeru EAN tego leku, dawką oraz postacią.
+      Pokazywane są również szczegóły dotyczące ceny oraz poziomu odpłatności, tj.
+      `Urzędowa cena zbytu',
+      `Cena hurtowa brutto',
+      `Cena detaliczna', < do sprawdzenia
+      `Wysokość limitu finansowania',
+      `Poziom odpłatności' i
+      `Wysokość dopłaty świadczeniobiorcy'.
+
+      Jeżeli jednak użytkownik wyszukiwał po numerze EAN i podany numer jeat nieprawidłowy, zostanie wyświetlona informacja z napisem  ``Nieprawidłowy numer EAN''.
+      Natomiast, jeżeli lek o danym numerze EAN istnieje, ale nie jest on przypisywany na wybraną jednostkę chorobową,
+      wyświetli się informacja z napisem  ``Lek o podanym numerze EAN nie jest przypisywany na wybraną jednostkę chorobową''.
+
+      \subsubsection{Definicja ``opłacalności''}
+      Definiujemy jaką jako współczynnik ceny (chyba detalicznej TODO) do pojedynczej dawki leku.
+      Na przykład, opakowanie leku ``LekABC'' zawiera 69 tabletek i kosztuje 12,37, wtedy współczynnik jest równy $\frac{12,37}{69} \approx 0,179$.
+      Z kolei w opakowaniu ``LekXYZ'' są 42 tabletki i można go nabyć za 17,23, więc współczynnik to $\frac{17,23}{42} \approx 0.410$.
+      Zakładając, że są identyczne, w wyniku wyszukiwania ``LekABC'' wyświetliłby się nad ``LekXYZ'', gdyż ma mniejszy współczynnik,
+      co jest równoważne z mniejszą ceną za jedną tabletkę.
 
   \section{Wymagania niefunkcjonalne}
 
