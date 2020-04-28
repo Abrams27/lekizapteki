@@ -19,6 +19,7 @@ Lekizapteki\\
 
 
 \begin{document}
+  \setlength{\parindent}{0in}
   \maketitle
 
   \section{Dziennik zmian}
@@ -31,12 +32,12 @@ Lekizapteki\\
   \end{tabular}
 
   \section{Opis}
-  Użytkownik ma do dyspozyji aplikację WWW, która umożliwia wyszukiwanie leków identycznych do szukanego na daną jednostkę chorobową.
+  Użytkownik ma do dyspozycji aplikację WWW, która umożliwia wyszukiwanie leków identycznych z szukanym na daną jednostkę chorobową.
   Serwis udostępnia przeglądanie i wyszukiwanie tylko leków, które są w niżej opisanej postaci.
 
   \section{Wymagania funkcjonalne}
     \subsection{Ograniczenia przeszukiwanych danych}
-    Użytkownik otrzymuje możliwość przeszukiwania leków zawierających jedynie jedna substancję czynną oraz będące w następujących postaciach:
+    Użytkownik otrzymuje możliwość przeszukiwania leków zawierających jedynie jedną substancję czynną oraz będące w następujących postaciach:
     tabletki,
     tabletki powlekane,
     tabletki dojelitowe,
@@ -53,29 +54,29 @@ Lekizapteki\\
     Jest on polem, na które można kliknąć.
     Po kliknięciu rozwija się bezpośrednio pod nim lista, natomiast początkowe pole umożliwia wpisywanie tekstu.
     Elementy w liście są posortowane alfabetycznie rosnąco (`a` jest przed `b`).
-    Wybór elemenetu odbywa się poprzez wybranie go z listy - przewijanie jej i kliknięcie na element.
-    Pole wejsciowe umożliwia filtrowanie elementów wyświetlanych w liście, są w niej wyświetlane jedynie pozycje zawierające wpisaną frazę.
+    Wybór elementu odbywa się poprzez wybranie go z listy — przewijanie jej i kliknięcie na element.
+    Pole wejściowe umożliwia filtrowanie elementów wyświetlanych w liście, są w niej wyświetlane jedynie pozycje zawierające wpisaną frazę.
 
     \subsection{Opis użytkowania}
       \subsubsection{Wybór jednostki chorobowej}
       Użytkownik wybiera chorobę z listy z polem do filtrowania.
-      Nastepnie, zatwierdza wybór wciśnięciem guzika ``Zatwierdź chorobę''.
+      Następnie, zatwierdza wybór wciśnięciem guzika ``Zatwierdź chorobę''.
       Guzik znajduje się obok komponentu do wyboru choroby,
       Powoduje to pojawienie się listy z polem do filtrowania do wybierania leku.
 
       \subsubsection{Wybór leku}
       Użytkownik może wyszukiwać lek podobnie jak chorobę lub po numerze EAN.
-      Wybór ten dokonuje przesuwanym guzikem ``Szukaj po numerze EAN'' znajdującym się na obok.
+      Wybór ten dokonuje przesuwanym guzikiem ``Szukaj po numerze EAN'' znajdującym się na obok.
 
-      Jeśli nie wybierze tej opcji to wybiera lek, sposród tych które są przypisywane na wybraną jednostkę chrobową.
+      Jeśli nie wybierze tej opcji, to wybiera lek, spośród tych które są przypisywane na wybraną jednostkę chorobową.
       Używa do tego również listy z polem do filtrowania.
 
       Jeśli zdecyduje się na wybieranie po numerze EAN, po przełączeniu guzika znika lista z polem do filtrowania,
       a w jej miejsce pojawia się pole do wpisywania numeru EAN.
 
-      Użytkownik wybór potwierdza nacisnięciem guzika ``szukaj'', który znajduje się obok.
+      Użytkownik wybór potwierdza naciśnięciem guzika ``szukaj'', który znajduje się obok.
 
-      Pojawia się po tym tableka zawierające leki generyczne do podanego, czyli takie które zawierają tę samą substancję czynną w odpowiedniej dawce
+      Pojawia się po tym tabelka zawierające leki generyczne do podanego, czyli takie, które zawierają tę samą substancję czynną w odpowiedniej dawce
       (o lekach generycznych można poczytać \href{https://pl.wikipedia.org/wiki/Lek_generyczny}{tutaj}).
       Wyświetlone są leki, które również są refundowane na podaną jednostkę chorobową.
 
@@ -83,7 +84,7 @@ Lekizapteki\\
       Leki o takiej samej wartości``opłacalności' są wyświetlane posortowane alfabetycznie rosnąco.
       Są one wyświetlane w tabelce, a użytkownik może je przewijać.
       Każda pozycja zawiera nazwę leku, substancję czynną i cenę detaliczną zdefiniowaną w rozporządzeniu.
-      Po kliknięciu na wiersz w tabeli, wysuwa się pod nim panel z inforamcją dotyczącą numeru EAN tego leku, dawką oraz postacią.
+      Po kliknięciu na wiersz w tabeli wysuwa się pod nim panel z informacją dotyczącą numeru EAN tego leku, dawką oraz postacią.
       Pokazywane są również szczegóły dotyczące ceny oraz poziomu odpłatności, tj.
       `Urzędowa cena zbytu',
       `Cena hurtowa brutto',
@@ -92,13 +93,13 @@ Lekizapteki\\
       `Poziom odpłatności' i
       `Wysokość dopłaty świadczeniobiorcy'.
 
-      Jeżeli jednak użytkownik wyszukiwał po numerze EAN i podany numer jeat nieprawidłowy, zostanie wyświetlona informacja z napisem  ``Nieprawidłowy numer EAN''.
+      Jeżeli jednak użytkownik wyszukiwał po numerze EAN i podany numer jeat nieprawidłowy, zostanie wyświetlona informacja z napisem ``Nieprawidłowy numer EAN''.
       Natomiast, jeżeli lek o danym numerze EAN istnieje, ale nie jest on przypisywany na wybraną jednostkę chorobową,
-      wyświetli się informacja z napisem  ``Lek o podanym numerze EAN nie jest przypisywany na wybraną jednostkę chorobową''.
+      wyświetli się informacja z napisem ``Lek o podanym numerze EAN nie jest przypisywany na wybraną jednostkę chorobową''.
 
       \subsubsection{Definicja ``opłacalności''}
       Definiujemy wartość tą dla leków jedynie w postaciach podanych w sekcji 2.3.1.
-      Definiujemy jaką jako współczynnik ceny detalicznej do 1 mg substancji czynnej w tabletce,
+      Definiujemy ją jako współczynnik ceny detalicznej do 1 mg substancji czynnej w tabletce,
       czyli $CENA / (LICZBA-TABLETEK-W-OPAKOWANIU * ILOSC-SUBSTANCJI-CZYNNEJ-W-MG)$.
       Na przykład, opakowanie leku ``LekABC'' zawiera 69 tabletek, w każdej tabletce są 42 mg substancji czynnej i kosztuje 12,37,
       wtedy współczynnik jest równy $\frac{12,37}{69 * 42} \approx 0,0042$.
