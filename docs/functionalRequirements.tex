@@ -108,6 +108,8 @@ Lekizapteki\\
       co jest równoważne z mniejszą ceną za 1 mg substancji czynnej na opakowanie.
 
   \section{Wymagania niefunkcjonalne}
-  Zapytania do serwera sa wykonywane jedynie
+  Frontend pobiera z backendu całe listy z chorobami oraz lekami i przechowuje je lokalnie.
+  Wydajność zostaje zwiększona, gdyż liczba zapytań do backendu, które są wolniejsze niż odczyty lokalne, jest zminimalizowana.
+  Umożliwi to przeglądanie i filtrowanie list szybko, bez konieczności odpytywania się zewnętrznego serwisu.
 
 \end{document}
