@@ -12,7 +12,7 @@ urlcolor=blue,
 }
 \setcounter{section}{-1}
 \lstset{
-basicstyle=\fontsize{7}{7}\selectfont\ttfamily,
+basicstyle=\fontsize{6}{6}\selectfont\ttfamily,
 }
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
@@ -31,6 +31,8 @@ Lekizapteki\\
       Nr iteracji & Data & Opis zmian \\
       \hline
       1. & 25.03.2020 & Utworzenie dokumentu oraz jego pierwsza wersja. \\
+      \hline
+      2. & 29.04.2020 & Poprawki w endpointach i schema. \\
     \end{tabular}
 
   \section{Ogólna struktura}
@@ -54,7 +56,7 @@ Lekizapteki\\
     Serwer jest dostepny na
     \href{http://students.mimuw.edu.pl:7312}{serwerze Students na porcie `7312`},
     natomiast frontend wykonuje zapytania za pomocą
-    \href{https://angular.io/guide/http}{httpClient'a}.
+    \href{https://angular.io/guide/http}{HttpClient'a} służacego do wykonywania zapytań http.
     Nie ma stosowanych żadnych form zabezpieczeń, rządania i odpowiedzi nie sa szyfrowane, ani nie ma wymiany tokenów.
     API backendu jest publiczne, więc każdy dysponujący linkiem może z niego korzystać.
     Backend akceptuje jedynie zapytania w formacie \texttt{application/json},
@@ -92,14 +94,31 @@ Lekizapteki\\
          }]
 
          HTTP/1.1 404 (Not Found)
-         Message: "Nieprawidlowy numer EAN"
-
-         HTTP/1.1 404 (Not Found)
          Message: "Nieprawidlowa jednostka chorobowa"
+
+       - complex types definitions
+         PricingDto: {
+           "tradePrice": Decimal,
+           "salePrice": Decimal,
+           "retailPrice": Decimal,
+           "totalFunding": Decimal,
+           "chargeFactor": Decimal,
+           "refund": Decimal,
+        }
+
      \end{lstlisting}
     \end{minipage}\hfill
     \begin{minipage}{.45\textwidth}
       \begin{lstlisting}
+          MedicineDto: {
+            "ean": "String",
+            "name": "String",
+            "activeIngredient": String
+            "dose": "String",
+            "form": "String",
+            "pricing": PricingDto
+          }
+
         - GET /lekizapteki/medicines/identical
 
           Parameters:
@@ -109,11 +128,10 @@ Lekizapteki\\
           Responses:
           HTTP/1.1 200 (OK)
           Body:
-          [{
-            "ean": "String",
-            "name": "String",
-            "dose": "String"
-          }]
+          {
+            "medicine": MedicineDto,
+            "identicalMedicines: [MedicineDto]
+          }
 
           HTTP/1.1 404 (Not Found)
           Message: "Nieprawidlowy numer EAN"
@@ -135,7 +153,7 @@ Lekizapteki\\
 
     \subsection{Makiety}
       \subsubsection{Wybór choroby}
-      \includegraphics[width=8cm, height=5cm]{lekizapteki-wybor-choroby}
+      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-wybor-choroby}
 
       \subsubsection{Wybór leku za pomocą nazwy i numeru EAN}
       \includegraphics[width=6.4cm, height=4cm]{lekizapteki-wybor-leku-nazwa}
@@ -174,73 +192,73 @@ Lekizapteki\\
     \begin{minipage}{.45\textwidth}
       \begin{lstlisting}
         CREATE TABLE DISEASE (
-        id IDENTITY NOT NULL,
-        name TEXT NOT NULL,
+          id IDENTITY NOT NULL,
+          name TEXT NOT NULL,
 
-        CONSTRAINT disease_pk PRIMARY KEY (id)
+          CONSTRAINT disease_pk PRIMARY KEY (id)
         );
 
         CREATE TABLE INGREDIENT (
-        id IDENTITY NOT NULL,
-        name TEXT NOT NULL,
+          id IDENTITY NOT NULL,
+          name TEXT NOT NULL,
 
-        CONSTRAINT ingredient_pky PRIMARY KEY (id)
+          CONSTRAINT ingredient_pky PRIMARY KEY (id)
         );
 
         CREATE TABLE DOSE (
-        id IDENTITY NOT NULL,
-        dose TEXT NOT NULL,
+          id IDENTITY NOT NULL,
+          dose TEXT NOT NULL,
 
-        CONSTRAINT dose_pk PRIMARY KEY (id)
+          CONSTRAINT dose_pk PRIMARY KEY (id)
         );
 
         CREATE TABLE FORM (
-        id IDENTITY NOT NULL,
-        name TEXT NOT NULL,
+          id IDENTITY NOT NULL,
+          name TEXT NOT NULL,
 
-        CONSTRAINT form_pk PRIMARY KEY (id)
+          CONSTRAINT form_pk PRIMARY KEY (id)
         );
 
         CREATE TABLE PACKAGE (
-        id IDENTITY NOT NULL,
-        content TEXT NOT NULL,
+          id IDENTITY NOT NULL,
+          content TEXT NOT NULL,
 
-        CONSTRAINT package_pk PRIMARY KEY (id)
+          CONSTRAINT package_pk PRIMARY KEY (id)
         );
       \end{lstlisting}
     \end{minipage}\hfill
     \begin{minipage}{.45\textwidth}
       \begin{lstlisting}
         CREATE TABLE PRICING (
-        id IDENTITY NOT NULL,
-        sale_price NUMERIC NOT NULL,
-        retail_price NUMERIC NOT NULL,
-        total_funding NUMERIC NOT NULL,
-        charge_factor NUMERIC NOT NULL,
-        refund NUMERIC NOT NULL,
+          id IDENTITY NOT NULL,
+          sale_price DECIMAL NOT NULL,
+          retail_price DECIMAL NOT NULL,
+          total_funding DECIMAL NOT NULL,
+          charge_factor DECIMAL NOT NULL,
+          refund DECIMAL NOT NULL,
 
-        CONSTRAINT pricing_pk PRIMARY KEY (id)
+          CONSTRAINT pricing_pk PRIMARY KEY (id)
         );
 
         CREATE TABLE MEDICINE (
-        id IDENTITY NOT NULL,
-        ean TEXT NOT NULL,
-        name TEXT NOT NULL,
-        dose_id DECIMAL,
-        form_id DECIMAL,
-        pricing_id DECIMAL,
-        package_id DECIMAL,
-        ingredient_id DECIMAL,
-        disease_id DECIMAL,
+          id IDENTITY NOT NULL,
+          ean TEXT NOT NULL,
+          name TEXT NOT NULL,
+          dose_id NUMERIC NOT NUL,
+          form_id NUMERIC NOT NUL,
+          pricing_id NUMERIC NOT NUL,
+          package_id NUMERIC NOT NUL,
+          ingredient_id NUMERIC NOT NUL,
+          disease_id NUMERIC NOT NUL,
 
-        FOREIGN KEY (dose_id) REFERENCES DOSE (id),
-        FOREIGN KEY (form_id) REFERENCES FORM (id),
-        FOREIGN KEY (pricing_id) REFERENCES PRICING (id),
-        FOREIGN KEY (package_id) REFERENCES PACKAGE (id),
-        FOREIGN KEY (ingredient_id) REFERENCES INGREDIENT (id),
-        FOREIGN KEY (disease_id) REFERENCES DISEASE (id),
+          FOREIGN KEY (dose_id) REFERENCES DOSE (id),
+          FOREIGN KEY (form_id) REFERENCES FORM (id),
+          FOREIGN KEY (pricing_id) REFERENCES PRICING (id),
+          FOREIGN KEY (package_id) REFERENCES PACKAGE (id),
+          FOREIGN KEY (ingredient_id) REFERENCES INGREDIENT (id),
+          FOREIGN KEY (disease_id) REFERENCES DISEASE (id),
 
-        CONSTRAINT medicine_pk PRIMARY KEY (id)
+          CONSTRAINT medicine_pk PRIMARY KEY (id)
         );
       \end{lstlisting}
     \end{minipage}
