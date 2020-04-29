@@ -28,7 +28,7 @@ Lekizapteki\\
     \hline
     1. & 23.03.2020 & Utworzenie dokumentu oraz jego pierwsza wersja. \\
     \hline
-    2. & 21.04.2020 & Poprawki, uszczegółowienie wymagań.
+    2. & 29.04.2020 & Poprawki, uszczegółowienie wymagań.
   \end{tabular}
 
   \section{Opis}
@@ -61,7 +61,7 @@ Lekizapteki\\
       \subsubsection{Wybór jednostki chorobowej}
       Użytkownik wybiera chorobę z listy z polem do filtrowania.
       Następnie, zatwierdza wybór wciśnięciem guzika ``Zatwierdź chorobę''.
-      Guzik znajduje się obok komponentu do wyboru choroby,
+      Guzik znajduje się obok komponentu do wyboru choroby.
       Powoduje to pojawienie się listy z polem do filtrowania do wybierania leku.
 
       \subsubsection{Wybór leku}
@@ -79,9 +79,10 @@ Lekizapteki\\
       Pojawia się po tym tabelka zawierające leki generyczne do podanego, czyli takie, które zawierają tę samą substancję czynną w odpowiedniej dawce
       (o lekach generycznych można poczytać \href{https://pl.wikipedia.org/wiki/Lek_generyczny}{tutaj}).
       Wyświetlone są leki, które również są refundowane na podaną jednostkę chorobową.
+      Dodatkowo nad tableką wyświetla się pole z informacjami o wyszukiwanym leku, z takimi samymi polami jak w niżej opisanej tabeli.
 
       Pozycje są posortowane po dalej zdefiniowanej ``opłacalności''.
-      Leki o takiej samej wartości``opłacalności' są wyświetlane posortowane alfabetycznie rosnąco.
+      Leki o takiej samej wartości ``opłacalności' są wyświetlane posortowane alfabetycznie rosnąco.
       Są one wyświetlane w tabelce, a użytkownik może je przewijać.
       Każda pozycja zawiera nazwę leku, substancję czynną i cenę detaliczną zdefiniowaną w rozporządzeniu.
       Po kliknięciu na wiersz w tabeli wysuwa się pod nim panel z informacją dotyczącą numeru EAN tego leku, dawką oraz postacią.
@@ -98,7 +99,7 @@ Lekizapteki\\
       wyświetli się informacja z napisem ``Lek o podanym numerze EAN nie jest przypisywany na wybraną jednostkę chorobową''.
 
       \subsubsection{Definicja ``opłacalności''}
-      Definiujemy wartość tą dla leków jedynie w postaciach podanych w sekcji 2.3.1.
+      Definiujemy wartość tą dla leków jedynie w postaciach podanych w sekcji 2.1.
       Definiujemy ją jako współczynnik ceny detalicznej do 1 mg substancji czynnej w tabletce,
       czyli $CENA / (LICZBA-TABLETEK-W-OPAKOWANIU * ILOSC-SUBSTANCJI-CZYNNEJ-W-MG)$.
       Na przykład, opakowanie leku ``LekABC'' zawiera 69 tabletek, w każdej tabletce są 42 mg substancji czynnej i kosztuje 12,37,
@@ -112,5 +113,7 @@ Lekizapteki\\
   Frontend pobiera z backendu całe listy z chorobami oraz lekami i przechowuje je lokalnie.
   Wydajność zostaje zwiększona, gdyż liczba zapytań do backendu, które są wolniejsze niż odczyty lokalne, jest zminimalizowana.
   Umożliwi to przeglądanie i filtrowanie list szybko, bez konieczności odpytywania się zewnętrznego serwisu.
+  Użytkownik w ten sposób otrzymuje większą wygodę przeglądania strony.
 
 \end{document}
+ umożliwia filtrowanie elementów wyświetlanych w liście, są w niej wyświetlane jedynie pozycje zawierające wpisaną frazę.
