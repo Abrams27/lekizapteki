@@ -2,5 +2,6 @@
 
 <div class="container">
 <!--  <router-outlet></router-outlet>-->
-  <app-dropdown-list></app-dropdown-list>
+  <app-disease-dropdown-list (confirmed)="mojaFunckcjaCoPokazeKomponent()"></app-disease-dropdown-list>
+  <app-medicine-dropdown-list [hidden]="ifHidden"></app-medicine-dropdown-list>
 </div>

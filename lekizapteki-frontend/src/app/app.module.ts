@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { DropdownListComponent } from './components/dropdown-list/dropdown-list.component';
+import { DiseaseDropdownListComponent } from './components/disease-dropdown-list/disease-dropdown-list.component';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
+import { MedicineDropdownListComponent } from './components/medicine-dropdown-list/medicine-dropdown-list.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { NgSelectModule, NgOption } from '@ng-select/ng-select';
   declarations: [
     AppComponent,
     TopBarComponent,
-    DropdownListComponent,
+    DiseaseDropdownListComponent,
+    MedicineDropdownListComponent,
   ],
   bootstrap: [ AppComponent ]
 })
