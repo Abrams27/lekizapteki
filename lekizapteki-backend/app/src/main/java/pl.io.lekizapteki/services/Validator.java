@@ -19,6 +19,9 @@ public class Validator {
     // pojedyncza substancja czynna -> zawartość komórki 'substancja czynna' nie ma w sobie znaku +
     // tylko w formie tabletek -> zawartość komórki 'nazwa, postać, dawka', jakoś sprawdzić postać
     List<Medicine> validatedMedicines = new ArrayList<>();
+
+    // TODO validate medicinesToValidate
+
     return validatedMedicines;
   }
 
