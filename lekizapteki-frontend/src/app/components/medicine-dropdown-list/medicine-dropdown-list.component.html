@@ -1,6 +1,6 @@
 <label>Append dropdown to body</label>
 
-<div class="floating-list">
+<div class="floating-list" [hidden]="ifSearchingByEan">
   <ng-select
     (open)="disapearPlaceholder()"
     [items]="medicines"
@@ -10,14 +10,23 @@
     appendTo="body"
     bindValue="id"
     [(ngModel)]="selectedMedicineId">
-    DUPA
   </ng-select>
   <p>
     Ean: {{selectedMedicineId}}
   </p>
   <hr/>
-  <button (click)="onClick()" class="btn btn-primary">Zatwierdź</button>
-  {{potwierdzonko}}
 </div>
+
+<div class="ng-input" [hidden]="!ifSearchingByEan">
+  <label>
+    <input #EAN (keyup)="0">
+  </label>
+  <p>{{EAN.value}}</p>
+</div>
+
+<button (click)="onClick()" class="btn btn-primary">Zatwierdź</button>
+{{potwierdzonko}}
+
+<button (click)="onClickSearchType(EAN)" class="btn btn-secondary">{{searchTypeButtonName}}</button>
 
 <div style="margin-top:300px"></div>

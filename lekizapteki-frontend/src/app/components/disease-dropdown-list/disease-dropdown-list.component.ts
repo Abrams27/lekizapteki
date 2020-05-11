@@ -33,11 +33,13 @@ export class DiseaseDropdownListComponent implements OnInit {
   }
 
   onClick() {
-    this.confirmed.emit();
-    console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
-    this.potwierdzonko = 'Jakos sie udalo. Buziaczek. Id:' + this.selectedDiseaseId.toString();
-
+    if (this.selectedDiseaseId != null) {
+      this.confirmed.emit();
+      console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
+      this.potwierdzonko = 'Jakos sie udalo. Buziaczek. Id:' + this.selectedDiseaseId.toString();
+    }
   }
+
   disapearPlaceholder() {
     this.placeholder = '';
     this.selectedDiseaseId = null;

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
+
 @Component({
   selector: 'app-medicine-dropdown-list',
   templateUrl: './medicine-dropdown-list.component.html',
@@ -8,10 +9,10 @@ import {Component, Input, OnInit} from '@angular/core';
 
 
 export class MedicineDropdownListComponent implements OnInit {
-
   medicines = [];
   @Input()
-  dupa = '';
+  ifSearchingByEan = false;
+  searchTypeButtonName = 'Szukaj po EAN';
   selectedMedicineId: number;
   public potwierdzonko = '';
   public placeholder = '';
@@ -34,14 +35,26 @@ export class MedicineDropdownListComponent implements OnInit {
   }
 
   onClick() {
-    console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
-    this.potwierdzonko = 'Jakos sie udalo. Buziaczek. Id:' + this.selectedMedicineId.toString();
-
+    if (this.selectedMedicineId != null) {
+      console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
+      this.potwierdzonko = 'Jakos sie udalo. Buziaczek. Id:' + this.selectedMedicineId.toString();
+    }
   }
+
+  onClickSearchType(EAN: any) {
+    if (this.ifSearchingByEan) {
+      this.ifSearchingByEan = false;
+      this.searchTypeButtonName = 'Wybierz z listy';
+      EAN.value = '';
+    } else {
+      this.ifSearchingByEan = true;
+      this.searchTypeButtonName = 'Szukaj po EAN';
+    }
+  }
+
   disapearPlaceholder() {
     this.placeholder = '';
     this.selectedMedicineId = null;
   }
 
 }
-
