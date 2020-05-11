@@ -27,6 +27,16 @@
 <button (click)="onClick()" class="btn btn-primary">Zatwierdź</button>
 {{potwierdzonko}}
 
-<button (click)="onClickSearchType(EAN)" class="btn btn-secondary">{{searchTypeButtonName}}</button>
+<!--<button (click)="onClickSearchType(EAN)" class="btn btn-secondary">{{searchTypeButtonName}}</button>-->
+
+<label>
+  <input type="radio"
+         [value]="searchTypeButtonName"
+         [checked]="ifSearchingByEan"
+          (click)="onClickSearchType(EAN)"/>
+  {{searchTypeButtonName}}
+</label>
+<!--       id="{{ groupName + choice }}"-->
+<!--       name="{{groupName}}"-->
 
 <div style="margin-top:300px"></div>
