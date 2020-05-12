@@ -1,0 +1,42 @@
+<label>Append dropdown to body</label>
+
+<div class="floating-list" [hidden]="ifSearchingByEan">
+  <ng-select
+    (open)="disapearPlaceholder()"
+    [items]="medicines"
+    bindLabel="name"
+    [virtualScroll]="true"
+    placeholder={{placeholder}}
+    appendTo="body"
+    bindValue="id"
+    [(ngModel)]="selectedMedicineId">
+  </ng-select>
+  <p>
+    Ean: {{selectedMedicineId}}
+  </p>
+  <hr/>
+</div>
+
+<div class="ng-input" [hidden]="!ifSearchingByEan">
+  <label>
+    <input #EAN (keyup)="0">
+  </label>
+  <p>{{EAN.value}}</p>
+</div>
+
+<button (click)="onClick()" class="btn btn-primary">Zatwierdź</button>
+{{potwierdzonko}}
+
+<!--<button (click)="onClickSearchType(EAN)" class="btn btn-secondary">{{searchTypeButtonName}}</button>-->
+
+<label>
+  <input type="radio"
+         [value]="searchTypeButtonName"
+         [checked]="ifSearchingByEan"
+          (click)="onClickSearchType(EAN)"/>
+  {{searchTypeButtonName}}
+</label>
+<!--       id="{{ groupName + choice }}"-->
+<!--       name="{{groupName}}"-->
+
+<div style="margin-top:300px"></div>
