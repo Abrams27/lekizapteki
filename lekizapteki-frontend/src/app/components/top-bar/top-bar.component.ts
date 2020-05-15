@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WebService} from '../../webservices/web.service';
+import {WebService} from '../../services/webservice/web.service';
 
 @Component({
   selector: 'app-top-bar',

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DiseaseDto} from './models/DiseaseDto';
-import {MedicineDto} from './models/MedicineDto';
-import {UrlBuilder} from './url-builder.service';
-import {LoggingHttpClient} from './logging-http-client.service';
+import {DiseaseDto} from './models/disease.dto';
+import {MedicineDto} from './models/medicine.dto';
+import {UrlBuilder} from '../url-builder.service';
+import {LoggingHttpClient} from '../logging-http-client.service';
 
 @Injectable({
   providedIn: 'root'
