@@ -3,8 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DiseaseDto} from './models/DiseaseDto';
 import {MedicineDto} from './models/MedicineDto';
-import {UrlBuilder} from './urlBuilderService';
-import {LoggingHttpClientWrapper} from './LoggingHttpClientWrapperService';
+import {UrlBuilder} from './url-builder.service';
+import {LoggingHttpClient} from './logging-http-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,37 +12,37 @@ import {LoggingHttpClientWrapper} from './LoggingHttpClientWrapperService';
 export class WebService {
 
   // TODO dowiedziec sie czy da sie jakos to do pliku przeniesc
-  private API_URL = 'localhost:8080/lekizapteki';
+  private API_URL = 'http://students.mimuw.edu.pl:7312/lekizapteki';
   private DISEASES_PATH = 'diesases';
   private MEDICINES_PATH = 'medicines';
   private IDENTICAL_PATH = 'identical';
 
-  constructor(private httpClient: HttpClient) {}
+  public constructor(private httpClient: HttpClient) {}
 
-  getDiseases(): Observable<DiseaseDto[]> {
+  public getDiseases(): Observable<DiseaseDto[]> {
     const url = UrlBuilder.builder(this.API_URL)
       .addPath(this.DISEASES_PATH)
       .buildUrl();
 
-    return LoggingHttpClientWrapper.get<DiseaseDto[]>(
+    return LoggingHttpClient.get<DiseaseDto[]>(
       this.getDiseases.name,
       this.httpClient,
       url);
   }
 
-  getMedicinesForDisease(diseaseId: string): Observable<MedicineDto[]> {
+  public getMedicinesForDisease(diseaseId: string): Observable<MedicineDto[]> {
     const url = UrlBuilder.builder(this.API_URL)
       .addPath(this.MEDICINES_PATH)
       .addParam('diseaseId', diseaseId)
       .buildUrl();
 
-    return LoggingHttpClientWrapper.get<MedicineDto[]>(
+    return LoggingHttpClient.get<MedicineDto[]>(
       this.getMedicinesForDisease.name,
       this.httpClient,
       url);
   }
 
-  getMedicinesForDiseaseIdenticalToGiven(ean: string, diseaseId: string): Observable<MedicineDto[]> {
+  public getMedicinesForDiseaseIdenticalToGiven(ean: string, diseaseId: string): Observable<MedicineDto[]> {
     const url = UrlBuilder.builder(this.API_URL)
     .addPath(this.MEDICINES_PATH)
     .addPath(this.IDENTICAL_PATH)
@@ -50,7 +50,7 @@ export class WebService {
     .addParam('diseaseId', diseaseId)
     .buildUrl();
 
-    return LoggingHttpClientWrapper.get<MedicineDto[]>(
+    return LoggingHttpClient.get<MedicineDto[]>(
       this.getMedicinesForDiseaseIdenticalToGiven.name,
       this.httpClient,
       url);
