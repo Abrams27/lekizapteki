@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,10 +12,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.hibernate.jdbc.Work;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import pl.io.lekizapteki.enums.ColumnType;
 
-//@ConfigurationProperties(prefix = "ColumnTypes")
+//@Configuration
+//@ConfigurationProperties(prefix = "excel")
+@AllArgsConstructor
 public class ExcelParser {
 
   private static final ColumnType[] columnTypesInOrder = {
@@ -29,10 +34,13 @@ public class ExcelParser {
       ColumnType.REFUND
   };
 
+  private FileInputStream excelFile;
+  private Workbook workbook;
+
   @SneakyThrows
   public List<Medicine> parseExcelFile(String filePath) {
-    @Cleanup FileInputStream excelFile = new FileInputStream(new File(filePath));
-    @Cleanup Workbook workbook = new XSSFWorkbook(excelFile);
+//    FileInputStream excelFile = new FileInputStream(new File(filePath));
+//    Workbook workbook = new XSSFWorkbook(excelFile);
 
     Sheet sheet = workbook.getSheetAt(0);
 

@@ -1,15 +1,16 @@
 package pl.io.lekizapteki.services;
 
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 public class Medicine {
-  @Setter private String ingredient;
-  @Setter private String nameAndFormAndDose;
-  @Setter private String pack;
-  @Setter private String ean;
-  @Setter private String salePrice;
-  @Setter private String retailPrice;
-  @Setter private String totalFunding;
-  @Setter private String chargeFactor;
-  @Setter private String refund;
+  private String ingredient;
+  private String nameAndFormAndDose;
+  private String pack;
+  private String ean;
+  private String salePrice;
+  private String retailPrice;
+  private String totalFunding;
+  private String chargeFactor;
+  private String refund;
 }
