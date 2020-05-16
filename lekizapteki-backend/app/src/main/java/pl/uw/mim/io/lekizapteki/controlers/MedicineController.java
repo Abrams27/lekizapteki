@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import pl.uw.mim.io.lekizapteki.MedicineApi;
+import pl.uw.mim.io.lekizapteki.models.medicine.IdenticalMedicinesDto;
 import pl.uw.mim.io.lekizapteki.models.medicine.MedicineDto;
 import pl.uw.mim.io.lekizapteki.usecases.GetIdenticalMedicines;
 import pl.uw.mim.io.lekizapteki.usecases.GetMedicines;
@@ -21,7 +22,7 @@ public class MedicineController implements MedicineApi {
   }
 
   @Override
-  public List<MedicineDto> getIdenticalMedicines(String ean, String diseaseId) {
+  public List<IdenticalMedicinesDto> getIdenticalMedicines(String ean, String diseaseId) {
     return getIdenticalMedicines.execute(ean, diseaseId);
   }
 }
