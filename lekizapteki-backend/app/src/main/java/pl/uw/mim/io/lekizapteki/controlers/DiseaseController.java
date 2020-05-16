@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import pl.uw.mim.io.lekizapteki.DiseaseApi;
-import pl.uw.mim.io.lekizapteki.models.DiseaseDto;
+import pl.uw.mim.io.lekizapteki.models.disease.DiseaseDto;
 import pl.uw.mim.io.lekizapteki.usecases.GetDiseases;
 
 @RestController

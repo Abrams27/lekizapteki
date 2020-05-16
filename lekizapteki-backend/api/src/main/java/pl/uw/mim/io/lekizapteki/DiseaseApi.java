@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.uw.mim.io.lekizapteki.models.DiseaseDto;
+import pl.uw.mim.io.lekizapteki.models.disease.DiseaseDto;
 
 @RequestMapping("/lekizapteki")
 public interface DiseaseApi {

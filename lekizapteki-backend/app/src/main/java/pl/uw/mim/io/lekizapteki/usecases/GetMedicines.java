@@ -3,7 +3,7 @@ package pl.uw.mim.io.lekizapteki.usecases;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uw.mim.io.lekizapteki.models.MedicineDto;
+import pl.uw.mim.io.lekizapteki.models.medicine.MedicineDto;
 
 @Component
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package pl.uw.mim.io.lekizapteki.models;
+package pl.uw.mim.io.lekizapteki.models.disease;
 
 import lombok.Builder;
 import lombok.Data;
