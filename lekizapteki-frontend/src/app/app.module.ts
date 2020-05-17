@@ -10,23 +10,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { DiseaseDropdownListComponent } from './components/disease-dropdown-list/disease-dropdown-list.component';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import { MedicineDropdownListComponent } from './components/medicine-dropdown-list/medicine-dropdown-list.component';
+import { IdenticalMedicinesDetailsComponent } from './components/identical-medicines-details/identical-medicines-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    MatTableModule,
     RouterModule.forRoot([
       {path: '', component: TopBarComponent},
     ]),
     HttpClientModule,
     FormsModule,
     NgSelectModule,
+    BrowserAnimationsModule,
   ],
   declarations: [
     AppComponent,
     TopBarComponent,
     DiseaseDropdownListComponent,
     MedicineDropdownListComponent,
+    IdenticalMedicinesDetailsComponent,
   ],
   bootstrap: [ AppComponent ]
 })

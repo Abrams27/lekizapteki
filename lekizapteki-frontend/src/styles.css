@@ -1,7 +1,6 @@
 /* Global Styles */
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
-
 * {
   font-family: 'Roboto', Arial, sans-serif;
   color: #616161;
@@ -138,3 +137,6 @@ app-top-bar h1 {
   border-radius: 2px;
   background-color: #EEEEEE;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

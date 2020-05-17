@@ -7,9 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent  {
   ifHidden = true;
+  ifHidden2 = true;
   mojaFunckcjaCoPokazeKomponent() {
     this.ifHidden = false;
   }
 
+  mojaFunckcjaCoPokazeKomponent2() {
+    this.ifHidden2 = false;
+  }
 }
 
