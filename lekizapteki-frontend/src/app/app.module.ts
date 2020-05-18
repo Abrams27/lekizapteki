@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { DiseaseDropdownListComponent } from './components/disease-dropdown-list/disease-dropdown-list.component';
+import { DiseaseSelectionComponent } from './components/disease-selection/disease-selection.component';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import { MedicineDropdownListComponent } from './components/medicine-dropdown-list/medicine-dropdown-list.component';
 import { IdenticalMedicinesDetailsComponent } from './components/identical-medicines-details/identical-medicines-details.component';
@@ -30,7 +30,7 @@ import {MatTableModule} from '@angular/material/table';
   declarations: [
     AppComponent,
     TopBarComponent,
-    DiseaseDropdownListComponent,
+    DiseaseSelectionComponent,
     MedicineDropdownListComponent,
     IdenticalMedicinesDetailsComponent,
   ],

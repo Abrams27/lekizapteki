@@ -1,13 +1,13 @@
-<label>Append dropdown to body</label>
+<label>Wybierz chorobę</label>
 
 
 <div class="floating-list">
   <ng-select
-    (open)="disapearPlaceholder()"
-    [items]="diseases"
+    (open)="hidePlaceholder()"
+    [items]="getDiseases()"
     bindLabel="name"
     [virtualScroll]="true"
-    placeholder={{placeholder}}
+    placeholder={{getPlaceholder()}}
     appendTo="body"
     bindValue="id"
     [(ngModel)]="selectedDiseaseId">
@@ -19,5 +19,3 @@
 </div>
 <button (click)="onClick()" class="btn btn-primary">Zatwierdź</button>
 {{potwierdzonko}}
-
-<div style="margin-top:300px"></div>
