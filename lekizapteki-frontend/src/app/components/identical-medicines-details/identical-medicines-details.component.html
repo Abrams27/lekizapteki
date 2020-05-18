@@ -36,7 +36,7 @@
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="getColumnsToDisplay().length">
         <div class="example-element-detail"
-             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+             [@detailExpand]="element == getExpandedElement() ? 'expanded' : 'collapsed'">
           <p>
             dawka: {{element.dose}}
           </p>
@@ -68,8 +68,8 @@
     <tr mat-header-row *matHeaderRowDef="getColumnsToDisplay()"></tr>
     <tr mat-row *matRowDef="let element; columns: getColumnsToDisplay();"
         class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element">
+        [class.example-expanded-row]="getExpandedElement() === element"
+        (click)="clickOnExpandedElement(element)">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MedicineDetailsDto} from '../../services/webservices/models/medicine/detailed/medicine-details.dto';
 import {IdenticalMedicinesDetailsComponentProperties} from './identical-medicines-details.properties';
-import {PricingDto} from "../../services/webservices/models/medicine/detailed/pricing.dto";
+import {PricingDto} from '../../services/webservices/models/medicine/detailed/pricing.dto';
 
 @Component({
   selector: 'app-identical-medicines-details',
@@ -19,6 +19,7 @@ import {PricingDto} from "../../services/webservices/models/medicine/detailed/pr
 export class IdenticalMedicinesDetailsComponent implements OnInit {
 
   private dataSource = MEDICINE_DETAILS_MOCK;
+  private expandedElement: MedicineDetailsDto | null;
 
   private columnsToDisplay: string[] = [
     IdenticalMedicinesDetailsComponentProperties.MEDICINE_NAME_HEADER,
@@ -26,7 +27,6 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
     IdenticalMedicinesDetailsComponentProperties.RETAIL_PRICE_HEADER
   ];
 
-  expandedElement: MedicineDetailsDto | null;
   private selectedMedicine: MedicineDetailsDto = {
     ean: 'EAN 0',
     name: 'NAME 0',
@@ -63,6 +63,10 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
     return this.selectedMedicine.pricing;
   }
 
+  getExpandedElement(): MedicineDetailsDto | null {
+    return this.expandedElement;
+  }
+
   getColumnContentForHeader(header: string, element: MedicineDetailsDto): string | number {
     if (header === IdenticalMedicinesDetailsComponentProperties.MEDICINE_NAME_HEADER) {
       return element.name;
@@ -75,6 +79,10 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
     if (header === IdenticalMedicinesDetailsComponentProperties.RETAIL_PRICE_HEADER) {
       return element.pricing.retailPrice;
     }
+  }
+
+  clickOnExpandedElement(element: MedicineDetailsDto) {
+    this.expandedElement = this.expandedElement === element ? null : element;
   }
 
 }
