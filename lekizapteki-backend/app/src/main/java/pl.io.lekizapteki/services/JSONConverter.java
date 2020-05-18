@@ -1,13 +1,16 @@
 package pl.io.lekizapteki.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
+@AllArgsConstructor
 public class JSONConverter<T> {
+  ObjectMapper mapper;
 
   @SneakyThrows
   public String convertObjectsToJsonString(T objects) {
-    ObjectMapper mapper = new ObjectMapper();
+//    ObjectMapper mapper = new ObjectMapper();
     String jsonString = "";
 
     jsonString = mapper.writeValueAsString(objects);

@@ -1,37 +1,40 @@
 package pl.io.lekizapteki.services;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.hibernate.jdbc.Work;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import pl.io.lekizapteki.enums.ColumnType;
+import org.springframework.stereotype.Component;
+import pl.io.lekizapteki.repositories.columnTypes.ChargeFactor;
+import pl.io.lekizapteki.repositories.columnTypes.ColumnType;
+import pl.io.lekizapteki.repositories.columnTypes.Ean;
+import pl.io.lekizapteki.repositories.columnTypes.Ingredient;
+import pl.io.lekizapteki.repositories.columnTypes.NameFormDose;
+import pl.io.lekizapteki.repositories.columnTypes.Package;
+import pl.io.lekizapteki.repositories.columnTypes.Refund;
+import pl.io.lekizapteki.repositories.columnTypes.RetailPrice;
+import pl.io.lekizapteki.repositories.columnTypes.SalePrice;
+import pl.io.lekizapteki.repositories.columnTypes.TotalRefunding;
 
-//@Configuration
-//@ConfigurationProperties(prefix = "excel")
+@Component
 @AllArgsConstructor
 public class ExcelParser {
 
   private static final ColumnType[] columnTypesInOrder = {
-      ColumnType.INGREDIENT,
-      ColumnType.NAME_FORM_DOSE,
-      ColumnType.PACKAGE,
-      ColumnType.EAN,
-      ColumnType.SALE_PRICE,
-      ColumnType.RETAIL_PRICE,
-      ColumnType.TOTAL_REFUNDING,
-      ColumnType.CHARGE_FACTOR,
-      ColumnType.REFUND
+      new Ingredient(),
+      new NameFormDose(),
+      new Package(),
+      new Ean(),
+      new SalePrice(),
+      new RetailPrice(),
+      new TotalRefunding(),
+      new ChargeFactor(),
+      new Refund()
   };
 
   private FileInputStream excelFile;
@@ -54,51 +57,10 @@ public class ExcelParser {
 
       for (Cell cell : row) {
         int columnIndex = cell.getColumnIndex();
-
         String cellValue = cell.getStringCellValue();
 
         ColumnType columnType = columnTypesInOrder[columnIndex];
-
-        switch (columnType) {
-          case INGREDIENT: // kolumna 1 (Substancja Czynna)
-            medicine.setIngredient(cellValue);
-            break;
-
-          case NAME_FORM_DOSE: // kolumna 2 (Nazwa, postać i dawka)
-            medicine.setNameAndFormAndDose(cellValue);
-            break;
-
-          case PACKAGE: // kolumna 3 (Zawartość opakowania)
-            medicine.setPack(cellValue);
-            break;
-
-          case EAN: // kolumna 4 (Kod EAN lub inny kod odpowiadający kodowi EAN)
-            medicine.setEan(cellValue);
-            break;
-
-          case SALE_PRICE: // kolumna 8 (Urzędowa cena zbytu) ???
-            medicine.setSalePrice(cellValue);
-            break;
-
-          case RETAIL_PRICE: // kolumna 10 (Cena detaliczna) ???
-            medicine.setRetailPrice(cellValue);
-            break;
-
-          case TOTAL_REFUNDING: // kolumna 11 (Wysokość limitu finansowania) ???
-            medicine.setTotalFunding(cellValue);
-            break;
-
-          case CHARGE_FACTOR: // kolumna 15 (Poziom odpłatności) ???
-            medicine.setChargeFactor(cellValue);
-            break;
-
-          case REFUND: // kolumna 16 (Wysokość dopłaty świadczeniobiorcy) ???
-            medicine.setRefund(cellValue);
-            break;
-
-          default:
-            // tu nigdy nie bd
-        }
+        columnType.setMedicineProperty(medicine, cellValue);
       }
       medicineList.add(medicine);
     }
