@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MedicineDetailsDto} from '../../services/webservices/models/medicine/detailed/medicine-details.dto';
 import {IdenticalMedicinesDetailsComponentProperties} from './identical-medicines-details.properties';
+import {PricingDto} from "../../services/webservices/models/medicine/detailed/pricing.dto";
 
 @Component({
   selector: 'app-identical-medicines-details',
@@ -26,6 +27,21 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
   ];
 
   expandedElement: MedicineDetailsDto | null;
+  private selectedMedicine: MedicineDetailsDto = {
+    ean: 'EAN 0',
+    name: 'NAME 0',
+    activeIngredient: 'activeIngredient 0',
+    dose: 'dose 0',
+    form: 'form 0',
+    pricing: {
+      tradePrice: 0,
+      salePrice: 0,
+      retailPrice: 0,
+      totalFunding: 0,
+      chargeFactor: 0,
+      refund: 0
+    }
+  };
 
   constructor() { }
 
@@ -37,6 +53,14 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
 
   getColumnsToDisplay(): string[] {
     return this.columnsToDisplay;
+  }
+
+  getSelectedMedicine(): MedicineDetailsDto {
+    return this.selectedMedicine;
+  }
+
+  getSelectedMedicinePricing(): PricingDto {
+    return this.selectedMedicine.pricing;
   }
 
   getColumnContentForHeader(header: string, element: MedicineDetailsDto): string | number {
