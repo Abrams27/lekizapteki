@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 
 @Component({
@@ -12,6 +12,8 @@ export class MedicineDropdownListComponent implements OnInit {
   medicines = [];
   @Input()
   ifSearchingByEan = false;
+  @Output()
+  confirmed = new EventEmitter<void>();
   searchTypeButtonName = 'Szukaj po EAN';
   selectedMedicineId: number;
   public potwierdzonko = '';
@@ -36,6 +38,7 @@ export class MedicineDropdownListComponent implements OnInit {
 
   onClick() {
     if (this.selectedMedicineId != null) {
+      this.confirmed.emit();
       console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
       this.potwierdzonko = 'Jakos sie udalo. Buziaczek. Id:' + this.selectedMedicineId.toString();
     }
