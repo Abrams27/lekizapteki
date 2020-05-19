@@ -1,9 +1,8 @@
 <label>Wybierz chorobę</label>
 
-
 <div class="floating-list">
   <ng-select
-    (open)="hidePlaceholder()"
+    (open)="openFloatingList()"
     [items]="getDiseases()"
     bindLabel="name"
     [virtualScroll]="true"
@@ -17,5 +16,5 @@
   </p>
   <hr/>
 </div>
-<button (click)="onClick()" class="btn btn-primary">Zatwierdź</button>
+<button (click)="onClickSubmitButton()" class="btn btn-primary">Zatwierdź</button>
 {{potwierdzonko}}

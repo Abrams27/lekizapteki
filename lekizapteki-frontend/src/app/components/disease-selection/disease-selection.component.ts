@@ -3,7 +3,7 @@ import {DiseaseSelectionProperties} from './disease-selection.properties';
 import {DiseaseDto} from '../../services/webservices/models/disease/disease.dto';
 
 @Component({
-  selector: 'app-disease-dropdown-list',
+  selector: 'app-disease-selection',
   templateUrl: './disease-selection.component.html',
   styleUrls: ['./disease-selection.component.css']
 })
@@ -18,11 +18,10 @@ export class DiseaseSelectionComponent implements OnInit {
   potwierdzonko = '';
 
   private diseases: DiseaseDto[] = [];
-  private placeholder: string = DiseaseSelectionProperties.LIST_EMPTY_PLACEHOLDER;
+  private placeholder: string = DiseaseSelectionProperties.LIST_PLACEHOLDER;
 
   constructor() {
     this.create10kDiseases();
-    this.placeholder = DiseaseSelectionProperties.LIST_PLACEHOLDER;
   }
 
   ngOnInit(): void { }
@@ -35,7 +34,7 @@ export class DiseaseSelectionComponent implements OnInit {
     return this.placeholder;
   }
 
-  onClick() {
+  onClickSubmitButton() {
     if (this.selectedDiseaseId != null) {
       this.confirmed.emit();
       console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
@@ -43,9 +42,13 @@ export class DiseaseSelectionComponent implements OnInit {
     }
   }
 
-  hidePlaceholder() {
-    this.placeholder = DiseaseSelectionProperties.LIST_EMPTY_PLACEHOLDER;
+  openFloatingList() {
     this.selectedDiseaseId = null;
+    this.hidePlaceholder();
+  }
+
+  private hidePlaceholder() {
+    this.placeholder = DiseaseSelectionProperties.LIST_EMPTY_PLACEHOLDER;
   }
 
   private create10kDiseases() {

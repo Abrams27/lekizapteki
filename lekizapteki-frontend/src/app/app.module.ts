@@ -9,7 +9,7 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DiseaseSelectionComponent } from './components/disease-selection/disease-selection.component';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
-import { MedicineDropdownListComponent } from './components/medicine-dropdown-list/medicine-dropdown-list.component';
+import { MedicineSelectionComponent } from './components/medicine-selection/medicine-selection.component';
 import { IdenticalMedicinesDetailsComponent } from './components/identical-medicines-details/identical-medicines-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
@@ -31,7 +31,7 @@ import {MatTableModule} from '@angular/material/table';
     AppComponent,
     TopBarComponent,
     DiseaseSelectionComponent,
-    MedicineDropdownListComponent,
+    MedicineSelectionComponent,
     IdenticalMedicinesDetailsComponent,
   ],
   bootstrap: [ AppComponent ]
