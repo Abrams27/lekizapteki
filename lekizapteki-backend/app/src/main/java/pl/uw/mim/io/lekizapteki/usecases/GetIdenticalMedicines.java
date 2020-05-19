@@ -12,7 +12,7 @@ import pl.uw.mim.io.lekizapteki.models.medicine.detailed.PricingDto;
 @AllArgsConstructor
 public class GetIdenticalMedicines {
 
-  public List<IdenticalMedicinesDto> execute(String ean, String diseaseId) {
+  public List<IdenticalMedicinesDto> execute(String ean, Long diseaseId) {
     return List.of(mockIdenticalMedicines());
   }
 

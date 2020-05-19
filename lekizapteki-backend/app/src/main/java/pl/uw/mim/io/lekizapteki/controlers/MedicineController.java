@@ -17,12 +17,12 @@ public class MedicineController implements MedicineApi {
   private GetIdenticalMedicines getIdenticalMedicines;
 
   @Override
-  public List<MedicineDto> getMedicines(String diseaseId) {
+  public List<MedicineDto> getMedicines(Long diseaseId) {
     return getMedicines.execute(diseaseId);
   }
 
   @Override
-  public List<IdenticalMedicinesDto> getIdenticalMedicines(String ean, String diseaseId) {
+  public List<IdenticalMedicinesDto> getIdenticalMedicines(String ean, Long diseaseId) {
     return getIdenticalMedicines.execute(ean, diseaseId);
   }
 }
