@@ -1,9 +1,12 @@
 package pl.io.lekizapteki.repositories.columnTypes;
 
+import lombok.Builder;
 import pl.io.lekizapteki.services.Medicine;
 
+@Builder
 public class TotalRefundingSetter implements MedicinePropertySetter {
-  public void setMedicineProperty(Medicine medicine, String value) {
+  private Medicine medicine;
+  public void setMedicineProperty(String value) {
     medicine.setTotalFunding(value);
   }
 }

@@ -16,33 +16,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 import pl.io.lekizapteki.enums.ColumnType;
-import pl.io.lekizapteki.repositories.columnTypes.ChargeFactorSetter;
-import pl.io.lekizapteki.repositories.columnTypes.EanSetter;
-import pl.io.lekizapteki.repositories.columnTypes.IngredientSetter;
 import pl.io.lekizapteki.repositories.columnTypes.MedicinePropertySetter;
-import pl.io.lekizapteki.repositories.columnTypes.NameFormDoseSetter;
-import pl.io.lekizapteki.repositories.columnTypes.PackageSetter;
-import pl.io.lekizapteki.repositories.columnTypes.RefundSetter;
-import pl.io.lekizapteki.repositories.columnTypes.RetailPriceSetter;
-import pl.io.lekizapteki.repositories.columnTypes.SalePriceSetter;
-import pl.io.lekizapteki.repositories.columnTypes.TotalRefundingSetter;
 
 @Component
 @AllArgsConstructor
 public class ExcelParser {
-
-  // Tą strukturke tez bym wydzielil chyba do innej funkcji
-  private static final Map<ColumnType, MedicinePropertySetter> columnTypeToMedicinePropertySetter = Map.ofEntries(
-      entry(ColumnType.INGREDIENT, new IngredientSetter()),
-      entry(ColumnType.NAME_FORM_DOSE, new NameFormDoseSetter()),
-      entry(ColumnType.PACKAGE, new PackageSetter()),
-      entry(ColumnType.EAN, new EanSetter()),
-      entry(ColumnType.SALE_PRICE, new SalePriceSetter()),
-      entry(ColumnType.RETAIL_PRICE, new RetailPriceSetter()),
-      entry(ColumnType.TOTAL_REFUNDING, new TotalRefundingSetter()),
-      entry(ColumnType.CHARGE_FACTOR, new ChargeFactorSetter()),
-      entry(ColumnType.REFUND, new RefundSetter())
-  );
 
   // Nie jestem pewny co do niektórych numerów kolumn, TODO do sprawdzenia
   private static final Map<Integer, ColumnType> columnIndexToColumnType = Map.ofEntries(
@@ -53,8 +31,8 @@ public class ExcelParser {
       entry(8, ColumnType.SALE_PRICE),
       entry(9, ColumnType.RETAIL_PRICE),
       entry(11, ColumnType.TOTAL_REFUNDING),
-      entry(12, ColumnType.CHARGE_FACTOR),
-      entry(14, ColumnType.REFUND)
+      entry(14, ColumnType.CHARGE_FACTOR),
+      entry(15, ColumnType.REFUND)
   );
 
 //  private FileInputStream excelFile;
@@ -76,6 +54,7 @@ public class ExcelParser {
       }
 
       Medicine medicine = new Medicine();
+      MedicinePropertySetterBuilder medicinePropertySetterBuilder = new MedicinePropertySetterBuilder(medicine);
 
       for (Cell cell : row) {
         int columnIndex = cell.getColumnIndex();
@@ -83,9 +62,8 @@ public class ExcelParser {
           String cellValue = cell.getStringCellValue();
           ColumnType columnType = columnIndexToColumnType.get(columnIndex);
 
-          // To chyba wydzielić z tej funkcji
-          MedicinePropertySetter medicinePropertySetter = columnTypeToMedicinePropertySetter.get(columnType);
-          medicinePropertySetter.setMedicineProperty(medicine, cellValue);
+          MedicinePropertySetter medicinePropertySetter = medicinePropertySetterBuilder.build(columnType);
+          medicinePropertySetter.setMedicineProperty(cellValue);
         }
       }
       medicineList.add(medicine);
