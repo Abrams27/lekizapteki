@@ -1,36 +1,42 @@
 <label>Wybierz lek</label>
 
-<div class="floating-list" [hidden]="ifSearchingByEan">
+<div [hidden]="isSearchingByEan()">
+
   <ng-select
-    (open)="openFloatingList()"
+    [(ngModel)]="selectedMedicineId"
     [items]="getMedicines()"
-    bindLabel="name"
     [virtualScroll]="true"
-    placeholder={{getPlaceholder()}}
+    (open)="openFloatingList()"
+    bindLabel="name"
+    placeholder="{{getListPlaceholder()}}"
     appendTo="body"
-    bindValue="id"
-    [(ngModel)]="selectedMedicineId">
+    bindValue="id">
   </ng-select>
+
   <p>
     Ean: {{selectedMedicineId}}
   </p>
-  <hr/>
+
 </div>
 
-<div class="ng-input" [hidden]="!ifSearchingByEan">
-  <label>
-    <input #EAN (keyup)="0">
-  </label>
-  <p>{{EAN.value}}</p>
+<div [hidden]="isSearchingByEan() == false">
+
+  <input
+    [(ngModel)]="selectedMedicineEan"
+    placeholder="{{getInputPlaceholder()}}">
+
+  <p>
+    {{selectedMedicineEan}}
+  </p>
+
 </div>
 
-<button (click)="onClickSubmitButton()" class="btn btn-primary">Zatwierdź</button>
+<button (click)="onClickSubmitButton()">Zatwierdź</button>
+
+<input type="radio"
+       [value]="getSearchTypeButtonName()"
+       [checked]="isSearchingByEan()"
+       (click)="onClickSearchTypeInput()"/>
+
+{{getSearchTypeButtonName()}}
 {{potwierdzonko}}
-
-<label>
-  <input type="radio"
-         [value]="getSearchTypeButtonName()"
-         [checked]="ifSearchingByEan"
-          (click)="onClickSearchTypeInput(EAN)"/>
-  {{getSearchTypeButtonName()}}
-</label>

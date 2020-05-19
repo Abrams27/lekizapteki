@@ -1,20 +1,24 @@
 <label>Wybierz chorobę</label>
 
-<div class="floating-list">
+<div>
+
   <ng-select
-    (open)="openFloatingList()"
+    [(ngModel)]="selectedDiseaseId"
     [items]="getDiseases()"
-    bindLabel="name"
     [virtualScroll]="true"
-    placeholder={{getPlaceholder()}}
+    (open)="openFloatingList()"
+    bindLabel="name"
+    placeholder="{{getPlaceholder()}}"
     appendTo="body"
-    bindValue="id"
-    [(ngModel)]="selectedDiseaseId">
+    bindValue="id">
   </ng-select>
+
   <p>
     Ean: {{selectedDiseaseId}}
   </p>
-  <hr/>
+
 </div>
-<button (click)="onClickSubmitButton()" class="btn btn-primary">Zatwierdź</button>
+
+<button (click)="onClickSubmitButton()">Zatwierdź</button>
+
 {{potwierdzonko}}

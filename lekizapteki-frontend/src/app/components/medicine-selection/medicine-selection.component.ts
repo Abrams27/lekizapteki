@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MedicineSelectionProperties} from './medicine-selection.properties';
 import {MedicineDto} from '../../services/webservices/models/medicine/medicine.dto';
 
@@ -9,21 +9,32 @@ import {MedicineDto} from '../../services/webservices/models/medicine/medicine.d
   styleUrls: ['./medicine-selection.component.css']
 })
 export class MedicineSelectionComponent implements OnInit {
-  @Input()
-  ifSearchingByEan = false;
-
   @Output()
   confirmed = new EventEmitter<void>();
 
   selectedMedicineId: number;
+  selectedMedicineEan: string;
   potwierdzonko = '';
 
   private medicines: MedicineDto[] = [];
+  private searchingByEan = false;
   private searchTypeButtonName: string = MedicineSelectionProperties.SEARCH_TYPE_EAN_BUTTON_NAME;
   private placeholder: string = MedicineSelectionProperties.LIST_PLACEHOLDER;
 
   constructor() {
     this.create10kMedicines();
+  }
+
+  isSearchingByEan(): boolean {
+    return this.searchingByEan;
+  }
+
+  setSeatchingByEan() {
+    this.searchingByEan = true;
+  }
+
+  setSeatchingFromList() {
+    this.searchingByEan = false;
   }
 
   getSearchTypeButtonName(): string {
@@ -34,8 +45,12 @@ export class MedicineSelectionComponent implements OnInit {
     return this.medicines;
   }
 
-  getPlaceholder(): string {
+  getListPlaceholder(): string {
     return this.placeholder;
+  }
+
+  getInputPlaceholder(): string {
+    return MedicineSelectionProperties.INPUT_PLACEHOLDER;
   }
 
   private create10kMedicines() {
@@ -60,13 +75,8 @@ export class MedicineSelectionComponent implements OnInit {
     }
   }
 
-  onClickSearchTypeInput(EAN: any) {
-    if (this.ifSearchingByEan) {
-      this.ifSearchingByEan = false;
-      EAN.value = '';
-    } else {
-      this.ifSearchingByEan = true;
-    }
+  onClickSearchTypeInput() {
+    this.searchingByEan = !this.searchingByEan;
   }
 
   openFloatingList() {
