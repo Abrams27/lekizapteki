@@ -53,22 +53,28 @@ public class ExcelParser {
         continue;
       }
 
-      Medicine medicine = new Medicine();
-      MedicinePropertySetterBuilder medicinePropertySetterBuilder = new MedicinePropertySetterBuilder(medicine);
-
-      for (Cell cell : row) {
-        int columnIndex = cell.getColumnIndex();
-        if (columnIndexToColumnType.containsKey(columnIndex)) {
-          String cellValue = cell.getStringCellValue();
-          ColumnType columnType = columnIndexToColumnType.get(columnIndex);
-
-          MedicinePropertySetter medicinePropertySetter = medicinePropertySetterBuilder.build(columnType);
-          medicinePropertySetter.setMedicineProperty(cellValue);
-        }
-      }
+      Medicine medicine = mapRowToMedicine(row);
       medicineList.add(medicine);
     }
 
     return medicineList;
+  }
+
+  private Medicine mapRowToMedicine(Row row) {
+    Medicine medicine = new Medicine();
+    MedicinePropertySetterFactory medicinePropertySetterFactory = new MedicinePropertySetterFactory(medicine);
+
+    for (Cell cell : row) {
+      int columnIndex = cell.getColumnIndex();
+      if (columnIndexToColumnType.containsKey(columnIndex)) {
+        String cellValue = cell.getStringCellValue();
+        ColumnType columnType = columnIndexToColumnType.get(columnIndex);
+
+        MedicinePropertySetter medicinePropertySetter = medicinePropertySetterFactory.build(columnType);
+        medicinePropertySetter.setMedicineProperty(cellValue);
+      }
+    }
+
+    return medicine;
   }
 }

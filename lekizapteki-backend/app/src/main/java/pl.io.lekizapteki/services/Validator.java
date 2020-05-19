@@ -6,7 +6,7 @@ import java.util.List;
 public class Validator {
   private static final String filePath = "src/main/resources/wykaz.xlsx";
 
-  public static List<Medicine> validate(List<Medicine> medicines) {
+  public static List<Medicine> filter(List<Medicine> medicines) {
     return filterInvalidMedicines(medicines);
 
 //    JSONConverter<List<Medicine>> jsonConverter = new JSONConverter<>();

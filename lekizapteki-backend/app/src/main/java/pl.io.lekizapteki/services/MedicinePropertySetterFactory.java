@@ -15,11 +15,11 @@ import pl.io.lekizapteki.repositories.columnTypes.RetailPriceSetter;
 import pl.io.lekizapteki.repositories.columnTypes.SalePriceSetter;
 import pl.io.lekizapteki.repositories.columnTypes.TotalRefundingSetter;
 
-public class MedicinePropertySetterBuilder {
+public class MedicinePropertySetterFactory {
 
-  private Map<ColumnType, MedicinePropertySetter> columnTypeToMedicinePropertySetter;
+  private final Map<ColumnType, MedicinePropertySetter> columnTypeToMedicinePropertySetter;
 
-  public MedicinePropertySetterBuilder(Medicine medicine) {
+  public MedicinePropertySetterFactory(Medicine medicine) {
     this.columnTypeToMedicinePropertySetter = Map.ofEntries(
         entry(ColumnType.INGREDIENT, IngredientSetter.builder().medicine(medicine).build()),
         entry(ColumnType.NAME_FORM_DOSE, NameFormDoseSetter.builder().medicine(medicine).build()),
