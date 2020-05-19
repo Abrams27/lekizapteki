@@ -2,8 +2,8 @@ package pl.io.lekizapteki.repositories.columnTypes;
 
 import pl.io.lekizapteki.services.Medicine;
 
-public class ChargeFactor implements ColumnType {
+public class RetailPriceSetter implements MedicinePropertySetter {
   public void setMedicineProperty(Medicine medicine, String value) {
-    medicine.setChargeFactor(value);
+    medicine.setRetailPrice(value);
   }
 }

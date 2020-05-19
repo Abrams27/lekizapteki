@@ -1,7 +1,10 @@
 package pl.io.lekizapteki.usecases;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import pl.io.lekizapteki.services.ExcelParser;
 import pl.io.lekizapteki.services.JSONConverter;

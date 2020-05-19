@@ -2,8 +2,8 @@ package pl.io.lekizapteki.repositories.columnTypes;
 
 import pl.io.lekizapteki.services.Medicine;
 
-public class TotalRefunding implements ColumnType {
+public class PackageSetter implements MedicinePropertySetter {
   public void setMedicineProperty(Medicine medicine, String value) {
-    medicine.setTotalFunding(value);
+    medicine.setPack(value);
   }
 }
