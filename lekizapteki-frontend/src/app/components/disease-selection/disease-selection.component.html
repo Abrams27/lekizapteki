@@ -1,0 +1,24 @@
+<label>Wybierz chorobę</label>
+
+<div>
+
+  <ng-select
+    [(ngModel)]="selectedDiseaseId"
+    [items]="getDiseases()"
+    [virtualScroll]="true"
+    (open)="openFloatingList()"
+    bindLabel="name"
+    placeholder="{{getPlaceholder()}}"
+    appendTo="body"
+    bindValue="id">
+  </ng-select>
+
+  <p>
+    Ean: {{selectedDiseaseId}}
+  </p>
+
+</div>
+
+<button (click)="onClickSubmitButton()">Zatwierdź</button>
+
+{{potwierdzonko}}

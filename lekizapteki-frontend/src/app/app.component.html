@@ -2,7 +2,7 @@
 
 <div class="container">
 <!--  <router-outlet></router-outlet>-->
-  <app-disease-dropdown-list (confirmed)="mojaFunckcjaCoPokazeKomponent()"></app-disease-dropdown-list>
-  <app-medicine-dropdown-list [hidden]="ifHidden" (confirmed)="mojaFunckcjaCoPokazeKomponent2()"> </app-medicine-dropdown-list>
+  <app-disease-selection (confirmed)="mojaFunckcjaCoPokazeKomponent()"></app-disease-selection>
+  <app-medicine-selection [hidden]="ifHidden" (confirmed)="mojaFunckcjaCoPokazeKomponent2()"> </app-medicine-selection>
   <app-identical-medicines-details [hidden]="ifHidden2"></app-identical-medicines-details>
 </div>

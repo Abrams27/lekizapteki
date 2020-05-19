@@ -1,0 +1,42 @@
+<label>Wybierz lek</label>
+
+<div [hidden]="isSearchingByEan()">
+
+  <ng-select
+    [(ngModel)]="selectedMedicineId"
+    [items]="getMedicines()"
+    [virtualScroll]="true"
+    (open)="openFloatingList()"
+    bindLabel="name"
+    placeholder="{{getListPlaceholder()}}"
+    appendTo="body"
+    bindValue="id">
+  </ng-select>
+
+  <p>
+    Ean: {{selectedMedicineId}}
+  </p>
+
+</div>
+
+<div [hidden]="isSearchingByEan() == false">
+
+  <input
+    [(ngModel)]="selectedMedicineEan"
+    placeholder="{{getInputPlaceholder()}}">
+
+  <p>
+    {{selectedMedicineEan}}
+  </p>
+
+</div>
+
+<button (click)="onClickSubmitButton()">Zatwierdź</button>
+
+<input type="radio"
+       [value]="getSearchTypeButtonName()"
+       [checked]="isSearchingByEan()"
+       (click)="onClickSearchTypeInput()"/>
+
+{{getSearchTypeButtonName()}}
+{{potwierdzonko}}
