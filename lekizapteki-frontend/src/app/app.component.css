@@ -27,3 +27,15 @@
 .app-identical-medicines-details {
   grid-area: app-identical-medicines-details
 }
+
+.app-background-text {
+  position: fixed;
+  left: 30%;
+  bottom: 35%;
+  z-index: -1;
+
+  color: rgba(240, 221, 246, 0.4);
+
+  font-size: 1000%;
+  font-weight: bolder;
+}
