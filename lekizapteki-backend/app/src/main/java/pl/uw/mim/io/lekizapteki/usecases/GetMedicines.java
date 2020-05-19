@@ -18,15 +18,15 @@ public class GetMedicines {
 
   public List<MedicineDto> execute(Long diseaseId) {
     return medicinesDtoMapper
-        .map(medicineRepository.FindMedicinesForDisease(diseaseRepository.getDiseaseEntityById(diseaseId)));
+        .map(medicineRepository.findAllByDisease(diseaseRepository.getDiseaseEntityById(diseaseId)));
   }
 
 
-  private MedicineDto mockMedicine() {
-    return MedicineDto.builder()
-        .ean("Mock2137")
-        .dose("Ciebiera")
-        .name("Krzysiu")
-        .build();
-  }
+//  private MedicineDto mockMedicine() {
+//    return MedicineDto.builder()
+//        .ean("Mock2137")
+//        .dose("Ciebiera")
+//        .name("Krzysiu")
+//        .build();
+//  }
 }
