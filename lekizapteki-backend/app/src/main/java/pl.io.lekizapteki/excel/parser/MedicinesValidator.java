@@ -1,4 +1,4 @@
-package pl.io.lekizapteki.parseExcel;
+package pl.io.lekizapteki.excel.parser;
 
 import java.util.ArrayList;
 import java.util.List;

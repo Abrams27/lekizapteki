@@ -1,8 +1,8 @@
-package pl.io.lekizapteki.parseExcel;
+package pl.io.lekizapteki.excel.parser;
 
 import java.util.Map;
 import lombok.experimental.UtilityClass;
-import pl.io.lekizapteki.parseExcel.enums.ColumnType;
+import pl.io.lekizapteki.excel.parser.enums.ColumnType;
 import pl.io.lekizapteki.repositories.columnTypes.ChargeFactorSetter;
 import pl.io.lekizapteki.repositories.columnTypes.EanSetter;
 import pl.io.lekizapteki.repositories.columnTypes.IngredientSetter;

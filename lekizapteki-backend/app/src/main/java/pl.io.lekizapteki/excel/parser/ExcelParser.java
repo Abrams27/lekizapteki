@@ -1,4 +1,4 @@
-package pl.io.lekizapteki.parseExcel;
+package pl.io.lekizapteki.excel.parser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,13 +13,15 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
-import pl.io.lekizapteki.parseExcel.enums.ColumnType;
+import pl.io.lekizapteki.excel.parser.enums.ColumnType;
 import pl.io.lekizapteki.repositories.columnTypes.MedicinePropertySetter;
 import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
 
 @Component
 @AllArgsConstructor
 public class ExcelParser {
+
+  private static final int FIRST_VALID_ROW = 3; // pierwsze 3 wiersze to nagłówki
 
   private static final Map<Integer, ColumnType> columnIndexToColumnType = Map.of(
       1, ColumnType.INGREDIENT,
@@ -57,7 +59,7 @@ public class ExcelParser {
   }
 
   private boolean isMedicineRow(Row row) {
-    return row.getRowNum() > 2; // pierwsze 3 wiersze to nagłówki
+    return row.getRowNum() >= FIRST_VALID_ROW;
   }
 
   private Medicine mapRowToMedicine(Row row) {

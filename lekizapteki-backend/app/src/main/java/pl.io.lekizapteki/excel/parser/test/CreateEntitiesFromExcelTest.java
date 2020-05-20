@@ -1,8 +1,8 @@
-package pl.io.lekizapteki.parseExcel.test;
+package pl.io.lekizapteki.excel.parser.test;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import pl.io.lekizapteki.parseExcel.ExcelParser;
+import pl.io.lekizapteki.excel.parser.ExcelParser;
 import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
 
 
