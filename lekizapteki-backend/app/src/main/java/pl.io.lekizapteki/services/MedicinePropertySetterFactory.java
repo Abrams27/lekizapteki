@@ -18,7 +18,7 @@ public class MedicinePropertySetterFactory {
   private MedicinePropertySetterFactory() {}
 
   public static MedicinePropertySetter forMedicineAndColumnType(Medicine medicine, ColumnType columnType) {
-    final Map<ColumnType, MedicinePropertySetter> COLUMN_TYPE_TO_MEDICINE = Map.of(
+    final Map<ColumnType, MedicinePropertySetter> columnTypeToMedicinePropertySetter = Map.of(
         ColumnType.INGREDIENT, IngredientSetter.builder().medicine(medicine).build(),
         ColumnType.NAME_FORM_DOSE, NameFormDoseSetter.builder().medicine(medicine).build(),
         ColumnType.PACKAGE, PackageSetter.builder().medicine(medicine).build(),
@@ -30,6 +30,6 @@ public class MedicinePropertySetterFactory {
         ColumnType.REFUND, RefundSetter.builder().medicine(medicine).build()
     );
 
-    return COLUMN_TYPE_TO_MEDICINE.get(columnType);
+    return columnTypeToMedicinePropertySetter.get(columnType);
   }
 }
