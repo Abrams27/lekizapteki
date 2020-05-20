@@ -20,13 +20,4 @@ public class GetMedicines {
     return medicinesDtoMapper
         .map(medicineRepository.findAllByDisease(diseaseRepository.getDiseaseEntityById(diseaseId)));
   }
-
-
-//  private MedicineDto mockMedicine() {
-//    return MedicineDto.builder()
-//        .ean("Mock2137")
-//        .dose("Ciebiera")
-//        .name("Krzysiu")
-//        .build();
-//  }
 }

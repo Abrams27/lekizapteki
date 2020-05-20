@@ -14,10 +14,11 @@ public class MedicinesDtoMapper {
 
   public List<MedicineDto> map(List<MedicineEntity> medicineEntityList) {
     return medicineEntityList.stream()
-        .map(this::mapOneMedicineEntity)
+        .map(this::mapMedicineEntity)
         .collect(Collectors.toList());
   }
-  private MedicineDto mapOneMedicineEntity(MedicineEntity medicineEntity){
+
+  private MedicineDto mapMedicineEntity(MedicineEntity medicineEntity) {
     return MedicineDto.builder()
         .ean(medicineEntity.getEan())
         .dose(medicineEntity.getDose().getDose())
