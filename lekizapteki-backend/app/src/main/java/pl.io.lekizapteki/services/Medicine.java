@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Medicine {
+
   private String ingredient;
   private String nameAndFormAndDose;
   private String pack;

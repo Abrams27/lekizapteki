@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 import pl.io.lekizapteki.services.ExcelParser;
 import pl.io.lekizapteki.services.Medicine;
 
-public class GetEntitiesFromExcelTest {
+
+public class CreateEntitiesFromExcelTest {
 
   @Test
   public void excelParserTest() {
@@ -14,7 +15,7 @@ public class GetEntitiesFromExcelTest {
 
     List<Medicine> medicines = excelParser.parseExcelFile(filePath);
 
-    assert(medicines.size() == 4312);
+    assert (medicines.size() == 4312);
     for (Medicine medicine : medicines) {
       System.out.println(medicine.toString());
     }

@@ -44,16 +44,19 @@ public class ExcelParser {
   private List<Medicine> mapSheetToMedicineList(Sheet sheet) {
     List<Medicine> medicineList = new ArrayList<>();
 
-    for (Row row : sheet) {
-      if (row.getRowNum() < 3) { // pierwsze 3 wiersze to nagłówki
-        continue;
-      }
 
-      Medicine medicine = mapRowToMedicine(row);
-      medicineList.add(medicine);
+    for (Row row : sheet) {
+      if (isMedicineRow(row)) {
+        Medicine medicine = mapRowToMedicine(row);
+        medicineList.add(medicine);
+      }
     }
 
     return medicineList;
+  }
+
+  private boolean isMedicineRow(Row row) {
+    return row.getRowNum() > 2; // pierwsze 3 wiersze to nagłówki
   }
 
   private Medicine mapRowToMedicine(Row row) {

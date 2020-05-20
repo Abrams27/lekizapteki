@@ -1,6 +1,7 @@
 package pl.io.lekizapteki.services;
 
 import java.util.Map;
+import lombok.experimental.UtilityClass;
 import pl.io.lekizapteki.enums.ColumnType;
 import pl.io.lekizapteki.repositories.columnTypes.ChargeFactorSetter;
 import pl.io.lekizapteki.repositories.columnTypes.EanSetter;
@@ -13,11 +14,10 @@ import pl.io.lekizapteki.repositories.columnTypes.RetailPriceSetter;
 import pl.io.lekizapteki.repositories.columnTypes.SalePriceSetter;
 import pl.io.lekizapteki.repositories.columnTypes.TotalRefundingSetter;
 
+@UtilityClass
 public class MedicinePropertySetterFactory {
 
-  private MedicinePropertySetterFactory() {}
-
-  public static MedicinePropertySetter forMedicineAndColumnType(Medicine medicine, ColumnType columnType) {
+  public MedicinePropertySetter forMedicineAndColumnType(Medicine medicine, ColumnType columnType) {
     final Map<ColumnType, MedicinePropertySetter> columnTypeToMedicinePropertySetter = Map.of(
         ColumnType.INGREDIENT, new IngredientSetter(medicine),
         ColumnType.NAME_FORM_DOSE, new NameFormDoseSetter(medicine),
