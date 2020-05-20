@@ -32,21 +32,20 @@ public class ExcelParser {
       15, ColumnType.REFUND
   );
 
-//  private FileInputStream excelFile;
-//  private Workbook workbook;
-
   @SneakyThrows
   public List<Medicine> parseExcelFile(String filePath) {
-    // Na razie przywrocilem te dwie linijki bo ciezko mi bylo zrobic zeby dzialalo bez
     FileInputStream excelFile = new FileInputStream(new File(filePath));
     Workbook workbook = new XSSFWorkbook(excelFile);
-
     Sheet sheet = workbook.getSheetAt(0);
 
+    return mapSheetToMedicineList(sheet);
+  }
+
+  private List<Medicine> mapSheetToMedicineList(Sheet sheet) {
     List<Medicine> medicineList = new ArrayList<>();
 
     for (Row row : sheet) {
-      if (row.getRowNum() < 3) { // skip pierwsze 3 wiersze bo to nagłówki
+      if (row.getRowNum() < 3) { // pierwsze 3 wiersze to nagłówki
         continue;
       }
 
@@ -62,15 +61,26 @@ public class ExcelParser {
 
     for (Cell cell : row) {
       int columnIndex = cell.getColumnIndex();
-      if (columnIndexToColumnType.containsKey(columnIndex)) {
-        String cellValue = cell.getStringCellValue();
-        ColumnType columnType = columnIndexToColumnType.get(columnIndex);
-
-        MedicinePropertySetter medicinePropertySetter = MedicinePropertySetterFactory.forMedicineAndColumnType(medicine, columnType);
-        medicinePropertySetter.setMedicineProperty(cellValue);
+      if (isColumnConsidered(columnIndex)) {
+        setMedicinePropertyForColumnAndCell(columnIndex, cell, medicine);
       }
     }
 
     return medicine;
   }
+
+  private boolean isColumnConsidered(int columnIndex) {
+    return columnIndexToColumnType.containsKey(columnIndex);
+  }
+
+  private void setMedicinePropertyForColumnAndCell(int columnIndex, Cell cell, Medicine medicine) {
+    String cellValue = cell.getStringCellValue();
+    ColumnType columnType = columnIndexToColumnType.get(columnIndex);
+
+    MedicinePropertySetter medicinePropertySetter = MedicinePropertySetterFactory
+        .forMedicineAndColumnType(medicine, columnType);
+
+    medicinePropertySetter.setMedicineProperty(cellValue);
+  }
+
 }

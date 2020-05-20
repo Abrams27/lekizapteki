@@ -1,24 +1,33 @@
 package pl.io.lekizapteki.services.test;
 
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import pl.io.lekizapteki.services.ExcelParser;
 import pl.io.lekizapteki.services.Medicine;
 
 public class ExcelParserTest {
 
-  @Test
-  public void testowanko() {
+  private static List<Medicine> medicines;
 
+  @BeforeAll
+  static void setUp() {
+    String filePath = "src/main/resources/wykaz.xlsx";
     ExcelParser excelParser = new ExcelParser();
 
-    String filePath = "src/main/resources/wykaz.xlsx";
-    List<Medicine> leczki = excelParser.parseExcelFile(filePath);
+    medicines = excelParser.parseExcelFile(filePath);
+  }
 
-    assert(leczki.size() == 4312);
+  @Test
+  public void isCorrectMedicinesCount() {
+    assert(medicines.size() == 4312);
+  }
 
-    // wypisywanko lekow wczytanych
-    for (Medicine medicine : leczki) {
+
+
+  @Test
+  public void stdoutAllMedicines() {
+    for (Medicine medicine : medicines) {
       System.out.println(medicine.toString());
     }
   }
