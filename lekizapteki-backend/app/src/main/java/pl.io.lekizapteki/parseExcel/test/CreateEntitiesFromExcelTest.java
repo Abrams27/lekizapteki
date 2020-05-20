@@ -1,9 +1,9 @@
-package pl.io.lekizapteki.services.test;
+package pl.io.lekizapteki.parseExcel.test;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import pl.io.lekizapteki.services.ExcelParser;
-import pl.io.lekizapteki.services.Medicine;
+import pl.io.lekizapteki.parseExcel.ExcelParser;
+import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
 
 
 public class CreateEntitiesFromExcelTest {

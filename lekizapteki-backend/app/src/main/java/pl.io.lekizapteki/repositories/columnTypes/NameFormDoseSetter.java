@@ -1,7 +1,7 @@
 package pl.io.lekizapteki.repositories.columnTypes;
 
 import lombok.AllArgsConstructor;
-import pl.io.lekizapteki.services.Medicine;
+import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
 
 @AllArgsConstructor
 public class NameFormDoseSetter implements MedicinePropertySetter {

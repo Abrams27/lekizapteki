@@ -3,10 +3,10 @@ package pl.io.lekizapteki.usecases;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.io.lekizapteki.services.ExcelParser;
-import pl.io.lekizapteki.services.MapMedicinesToEntities;
-import pl.io.lekizapteki.services.Medicine;
-import pl.io.lekizapteki.services.MedicinesValidator;
+import pl.io.lekizapteki.parseExcel.ExcelParser;
+import pl.io.lekizapteki.parseExcel.MapMedicinesToEntities;
+import pl.io.lekizapteki.parseExcel.MedicinesValidator;
+import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
 
 @Component
 @AllArgsConstructor

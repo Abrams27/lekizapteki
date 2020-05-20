@@ -1,8 +1,8 @@
-package pl.io.lekizapteki.services;
+package pl.io.lekizapteki.parseExcel;
 
 import java.util.Map;
 import lombok.experimental.UtilityClass;
-import pl.io.lekizapteki.enums.ColumnType;
+import pl.io.lekizapteki.parseExcel.enums.ColumnType;
 import pl.io.lekizapteki.repositories.columnTypes.ChargeFactorSetter;
 import pl.io.lekizapteki.repositories.columnTypes.EanSetter;
 import pl.io.lekizapteki.repositories.columnTypes.IngredientSetter;
@@ -13,6 +13,7 @@ import pl.io.lekizapteki.repositories.columnTypes.RefundSetter;
 import pl.io.lekizapteki.repositories.columnTypes.RetailPriceSetter;
 import pl.io.lekizapteki.repositories.columnTypes.SalePriceSetter;
 import pl.io.lekizapteki.repositories.columnTypes.TotalRefundingSetter;
+import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
 
 @UtilityClass
 public class MedicinePropertySetterFactory {

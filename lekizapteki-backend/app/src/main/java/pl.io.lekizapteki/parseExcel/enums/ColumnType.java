@@ -1,4 +1,4 @@
-package pl.io.lekizapteki.enums;
+package pl.io.lekizapteki.parseExcel.enums;
 
 public enum ColumnType {
   INGREDIENT,

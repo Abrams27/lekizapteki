@@ -1,4 +1,4 @@
-package pl.io.lekizapteki.services;
+package pl.io.lekizapteki.repositories.excelDatatypes;
 
 import lombok.Data;
 
