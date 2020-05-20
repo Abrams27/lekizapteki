@@ -5,16 +5,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uw.mim.io.lekizapteki.mappers.dto.DiseasesDtoMapper;
 import pl.uw.mim.io.lekizapteki.models.disease.DiseaseDto;
-import pl.uw.mim.io.lekizapteki.repositories.DiseaseRepository;
+import pl.uw.mim.io.lekizapteki.services.DiseaseService;
 
 @Component
 @AllArgsConstructor
 public class GetDiseases {
-  private DiseaseRepository diseaseRepository;
-  private DiseasesDtoMapper diseasesDtoMapper;
+  private DiseaseService diseaseService;
 
   public List<DiseaseDto> execute() {
-    return diseasesDtoMapper
-        .map(diseaseRepository.findAll());
+    return DiseasesDtoMapper.map(diseaseService.getAllDiseases());
   }
 }
