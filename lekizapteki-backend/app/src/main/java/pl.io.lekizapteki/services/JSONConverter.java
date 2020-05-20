@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class JSONConverter<T> {
 
-  ObjectMapper mapper;
+  private final ObjectMapper mapper;
 
   @SneakyThrows
   public String convertObjectsToJsonString(T objects) {
