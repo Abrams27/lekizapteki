@@ -10,6 +10,7 @@ import pl.uw.mim.io.lekizapteki.services.DiseaseService;
 @Component
 @AllArgsConstructor
 public class GetDiseases {
+
   private DiseaseService diseaseService;
 
   public List<DiseaseDto> execute() {

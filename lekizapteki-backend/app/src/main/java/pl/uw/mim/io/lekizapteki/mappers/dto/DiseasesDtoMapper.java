@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import pl.uw.mim.io.lekizapteki.models.disease.DiseaseDto;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 
-@Component
 @UtilityClass
 public class DiseasesDtoMapper {
 

@@ -9,6 +9,7 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 @Service
 @AllArgsConstructor
 public class DiseaseService {
+
   private DiseaseRepository diseaseRepository;
 
   public List<DiseaseEntity> getAllDiseases() {
