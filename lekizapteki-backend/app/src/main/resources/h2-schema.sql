@@ -1,5 +1,3 @@
--- noinspection SqlNoDataSourceInspectionForFile
-
 CREATE TABLE DISEASE (
     id                   IDENTITY            NOT NULL,
     name                 TEXT                NOT NULL,

@@ -1,7 +1,5 @@
 package pl.io.lekizapteki.services;
 
-import static java.util.Map.entry;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -22,16 +20,16 @@ import pl.io.lekizapteki.repositories.columnTypes.MedicinePropertySetter;
 @AllArgsConstructor
 public class ExcelParser {
 
-  private static final Map<Integer, ColumnType> columnIndexToColumnType = Map.ofEntries(
-      entry(1, ColumnType.INGREDIENT),
-      entry(2, ColumnType.NAME_FORM_DOSE),
-      entry(3, ColumnType.PACKAGE),
-      entry(4, ColumnType.EAN),
-      entry(8, ColumnType.SALE_PRICE),
-      entry(10, ColumnType.RETAIL_PRICE),
-      entry(11, ColumnType.TOTAL_REFUNDING),
-      entry(14, ColumnType.CHARGE_FACTOR),
-      entry(15, ColumnType.REFUND)
+  private static final Map<Integer, ColumnType> columnIndexToColumnType = Map.of(
+      1, ColumnType.INGREDIENT,
+      2, ColumnType.NAME_FORM_DOSE,
+      3, ColumnType.PACKAGE,
+      4, ColumnType.EAN,
+      8, ColumnType.SALE_PRICE,
+      10, ColumnType.RETAIL_PRICE,
+      11, ColumnType.TOTAL_REFUNDING,
+      14, ColumnType.CHARGE_FACTOR,
+      15, ColumnType.REFUND
   );
 
 //  private FileInputStream excelFile;
@@ -61,7 +59,6 @@ public class ExcelParser {
 
   private Medicine mapRowToMedicine(Row row) {
     Medicine medicine = new Medicine();
-    MedicinePropertySetterFactory medicinePropertySetterFactory = new MedicinePropertySetterFactory(medicine);
 
     for (Cell cell : row) {
       int columnIndex = cell.getColumnIndex();
@@ -69,7 +66,7 @@ public class ExcelParser {
         String cellValue = cell.getStringCellValue();
         ColumnType columnType = columnIndexToColumnType.get(columnIndex);
 
-        MedicinePropertySetter medicinePropertySetter = medicinePropertySetterFactory.build(columnType);
+        MedicinePropertySetter medicinePropertySetter = MedicinePropertySetterFactory.forMedicineAndColumnType(medicine, columnType);
         medicinePropertySetter.setMedicineProperty(cellValue);
       }
     }

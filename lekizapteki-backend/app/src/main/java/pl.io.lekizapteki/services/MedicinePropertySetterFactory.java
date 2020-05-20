@@ -1,7 +1,5 @@
 package pl.io.lekizapteki.services;
 
-import static java.util.Map.entry;
-
 import java.util.Map;
 import pl.io.lekizapteki.enums.ColumnType;
 import pl.io.lekizapteki.repositories.columnTypes.ChargeFactorSetter;
@@ -17,23 +15,21 @@ import pl.io.lekizapteki.repositories.columnTypes.TotalRefundingSetter;
 
 public class MedicinePropertySetterFactory {
 
-  private final Map<ColumnType, MedicinePropertySetter> columnTypeToMedicinePropertySetter;
+  private MedicinePropertySetterFactory() {}
 
-  public MedicinePropertySetterFactory(Medicine medicine) {
-    this.columnTypeToMedicinePropertySetter = Map.ofEntries(
-        entry(ColumnType.INGREDIENT, IngredientSetter.builder().medicine(medicine).build()),
-        entry(ColumnType.NAME_FORM_DOSE, NameFormDoseSetter.builder().medicine(medicine).build()),
-        entry(ColumnType.PACKAGE, PackageSetter.builder().medicine(medicine).build()),
-        entry(ColumnType.EAN, EanSetter.builder().medicine(medicine).build()),
-        entry(ColumnType.SALE_PRICE, SalePriceSetter.builder().medicine(medicine).build()),
-        entry(ColumnType.RETAIL_PRICE, RetailPriceSetter.builder().medicine(medicine).build()),
-        entry(ColumnType.TOTAL_REFUNDING, TotalRefundingSetter.builder().medicine(medicine).build()),
-        entry(ColumnType.CHARGE_FACTOR, ChargeFactorSetter.builder().medicine(medicine).build()),
-        entry(ColumnType.REFUND, RefundSetter.builder().medicine(medicine).build())
+  public static MedicinePropertySetter forMedicineAndColumnType(Medicine medicine, ColumnType columnType) {
+    final Map<ColumnType, MedicinePropertySetter> COLUMN_TYPE_TO_MEDICINE = Map.of(
+        ColumnType.INGREDIENT, IngredientSetter.builder().medicine(medicine).build(),
+        ColumnType.NAME_FORM_DOSE, NameFormDoseSetter.builder().medicine(medicine).build(),
+        ColumnType.PACKAGE, PackageSetter.builder().medicine(medicine).build(),
+        ColumnType.EAN, EanSetter.builder().medicine(medicine).build(),
+        ColumnType.SALE_PRICE, SalePriceSetter.builder().medicine(medicine).build(),
+        ColumnType.RETAIL_PRICE, RetailPriceSetter.builder().medicine(medicine).build(),
+        ColumnType.TOTAL_REFUNDING, TotalRefundingSetter.builder().medicine(medicine).build(),
+        ColumnType.CHARGE_FACTOR, ChargeFactorSetter.builder().medicine(medicine).build(),
+        ColumnType.REFUND, RefundSetter.builder().medicine(medicine).build()
     );
-  }
 
-  public MedicinePropertySetter build(ColumnType columnType) {
-    return columnTypeToMedicinePropertySetter.get(columnType);
+    return COLUMN_TYPE_TO_MEDICINE.get(columnType);
   }
 }
