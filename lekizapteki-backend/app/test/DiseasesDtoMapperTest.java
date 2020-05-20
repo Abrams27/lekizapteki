@@ -8,14 +8,13 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 public class DiseasesDtoMapperTest {
 
   @Test
-  public void test() {
+  public void testListMapping() {
     DiseaseEntity diseaseEntity = DiseaseEntity.builder()
         .id(1L)
         .name("co ja robie ze swoim zyciem")
         .build();
 
-    List<DiseaseEntity> diseaseEntityList = new ArrayList<DiseaseEntity>();
-    diseaseEntityList.add(diseaseEntity);
+    List<DiseaseEntity> diseaseEntityList = List.of(diseaseEntity);
 
     List<DiseaseDto> diseaseDtoList = DiseasesDtoMapper.map(diseaseEntityList);
 
