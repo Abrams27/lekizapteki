@@ -19,15 +19,15 @@ public class MedicinePropertySetterFactory {
 
   public static MedicinePropertySetter forMedicineAndColumnType(Medicine medicine, ColumnType columnType) {
     final Map<ColumnType, MedicinePropertySetter> columnTypeToMedicinePropertySetter = Map.of(
-        ColumnType.INGREDIENT, IngredientSetter.builder().medicine(medicine).build(),
-        ColumnType.NAME_FORM_DOSE, NameFormDoseSetter.builder().medicine(medicine).build(),
-        ColumnType.PACKAGE, PackageSetter.builder().medicine(medicine).build(),
-        ColumnType.EAN, EanSetter.builder().medicine(medicine).build(),
-        ColumnType.SALE_PRICE, SalePriceSetter.builder().medicine(medicine).build(),
-        ColumnType.RETAIL_PRICE, RetailPriceSetter.builder().medicine(medicine).build(),
-        ColumnType.TOTAL_REFUNDING, TotalRefundingSetter.builder().medicine(medicine).build(),
-        ColumnType.CHARGE_FACTOR, ChargeFactorSetter.builder().medicine(medicine).build(),
-        ColumnType.REFUND, RefundSetter.builder().medicine(medicine).build()
+        ColumnType.INGREDIENT, new IngredientSetter(medicine),
+        ColumnType.NAME_FORM_DOSE, new NameFormDoseSetter(medicine),
+        ColumnType.PACKAGE, new PackageSetter(medicine),
+        ColumnType.EAN, new EanSetter(medicine),
+        ColumnType.SALE_PRICE, new SalePriceSetter(medicine),
+        ColumnType.RETAIL_PRICE, new RetailPriceSetter(medicine),
+        ColumnType.TOTAL_REFUNDING, new TotalRefundingSetter(medicine),
+        ColumnType.CHARGE_FACTOR, new ChargeFactorSetter(medicine),
+        ColumnType.REFUND, new RefundSetter(medicine)
     );
 
     return columnTypeToMedicinePropertySetter.get(columnType);

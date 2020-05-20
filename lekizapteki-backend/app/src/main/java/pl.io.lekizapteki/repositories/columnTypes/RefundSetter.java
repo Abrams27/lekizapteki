@@ -1,9 +1,9 @@
 package pl.io.lekizapteki.repositories.columnTypes;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import pl.io.lekizapteki.services.Medicine;
 
-@Builder
+@AllArgsConstructor
 public class RefundSetter implements MedicinePropertySetter {
   private final Medicine medicine;
   public void setMedicineProperty(String value) {
