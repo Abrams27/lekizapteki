@@ -29,9 +29,8 @@ public class MedicineEntityMapper {
     PackageEntity packageEntity = PackageEntityMapper.map(medicine.getPack());
 
     PricingEntity pricingEntity = PricingEntityMapper.map(
-        medicine.getSalePrice(), medicine.getRetailPrice(),
-        medicine.getTotalFunding(), medicine.getChargeFactor(),
-        medicine.getRefund()
+        medicine.getSalePrice(), medicine.getTradePrice(), medicine.getRetailPrice(),
+        medicine.getTotalFunding(), medicine.getChargeFactor(), medicine.getRefund()
     );
 
     return MedicineEntity.builder()

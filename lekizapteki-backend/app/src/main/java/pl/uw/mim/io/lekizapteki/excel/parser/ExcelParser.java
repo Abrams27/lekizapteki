@@ -30,6 +30,7 @@ public class ExcelParser {
       3, ColumnType.PACKAGE,
       4, ColumnType.EAN,
       8, ColumnType.SALE_PRICE,
+      9, ColumnType.TRADE_PRICE,
       10, ColumnType.RETAIL_PRICE,
       11, ColumnType.TOTAL_REFUNDING,
       14, ColumnType.CHARGE_FACTOR,

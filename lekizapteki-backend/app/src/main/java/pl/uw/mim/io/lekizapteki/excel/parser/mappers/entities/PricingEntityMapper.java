@@ -10,10 +10,11 @@ public class PricingEntityMapper {
   private final String LUMP_SUM = "ryczałt";
   private final String FREE_UP_TO_THE_LIMIT = "bezpłatny do limitu";
 
-  public PricingEntity map(String salePrice, String retailPrice, String totalFunding, String chargeFactor, String refund) {
+  public PricingEntity map(String salePrice, String tradePrice, String retailPrice, String totalFunding, String chargeFactor, String refund) {
 
     return PricingEntity.builder()
         .salePrice(priceToBigDecimal(salePrice))
+        .tradePrice(priceToBigDecimal(tradePrice))
         .retailPrice(priceToBigDecimal(retailPrice))
         .totalFunding(priceToBigDecimal(totalFunding))
         .chargeFactor(chargeFactorToBigDecimal(chargeFactor))
