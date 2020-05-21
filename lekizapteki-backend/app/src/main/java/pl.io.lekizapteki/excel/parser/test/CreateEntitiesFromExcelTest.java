@@ -16,10 +16,6 @@ public class CreateEntitiesFromExcelTest {
     List<Medicine> medicines = excelParser.parseExcelFile(filePath);
 
     assert (medicines.size() == 4312);
-    for (Medicine medicine : medicines) {
-      System.out.println(medicine.toString());
-    }
   }
 
-  // będą dodawane pozniej testy do mapowań medicine -> entity
 }
