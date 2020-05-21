@@ -15,4 +15,5 @@ public class DiseaseService {
   public List<DiseaseEntity> getAllDiseases() {
     return diseaseRepository.findAll();
   }
+
 }

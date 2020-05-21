@@ -17,4 +17,5 @@ public class DiseaseController implements DiseaseApi {
   public List<DiseaseDto> getDiseases() {
     return getDiseases.execute();
   }
+
 }
