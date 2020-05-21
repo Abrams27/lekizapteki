@@ -3,6 +3,7 @@ package pl.uw.mim.io.lekizapteki.services;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 import pl.uw.mim.io.lekizapteki.exceptions.NoSuchDiseaseException;
 import pl.uw.mim.io.lekizapteki.repositories.DiseaseRepository;
 import pl.uw.mim.io.lekizapteki.repositories.MedicineRepository;
@@ -27,4 +28,21 @@ public class MedicineService {
         .orElseThrow(NoSuchDiseaseException::new);
   }
 
+  public MedicineEntity getMedicineWithEanAndDiseaseId(String ean, Long diseaseId) {
+    return medicineRepository
+        .findByEanAndDisease(ean, getDiseaseWithId(diseaseId));
+  }
+
+  public List<MedicineEntity> getIdenticalMedicines(String ean, Long diseaseId) {
+
+    MedicineEntity medicineEntity = getMedicineWithEanAndDiseaseId(ean, diseaseId);
+
+    return medicineRepository
+        .findAllByIngredientAndFormAndDoseAndDisease(
+            medicineEntity.getIngredient(),
+            medicineEntity.getForm(),
+            medicineEntity.getDose(),
+            medicineEntity.getDisease()
+        );
+  }
 }
