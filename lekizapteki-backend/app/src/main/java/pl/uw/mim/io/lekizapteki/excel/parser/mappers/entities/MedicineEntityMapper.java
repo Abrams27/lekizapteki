@@ -1,5 +1,9 @@
 package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
@@ -14,11 +18,11 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 public class MedicineEntityMapper {
 
   public MedicineEntity map(Medicine medicine) {
-    String[] nameAndFormAndDose = splitNameAndFormAndDose(medicine.getNameAndFormAndDose());
+    List<String> nameAndFormAndDose = splitNameAndFormAndDose(medicine.getNameAndFormAndDose());
 
-    String name = nameAndFormAndDose[0];
-    String form = nameAndFormAndDose[1];
-    String dose = nameAndFormAndDose[2];
+    String name = nameAndFormAndDose.get(0);
+    String form = nameAndFormAndDose.get(1);
+    String dose = nameAndFormAndDose.get(2);
 
     DoseEntity doseEntity = DoseEntityMapper.map(dose);
     IngredientEntity ingredientEntity = IngredientEntityMapper.map(medicine.getIngredient());
@@ -44,9 +48,23 @@ public class MedicineEntityMapper {
         .build();
   }
 
-  private String[] splitNameAndFormAndDose(String nameAndFormAndDose) {
+  // TODO Zmienić na private (public do testowania jedynie)
+  public List<String> splitNameAndFormAndDose(String nameAndFormAndDose) {
     final String PATTERN = "^(.+), (tabl[^,]+), (.+)$";
 
-    return nameAndFormAndDose.split(PATTERN);
+    Pattern r = Pattern.compile(PATTERN);
+    Matcher m = r.matcher(nameAndFormAndDose);
+
+    List<String> groups = new ArrayList<>();
+
+    if (m.find()) {
+      for (int i = 1; i <= m.groupCount(); i++) {
+        groups.add(m.group(i));
+      }
+    } else {
+      System.out.println("COS BARDZO ZLE");
+    }
+
+    return groups;
   }
 }
