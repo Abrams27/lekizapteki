@@ -25,4 +25,5 @@ public class MedicineController implements MedicineApi {
   public List<IdenticalMedicinesDto> getIdenticalMedicines(String ean, Long diseaseId) {
     return getIdenticalMedicines.execute(ean, diseaseId);
   }
+
 }

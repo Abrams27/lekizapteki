@@ -2,14 +2,13 @@ package mappers.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
-import pl.uw.mim.io.lekizapteki.mappers.dto.MedicinesDtoMapper;
+import pl.uw.mim.io.lekizapteki.mappers.dto.MedicineDtoMapper;
 import pl.uw.mim.io.lekizapteki.models.medicine.MedicineDto;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 
-class MedicinesDtoMapperTest {
+class MedicineDtoMapperTest {
 
   private final static Long DOSE_ID = 1L;
   private final static String DOSE_DOSE = "test dose";
@@ -22,12 +21,11 @@ class MedicinesDtoMapperTest {
   void shouldMapEntityToDto() {
     MedicineEntity medicineEntity = buildTestMedicineEntity();
 
-    List<MedicineDto> medicineDtoList = MedicinesDtoMapper.map( List.of(medicineEntity));
+    MedicineDto medicineDto = MedicineDtoMapper.map(medicineEntity);
 
-    assertEquals(1, medicineDtoList.size());
-    assertEquals(DOSE_DOSE, medicineDtoList.get(0).getDose());
-    assertEquals(MEDICINE_NAME, medicineDtoList.get(0).getName());
-    assertEquals(MEDICINE_EAN, medicineDtoList.get(0).getEan());
+    assertEquals(DOSE_DOSE, medicineDto.getDose());
+    assertEquals(MEDICINE_NAME, medicineDto.getName());
+    assertEquals(MEDICINE_EAN, medicineDto.getEan());
   }
 
   private MedicineEntity buildTestMedicineEntity() {
