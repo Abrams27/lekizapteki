@@ -1,5 +1,7 @@
+package mappers.dto;
+
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import pl.uw.mim.io.lekizapteki.mappers.dto.MedicinesDtoMapper;
 import pl.uw.mim.io.lekizapteki.models.medicine.MedicineDto;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;

@@ -1,5 +1,7 @@
+package mappers.dto;
+
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import pl.uw.mim.io.lekizapteki.mappers.dto.DiseasesDtoMapper;
 import pl.uw.mim.io.lekizapteki.models.disease.DiseaseDto;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
