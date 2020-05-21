@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
+import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -39,12 +40,9 @@ public class ExcelParser {
 
   @SneakyThrows
   public List<Medicine> parseExcelFile(String filePath) {
-    FileInputStream excelFile = new FileInputStream(new File(filePath));
-    Workbook workbook = new XSSFWorkbook(excelFile);
+    @Cleanup FileInputStream excelFile = new FileInputStream(new File(filePath));
+    @Cleanup Workbook workbook = new XSSFWorkbook(excelFile);
     Sheet sheet = workbook.getSheetAt(0);
-
-    excelFile.close();
-    workbook.close();
 
     return mapSheetToMedicineList(sheet);
   }
@@ -90,7 +88,6 @@ public class ExcelParser {
 
     MedicinePropertySetter medicinePropertySetter = MedicinePropertySetterFactory
         .forMedicineAndColumnType(medicine, columnType);
-
     medicinePropertySetter.setMedicineProperty(cellValue);
   }
 
