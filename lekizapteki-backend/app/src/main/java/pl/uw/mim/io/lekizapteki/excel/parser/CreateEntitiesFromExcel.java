@@ -1,12 +1,12 @@
-package pl.io.lekizapteki.usecases;
+package pl.uw.mim.io.lekizapteki.excel.parser;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.io.lekizapteki.excel.parser.ExcelParser;
-import pl.io.lekizapteki.excel.parser.MapMedicinesToEntities;
-import pl.io.lekizapteki.excel.parser.MedicinesValidator;
-import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.ExcelParser;
+import pl.uw.mim.io.lekizapteki.excel.parser.MapMedicinesToEntities;
+import pl.uw.mim.io.lekizapteki.excel.parser.MedicinesValidator;
+import pl.uw.mim.io.lekizapteki.excel.parser.repositories.excelDatatypes.Medicine;
 
 @Component
 @AllArgsConstructor

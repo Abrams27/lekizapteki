@@ -1,4 +1,4 @@
-package pl.io.lekizapteki.repositories.columnTypes;
+package pl.uw.mim.io.lekizapteki.excel.parser.repositories.columnTypes;
 
 public interface MedicinePropertySetter {
 

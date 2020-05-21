@@ -1,9 +1,9 @@
-package pl.io.lekizapteki.excel.parser;
+package pl.uw.mim.io.lekizapteki.excel.parser;
 
 import java.util.ArrayList;
 import java.util.List;
 import lombok.experimental.UtilityClass;
-import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.repositories.excelDatatypes.Medicine;
 
 @UtilityClass
 public class MedicinesValidator {

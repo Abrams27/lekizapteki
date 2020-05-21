@@ -1,4 +1,4 @@
-package pl.io.lekizapteki.excel.parser;
+package pl.uw.mim.io.lekizapteki.excel.parser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,9 +13,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
-import pl.io.lekizapteki.excel.parser.enums.ColumnType;
-import pl.io.lekizapteki.repositories.columnTypes.MedicinePropertySetter;
-import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.enums.ColumnType;
+import pl.uw.mim.io.lekizapteki.excel.parser.repositories.columnTypes.MedicinePropertySetter;
+import pl.uw.mim.io.lekizapteki.excel.parser.repositories.excelDatatypes.Medicine;
 
 @Component
 @AllArgsConstructor

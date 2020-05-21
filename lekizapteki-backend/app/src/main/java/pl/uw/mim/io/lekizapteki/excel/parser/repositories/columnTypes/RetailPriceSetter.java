@@ -1,7 +1,7 @@
-package pl.io.lekizapteki.repositories.columnTypes;
+package pl.uw.mim.io.lekizapteki.excel.parser.repositories.columnTypes;
 
 import lombok.AllArgsConstructor;
-import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.repositories.excelDatatypes.Medicine;
 
 @AllArgsConstructor
 public class RetailPriceSetter implements MedicinePropertySetter {

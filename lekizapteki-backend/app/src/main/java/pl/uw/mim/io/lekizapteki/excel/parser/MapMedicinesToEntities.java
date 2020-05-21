@@ -1,7 +1,7 @@
-package pl.io.lekizapteki.excel.parser;
+package pl.uw.mim.io.lekizapteki.excel.parser;
 
 import java.util.List;
-import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.repositories.excelDatatypes.Medicine;
 
 public class MapMedicinesToEntities {
 
