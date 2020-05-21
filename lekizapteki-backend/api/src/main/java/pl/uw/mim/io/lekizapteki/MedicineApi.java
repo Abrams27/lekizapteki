@@ -16,12 +16,12 @@ public interface MedicineApi {
   @CrossOrigin(origins = "*")
   @GetMapping("/medicines")
   List<MedicineDto> getMedicines(
-      @RequestParam(required = false) String diseaseId);
+      @RequestParam(required = false) Long diseaseId);
 
   @CrossOrigin(origins = "*")
   @GetMapping("/medicines/identical")
   List<IdenticalMedicinesDto> getIdenticalMedicines(
       @RequestParam(required = true) String ean,
-      @RequestParam(required = false) String diseaseId);
+      @RequestParam(required = false) Long diseaseId);
 
 }
