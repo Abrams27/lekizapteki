@@ -38,9 +38,8 @@ public class MedicineService {
     MedicineEntity medicineEntity = getMedicineWithEanAndDiseaseId(ean, diseaseId);
 
     return medicineRepository
-        .findAllByIngredientAndFormAndDoseAndDisease(
+        .findAllByIngredientAndDoseAndDisease(
             medicineEntity.getIngredient(),
-            medicineEntity.getForm(),
             medicineEntity.getDose(),
             medicineEntity.getDisease()
         );
