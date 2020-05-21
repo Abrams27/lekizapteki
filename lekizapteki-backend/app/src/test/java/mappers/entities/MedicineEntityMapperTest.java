@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities.MedicineEntityMapper;
+import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicinePropertyUtils;
 
 public class MedicineEntityMapperTest {
 
@@ -26,7 +26,7 @@ public class MedicineEntityMapperTest {
       String nameAndFormAndDose = entry.getKey();
       List<String> correctSplit = entry.getValue();
 
-      List<String> split = MedicineEntityMapper.splitNameAndFormAndDose(nameAndFormAndDose);
+      List<String> split = MedicinePropertyUtils.splitNameAndFormAndDose(nameAndFormAndDose);
 //
 //      System.out.println("split = " + split);
 //      System.out.println("correct = " + correctSplit);
