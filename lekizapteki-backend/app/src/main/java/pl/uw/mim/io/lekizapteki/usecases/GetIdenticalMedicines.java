@@ -13,12 +13,6 @@ import pl.uw.mim.io.lekizapteki.services.MedicineService;
 @AllArgsConstructor
 public class GetIdenticalMedicines {
 
-  private MedicineService medicineService;
-
-  private MedicineDetailsDto MapMedicineDetails(MedicineEntity medicineEntity) {
-    return MedicineDetailsDtoMapper.map(medicineEntity);
-  }
-
   public IdenticalMedicinesDto execute(String ean, Long diseaseId) {
     return IdenticalMedicinesDto.builder()
         .medicine(MapMedicineDetails(medicineService.getMedicineWithEanAndDiseaseId(ean, diseaseId)))
@@ -29,5 +23,11 @@ public class GetIdenticalMedicines {
             .collect(Collectors.toList())
         )
         .build();
+  }
+
+  private MedicineService medicineService;
+
+  private MedicineDetailsDto MapMedicineDetails(MedicineEntity medicineEntity) {
+    return MedicineDetailsDtoMapper.map(medicineEntity);
   }
 }

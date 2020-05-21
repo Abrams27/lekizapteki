@@ -14,6 +14,17 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 @UtilityClass
 public class MedicineDetailsDtoMapper {
 
+  public MedicineDetailsDto map(MedicineEntity medicineEntity) {
+    return MedicineDetailsDto.builder()
+        .ean(medicineEntity.getEan())
+        .dose(medicineEntity.getDose().getDose())
+        .name(medicineEntity.getName())
+        .activeIngredient(MapIngredient(medicineEntity.getIngredient()))
+        .pricing(MapPricing(medicineEntity.getPricing()))
+        .form(MapForm(medicineEntity.getForm()))
+        .build();
+  }
+
   private PricingDto MapPricing(PricingEntity pricingEntity) {
     return PricingDtoMapper.map(pricingEntity);
   }
@@ -24,16 +35,5 @@ public class MedicineDetailsDtoMapper {
 
   private String MapIngredient(IngredientEntity ingredientEntity) {
     return IngredientStringMapper.map(ingredientEntity);
-  }
-
-  public MedicineDetailsDto map(MedicineEntity medicineEntity) {
-    return MedicineDetailsDto.builder()
-        .ean(medicineEntity.getEan())
-        .dose(medicineEntity.getDose().getDose())
-        .name(medicineEntity.getName())
-        .activeIngredient(MapIngredient(medicineEntity.getIngredient()))
-        .pricing(MapPricing(medicineEntity.getPricing()))
-        .form(MapForm(medicineEntity.getForm()))
-        .build();
   }
 }
