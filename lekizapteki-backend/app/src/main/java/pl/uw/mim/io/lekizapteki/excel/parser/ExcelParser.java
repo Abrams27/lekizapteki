@@ -14,8 +14,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 import pl.uw.mim.io.lekizapteki.excel.parser.editors.medicine.MedicinePropertySetterFactory;
-import pl.uw.mim.io.lekizapteki.excel.parser.enums.ColumnType;
 import pl.uw.mim.io.lekizapteki.excel.parser.editors.medicine.setter.MedicinePropertySetter;
+import pl.uw.mim.io.lekizapteki.excel.parser.enums.ColumnType;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 
 @Component
@@ -41,6 +41,9 @@ public class ExcelParser {
     FileInputStream excelFile = new FileInputStream(new File(filePath));
     Workbook workbook = new XSSFWorkbook(excelFile);
     Sheet sheet = workbook.getSheetAt(0);
+
+    excelFile.close();
+    workbook.close();
 
     return mapSheetToMedicineList(sheet);
   }

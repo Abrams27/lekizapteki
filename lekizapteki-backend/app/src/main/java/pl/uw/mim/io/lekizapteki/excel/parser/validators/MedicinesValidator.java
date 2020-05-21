@@ -25,9 +25,19 @@ public class MedicinesValidator {
   }
 
   private boolean isValidMedicine(Medicine medicine) {
-    // pojedyncza substancja czynna -> zawartość komórki 'substancja czynna' nie ma w sobie znaku +
-    // tylko w formie tabletek -> zawartość komórki 'nazwa, postać, dawka', jakoś sprawdzić postać
-    // moze jeszcze jakies nwm
-    return true;
+    // 1. ma być pojedyncza substancja czynna
+    // 2. jedyna dopuszczalna forma to tabletki
+    return hasSingleIngredient(medicine) && hasPillForm(medicine);
   }
+
+  // pojedyncza substancja czynna -> zawartość komórki 'substancja czynna' nie ma w sobie znaku +
+  private boolean hasSingleIngredient(Medicine medicine) {
+    return !medicine.getIngredient().contains(" + ");
+  }
+
+  // tylko w formie tabletek -> zawartość komórki 'nazwa, postać, dawka' ma w sobie podciąg 'tabl'
+  private boolean hasPillForm(Medicine medicine) {
+    return medicine.getNameAndFormAndDose().contains("tabl");
+  }
+
 }
