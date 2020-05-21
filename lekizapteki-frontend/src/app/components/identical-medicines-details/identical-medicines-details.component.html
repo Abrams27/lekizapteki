@@ -114,63 +114,81 @@
       <div [@detailExpand]="element == getExpandedElement() ? 'expanded' : 'collapsed'"
            class="identical-medicines-details-expanded-element">
 
-        <p>
-          dawka:
+        <section class="identical-medicines-details-expanded-section">
 
-          <span class="identical-medicines-bolder-text">
-            {{element.dose}}
-          </span>
-        </p>
-        <p>
-          postać:
+          <p class="identical-medicines-details-medicine-ean">
+            EAN:
 
-          <span class="identical-medicines-bolder-text">
-            {{element.form}}
-          </span>
-        </p>
-        <p>
-          Urzędowa cena zbytu:
+            <span class="identical-medicines-bolder-text">
+              {{element.ean}}
+            </span>
+          </p>
 
-          <span class="identical-medicines-bolder-text">
-            {{element.pricing.tradePrice}}
-          </span>
-        </p>
-        <p>
-          Cena hurtowa brutto:
+          <p class="identical-medicines-details-medicine-dose">
+            dawka:
 
-          <span class="identical-medicines-bolder-text">
-            {{element.pricing.salePrice}}
-          </span>
-        </p>
-        <p>
-          Cena detaliczna:
+            <span class="identical-medicines-bolder-text">
+              {{element.dose}}
+            </span>
+          </p>
 
-          <span class="identical-medicines-bolder-text">
-            {{element.pricing.retailPrice}}
-          </span>
-        </p>
-        <p>
-          Wysokość limitu finansowania:
+          <p class="identical-medicines-details-medicine-form">
+            postać:
 
-          <span class="identical-medicines-bolder-text">
-            {{element.pricing.totalFunding}}
-          </span>
-        </p>
-        <p>
-          Poziom odpłatności:
+            <span class="identical-medicines-bolder-text">
+              {{element.form}}
+            </span>
+          </p>
 
-          <span class="identical-medicines-bolder-text">
-            {{element.pricing.chargeFactor}}
-          </span>
-        </p>
-        <p>
-          Wysokość dopłaty świadczeniobiorcy:
+          <p class="identical-medicines-details-medicine-trade-price">
+            Urzędowa cena zbytu:
 
-          <span class="identical-medicines-bolder-text">
-            {{element.pricing.refund}}
-          </span>
-        </p>
+            <span class="identical-medicines-bolder-text">
+              {{element.pricing.tradePrice}} PLN
+            </span>
+          </p>
 
+          <p class="identical-medicines-details-medicine-sale-price">
+            Cena hurtowa brutto:
+
+            <span class="identical-medicines-bolder-text">
+              {{element.pricing.salePrice}} PLN
+            </span>
+          </p>
+
+          <p class="identical-medicines-details-medicine-retail-price">
+            Cena detaliczna:
+
+            <span class="identical-medicines-bolder-text">
+              {{element.pricing.retailPrice}} PLN
+            </span>
+          </p>
+
+          <p class="identical-medicines-details-medicine-total-founding">
+            Wysokość limitu finansowania:
+
+            <span class="identical-medicines-bolder-text">
+              {{element.pricing.totalFunding}} PLn
+            </span>
+          </p>
+
+          <p class="identical-medicines-details-medicine-charge-factor">
+            Poziom odpłatności:
+
+            <span class="identical-medicines-bolder-text">
+              {{element.pricing.chargeFactor}} %
+            </span>
+          </p>
+
+          <p class="identical-medicines-details-medicine-refund">
+            Wysokość dopłaty świadczeniobiorcy:
+
+            <span class="identical-medicines-bolder-text">
+              {{element.pricing.refund}} PLN ?
+            </span>
+          </p>
+
+        </section>
       </div>
     </td>
 
@@ -189,5 +207,7 @@
 
   <tr mat-row
       *matRowDef="let row; columns: ['expandedDetail']"
-      class="identical-medicines-details-details-expanded-row"></tr>
+      class="identical-medicines-details-details-expanded-row">
+  </tr>
+
 </table>
