@@ -7,9 +7,9 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 @UtilityClass
 public class PricingEntityMapper {
 
-  // TODO poprawic castowanie stringow na Longa, (np tam gdzie jest %)
-  // TODO co zrobic z wartosciami z przecinkami?
+  // TODO: co zrobic z chargeFactor? to moze byc wartosc w procentach lub napis
   public PricingEntity map(String salePrice, String retailPrice, String totalFunding, String chargeFactor, String refund) {
+
     return PricingEntity.builder()
         .salePrice(BigDecimal.valueOf(Long.parseLong(salePrice)))
         .retailPrice(BigDecimal.valueOf(Long.parseLong(retailPrice)))
