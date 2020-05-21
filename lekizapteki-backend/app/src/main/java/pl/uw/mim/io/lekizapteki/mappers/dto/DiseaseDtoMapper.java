@@ -13,4 +13,5 @@ public class DiseaseDtoMapper {
         .name(diseaseEntity.getName())
         .build();
   }
+
 }

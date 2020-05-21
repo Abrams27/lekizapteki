@@ -14,4 +14,5 @@ public class MedicineDtoMapper {
         .name(medicineEntity.getName())
         .build();
   }
+
 }

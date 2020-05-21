@@ -8,4 +8,5 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 public interface MedicineRepository extends JpaRepository<MedicineEntity, Long> {
 
   List<MedicineEntity> findAllByDisease(DiseaseEntity disease);
+
 }
