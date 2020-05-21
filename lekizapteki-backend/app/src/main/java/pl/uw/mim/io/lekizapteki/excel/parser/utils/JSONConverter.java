@@ -1,4 +1,4 @@
-package pl.uw.mim.io.lekizapteki.excel.parser.services;
+package pl.uw.mim.io.lekizapteki.excel.parser.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;

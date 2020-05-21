@@ -13,9 +13,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
+import pl.uw.mim.io.lekizapteki.excel.parser.editors.medicine.MedicinePropertySetterFactory;
 import pl.uw.mim.io.lekizapteki.excel.parser.enums.ColumnType;
-import pl.uw.mim.io.lekizapteki.excel.parser.repositories.columnTypes.MedicinePropertySetter;
-import pl.uw.mim.io.lekizapteki.excel.parser.repositories.excelDatatypes.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.editors.medicine.setter.MedicinePropertySetter;
+import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 
 @Component
 @AllArgsConstructor

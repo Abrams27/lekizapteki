@@ -1,4 +1,4 @@
-package pl.uw.mim.io.lekizapteki.excel.parser.repositories.excelDatatypes;
+package pl.uw.mim.io.lekizapteki.excel.parser.models;
 
 import lombok.Data;
 

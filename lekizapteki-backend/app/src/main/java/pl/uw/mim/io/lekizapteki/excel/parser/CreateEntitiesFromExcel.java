@@ -3,10 +3,9 @@ package pl.uw.mim.io.lekizapteki.excel.parser;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uw.mim.io.lekizapteki.excel.parser.ExcelParser;
-import pl.uw.mim.io.lekizapteki.excel.parser.MapMedicinesToEntities;
-import pl.uw.mim.io.lekizapteki.excel.parser.MedicinesValidator;
-import pl.uw.mim.io.lekizapteki.excel.parser.repositories.excelDatatypes.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.mappers.MedicinesToEntitiesMapper;
+import pl.uw.mim.io.lekizapteki.excel.parser.validators.MedicinesValidator;
+import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 
 @Component
 @AllArgsConstructor
@@ -18,6 +17,6 @@ public class CreateEntitiesFromExcel {
   public void execute() {
     List<Medicine> medicines = excelParser.parseExcelFile(FILE_PATH);
     List<Medicine> validatedMedicines = MedicinesValidator.filter(medicines);
-    MapMedicinesToEntities.map(validatedMedicines);
+    MedicinesToEntitiesMapper.map(validatedMedicines);
   }
 }
