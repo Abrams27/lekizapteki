@@ -12,6 +12,7 @@ public class Medicine {
   private String salePrice;
   private String retailPrice;
   private String totalFunding;
+  private String disease;
   private String chargeFactor;
   private String refund;
 }

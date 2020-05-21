@@ -8,6 +8,7 @@ public enum ColumnType {
   SALE_PRICE,
   RETAIL_PRICE,
   TOTAL_REFUNDING,
+  DISEASE,
   CHARGE_FACTOR,
   REFUND
 }

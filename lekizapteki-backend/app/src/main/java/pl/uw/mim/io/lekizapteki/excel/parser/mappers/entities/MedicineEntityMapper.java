@@ -2,6 +2,7 @@ package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
 
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
+import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.FormEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.IngredientEntity;
@@ -13,7 +14,7 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 public class MedicineEntityMapper {
 
   public MedicineEntity map(Medicine medicine) {
-    String[] nameAndFormAndDose = getSplittedNameAndFormAndDose(medicine.getNameAndFormAndDose());
+    String[] nameAndFormAndDose = splitNameAndFormAndDose(medicine.getNameAndFormAndDose());
 
     String name = nameAndFormAndDose[0];
     String form = nameAndFormAndDose[1];
@@ -22,7 +23,7 @@ public class MedicineEntityMapper {
     DoseEntity doseEntity = DoseEntityMapper.map(dose);
     IngredientEntity ingredientEntity = IngredientEntityMapper.map(medicine.getIngredient());
     FormEntity formEntity = FormEntityMapper.map(form);
-//    DiseaseEntity diseaseEntity = DiseaseEntityMapper.map(disease) TODO ???
+    DiseaseEntity diseaseEntity = DiseaseEntityMapper.map(medicine.getDisease());
     PackageEntity packageEntity = PackageEntityMapper.map(medicine.getPack());
 
     PricingEntity pricingEntity = PricingEntityMapper.map(
@@ -37,13 +38,13 @@ public class MedicineEntityMapper {
         .dose(doseEntity)
         .ingredient(ingredientEntity)
         .form(formEntity)
-//        .disease(diseaseEntity) TODO ???
+        .disease(diseaseEntity)
         .pack(packageEntity)
         .pricing(pricingEntity)
         .build();
   }
 
-  private String[] getSplittedNameAndFormAndDose(String nameAndFormAndDose) {
+  private String[] splitNameAndFormAndDose(String nameAndFormAndDose) {
     final String PATTERN = "^(.+), (tabl[^,]+), (.+)$";
 
     return nameAndFormAndDose.split(PATTERN);
