@@ -1,21 +1,24 @@
 package excel.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import pl.io.lekizapteki.excel.parser.ExcelParser;
 import pl.io.lekizapteki.repositories.excelDatatypes.Medicine;
 
 
-public class CreateEntitiesFromExcelTest {
+class CreateEntitiesFromExcelTest {
+
+  private final static String TEST_FILE_PATH = "src/main/resources/wykaz.xlsx";
 
   @Test
-  public void excelParserTest() {
-    String filePath = "src/main/resources/wykaz.xlsx";
+  void shouldParseAllLines() {
     ExcelParser excelParser = new ExcelParser();
 
-    List<Medicine> medicines = excelParser.parseExcelFile(filePath);
+    List<Medicine> medicines = excelParser.parseExcelFile(TEST_FILE_PATH);
 
-    assert (medicines.size() == 4312);
+    assertEquals(4312, medicines.size());
   }
 
 }

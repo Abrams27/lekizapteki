@@ -1,26 +1,34 @@
 package mappers.dto;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import pl.uw.mim.io.lekizapteki.mappers.dto.DiseasesDtoMapper;
 import pl.uw.mim.io.lekizapteki.models.disease.DiseaseDto;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 
-public class DiseasesDtoMapperTest {
+class DiseasesDtoMapperTest {
+
+  private final static Long DISEASE_ID = 1L;
+  private final static String DISEASE_NAME = "test name";
 
   @Test
-  public void testListMapping() {
-    DiseaseEntity diseaseEntity = DiseaseEntity.builder()
-        .id(1L)
-        .name("co ja robie ze swoim zyciem")
-        .build();
+  void shouldMapEntityDoDto() {
+    DiseaseEntity diseaseEntity = buildTestDiseaseEntity();
 
-    List<DiseaseEntity> diseaseEntityList = List.of(diseaseEntity);
+    List<DiseaseDto> diseaseDtoList = DiseasesDtoMapper.map(List.of(diseaseEntity));
 
-    List<DiseaseDto> diseaseDtoList = DiseasesDtoMapper.map(diseaseEntityList);
-
-    assert(diseaseDtoList.size() == 1);
-    assert(diseaseDtoList.get(0).getId() == 1L);
-    assert(diseaseDtoList.get(0).getName().equals("co ja robie ze swoim zyciem"));
+    assertEquals(1, diseaseDtoList.size());
+    assertEquals(DISEASE_ID, diseaseDtoList.get(0).getId());
+    assertEquals(DISEASE_NAME, diseaseDtoList.get(0).getName());
   }
+
+  private DiseaseEntity buildTestDiseaseEntity() {
+    return DiseaseEntity.builder()
+        .id(DISEASE_ID)
+        .name(DISEASE_NAME)
+        .build();
+  }
+
 }

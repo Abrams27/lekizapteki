@@ -1,5 +1,7 @@
 package mappers.dto;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import pl.uw.mim.io.lekizapteki.mappers.dto.MedicinesDtoMapper;
@@ -7,25 +9,41 @@ import pl.uw.mim.io.lekizapteki.models.medicine.MedicineDto;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 
-public class MedicinesDtoMapperTest {
+class MedicinesDtoMapperTest {
+
+  private final static Long DOSE_ID = 1L;
+  private final static String DOSE_DOSE = "test dose";
+
+  private final static Long MEDICINE_ID = 2L;
+  private final static String MEDICINE_NAME = "test medicine";
+  private final static String MEDICINE_EAN = "test ean";
 
   @Test
-  public void testListMapping() {
-    DoseEntity doseEntity = DoseEntity.builder()
-        .id(1L)
-        .dose("co ja robie ze swoim zyciem")
-        .build();
-    MedicineEntity medicineEntity = MedicineEntity.builder()
-        .id(2L)
-        .name("Nie jest latwo")
-        .dose(doseEntity)
-        .ean("KC Marcin nawet jak jestes zly")
-        .build();
-    List<MedicineEntity> medicineEntityList = List.of(medicineEntity);
-    List<MedicineDto> medicineDtoList = MedicinesDtoMapper.map(medicineEntityList);
-    assert (medicineDtoList.size() == 1);
-    assert (medicineDtoList.get(0).getDose().equals("co ja robie ze swoim zyciem"));
-    assert (medicineDtoList.get(0).getName().equals("Nie jest latwo"));
-    assert (medicineDtoList.get(0).getEan().equals("KC Marcin nawet jak jestes zly"));
+  void shouldMapEntityToDto() {
+    MedicineEntity medicineEntity = buildTestMedicineEntity();
+
+    List<MedicineDto> medicineDtoList = MedicinesDtoMapper.map( List.of(medicineEntity));
+
+    assertEquals(1, medicineDtoList.size());
+    assertEquals(DOSE_DOSE, medicineDtoList.get(0).getDose());
+    assertEquals(MEDICINE_NAME, medicineDtoList.get(0).getName());
+    assertEquals(MEDICINE_EAN, medicineDtoList.get(0).getEan());
   }
+
+  private MedicineEntity buildTestMedicineEntity() {
+    return MedicineEntity.builder()
+        .id(MEDICINE_ID)
+        .name(MEDICINE_NAME)
+        .dose(buildTestDoseEntity())
+        .ean(MEDICINE_EAN)
+        .build();
+  }
+
+  private DoseEntity buildTestDoseEntity() {
+    return DoseEntity.builder()
+        .id(DOSE_ID)
+        .dose(DOSE_DOSE)
+        .build();
+  }
+
 }
