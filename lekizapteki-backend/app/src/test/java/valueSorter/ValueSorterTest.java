@@ -9,7 +9,7 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.PackageEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
-import pl.uw.mim.io.lekizapteki.services.MedicineValueSorterService;
+import pl.uw.mim.io.lekizapteki.utility.MedicineValueSorter;
 
 public class ValueSorterTest {
 
@@ -19,7 +19,8 @@ public class ValueSorterTest {
         .of(buildTestMedicineEntity(1L, "zero", "500 mg", "123", "10 szt."),
             buildTestMedicineEntity(2L, "jeden", "25 mg", "124", "15 szt."),
             buildTestMedicineEntity(3L, "dwa", "25 mg", "125", "15 szt."));
-    List<MedicineEntity> resultMedicineEntityList = MedicineValueSorterService.sort(medicineEntityList);
+    List<MedicineEntity> resultMedicineEntityList = MedicineValueSorter.sort(medicineEntityList);
+
     assertEquals(1L, resultMedicineEntityList.get(0).getId());
     assertEquals(2L, resultMedicineEntityList.get(1).getId());
     assertEquals(3L, resultMedicineEntityList.get(2).getId());
