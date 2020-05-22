@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class NoSuchDiseaseException extends RuntimeException {
 
-  // TODO COS JEST ZLE
-  private final static String MESSAGE = "Nieprawidłowy numer EAN";
+  private final static String MESSAGE = "Nieprawidlowa jednostka chorobowa";
 
   public NoSuchDiseaseException() {
     super(MESSAGE);

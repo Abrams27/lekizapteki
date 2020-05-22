@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uw.mim.io.lekizapteki.exceptions.NoSuchDiseaseException;
+import pl.uw.mim.io.lekizapteki.exceptions.WrongMedicineForDiseaseException;
 import pl.uw.mim.io.lekizapteki.repositories.DiseaseRepository;
 import pl.uw.mim.io.lekizapteki.repositories.MedicineRepository;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
@@ -17,30 +18,35 @@ public class MedicineService {
   private DiseaseRepository diseaseRepository;
 
   public List<MedicineEntity> getMedicinesForDiseaseId(Long diseaseId) {
+    DiseaseEntity diseaseEntity = getDiseaseWithIdOrThrow(diseaseId);
+
     return medicineRepository
-        .findAllByDisease(getDiseaseWithId(diseaseId));
+        .findAllByDisease(diseaseEntity);
   }
 
   public List<MedicineEntity> getIdenticalMedicines(String ean, Long diseaseId) {
-
-    MedicineEntity medicineEntity = getMedicineWithEanAndDiseaseId(ean, diseaseId);
+    MedicineEntity medicineEntity = getMedicineWithEanAndDiseaseIdOrThrow(ean, diseaseId);
 
     return medicineRepository
         .findAllByIngredientAndDoseAndDisease(
             medicineEntity.getIngredient(),
             medicineEntity.getDose(),
-            medicineEntity.getDisease()
-        );
+            medicineEntity.getDisease());
   }
 
-  public MedicineEntity getMedicineWithEanAndDiseaseId(String ean, Long diseaseId) {
+  public MedicineEntity getMedicineWithEanAndDiseaseIdOrThrow(String ean, Long diseaseId) {
+    DiseaseEntity diseaseEntity = getDiseaseWithIdOrThrow(diseaseId);
+
     return medicineRepository
-        .findByEanAndDisease(ean, getDiseaseWithId(diseaseId));
+        .findByEanAndDisease(ean, diseaseEntity)
+        .orElseThrow(WrongMedicineForDiseaseException::new);
   }
 
-  private DiseaseEntity getDiseaseWithId(Long diseaseId) {
+
+  private DiseaseEntity getDiseaseWithIdOrThrow(Long diseaseId) {
     return diseaseRepository
         .getDiseaseEntityById(diseaseId)
         .orElseThrow(NoSuchDiseaseException::new);
   }
+
 }

@@ -1,6 +1,7 @@
 package pl.uw.mim.io.lekizapteki.repositories;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
@@ -11,7 +12,7 @@ public interface MedicineRepository extends JpaRepository<MedicineEntity, Long> 
 
   List<MedicineEntity> findAllByDisease(DiseaseEntity disease);
 
-  MedicineEntity findByEanAndDisease(String ean, DiseaseEntity disease);
+  Optional<MedicineEntity> findByEanAndDisease(String ean, DiseaseEntity disease);
 
   List<MedicineEntity> findAllByIngredientAndDoseAndDisease(
       IngredientEntity ingredient,
