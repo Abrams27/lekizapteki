@@ -6,7 +6,7 @@ import {MedicineDto} from './models/medicine/medicine.dto';
 import {UrlBuilder} from './url-builder.service';
 import {LoggingHttpClient} from './logging-http-client.service';
 import {environment} from '../../../environments/environment';
-import {IdenticalMedicinesDto} from "./models/medicine/identical-medicines.dto";
+import {IdenticalMedicinesDto} from './models/medicine/identical-medicines.dto';
 
 @Injectable({
   providedIn: 'root'

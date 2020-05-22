@@ -1,25 +1,24 @@
 <hr class="identical-medicines-details-hr">
 
-<section class="identical-medicines-details-selected-medicine-section"
-         *ngIf="getSelectedMedicine() | async as selectedMedicine">
+<section class="identical-medicines-details-selected-medicine-section">
 
   <p class="identical-medicines-details-selected-medicine-name-top">
-    {{selectedMedicine.name}}
+    {{getSelectedMedicine().name}}
   </p>
 
   <p class="identical-medicines-details-selected-medicine-active-ingredient-top">
-    {{selectedMedicine.activeIngredient}}
+    {{getSelectedMedicine().activeIngredient}}
   </p>
 
   <p class="identical-medicines-details-selected-medicine-retail-price-top">
-    {{selectedMedicine.pricing.retailPrice}}
+    {{getSelectedMedicine().pricing.retailPrice}}
   </p>
 
   <p class="identical-medicines-details-selected-medicine-ean">
     EAN:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.ean}}
+       {{getSelectedMedicine().ean}}
     </span>
   </p>
 
@@ -27,7 +26,7 @@
     dawka:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.dose}}
+       {{getSelectedMedicine().dose}}
     </span>
   </p>
 
@@ -35,7 +34,7 @@
     postać:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.form}}
+       {{getSelectedMedicine().form}}
     </span>
   </p>
 
@@ -43,7 +42,7 @@
     Urzędowa cena zbytu:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.pricing.tradePrice}}
+       {{getSelectedMedicine().pricing.tradePrice}} PLN
     </span>
   </p>
 
@@ -51,7 +50,7 @@
     Cena hurtowa brutto:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.pricing.salePrice}}
+       {{getSelectedMedicine().pricing.salePrice}} PLN
     </span>
   </p>
 
@@ -59,7 +58,7 @@
     Cena detaliczna:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.pricing.retailPrice}}
+       {{getSelectedMedicine().pricing.retailPrice}} PLN
     </span>
   </p>
 
@@ -67,7 +66,7 @@
     Wysokość limitu finansowania:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.pricing.totalFunding}}
+       {{getSelectedMedicine().pricing.totalFunding}} PLN
     </span>
   </p>
 
@@ -75,7 +74,7 @@
     Poziom odpłatności:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.pricing.chargeFactor}}
+       {{getSelectedMedicine().pricing.chargeFactor}} %
     </span>
   </p>
 
@@ -83,7 +82,7 @@
     Wysokość dopłaty świadczeniobiorcy:
 
     <span class="identical-medicines-bolder-text">
-       {{selectedMedicine.pricing.refund}}
+       {{getSelectedMedicine().pricing.refund}} PLN
     </span>
   </p>
 
@@ -123,7 +122,7 @@
             EAN:
 
             <span class="identical-medicines-bolder-text">
-              {{element.ean}}
+               {{element.ean}}
             </span>
           </p>
 
@@ -171,7 +170,7 @@
             Wysokość limitu finansowania:
 
             <span class="identical-medicines-bolder-text">
-              {{element.pricing.totalFunding}} PLn
+              {{element.pricing.totalFunding}} PLN
             </span>
           </p>
 
