@@ -1,6 +1,5 @@
 package pl.uw.mim.io.lekizapteki.mappers.dto;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.mappers.string.FormStringMapper;
 import pl.uw.mim.io.lekizapteki.mappers.string.IngredientStringMapper;
