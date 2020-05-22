@@ -11,7 +11,7 @@ import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicineParser;
 
 public class MedicineEntityMapperTest {
 
-  Map<String, List<String>> correctSplitsOfNameAndFormAndDose = Map.of(
+  private static final Map<String, List<String>> correctSplitsOfNameAndFormAndDose = Map.of(
       "Tritace 2,5 Comb, tabl., 2,5+12,5 mg", List.of("Tritace 2,5 Comb", "tabl.", "2,5+12,5 mg"),
       "Ampril HD, tabl., 5+25 mg", List.of("Ampril HD", "tabl.", "5+25 mg"),
       "Delmuno 2,5, tabl. powl., 2,5+2,5 mg", List.of("Delmuno 2,5", "tabl. powl.", "2,5+2,5 mg"),
@@ -25,28 +25,28 @@ public class MedicineEntityMapperTest {
   public void shouldSplitNameAndFormAndDose() {
 
     for (Map.Entry<String, List<String>> entry : correctSplitsOfNameAndFormAndDose.entrySet()) {
+      shouldSplitCorrectly(entry.getKey(), entry.getValue());
+    }
+  }
 
-      String nameAndFormAndDose = entry.getKey();
-      List<String> correctSplit = entry.getValue();
+  private void shouldSplitCorrectly(String nameAndFormAndDose, List<String> correctSplit) {
+    List<String> split = new ArrayList<>();
 
-      List<String> split = new ArrayList<>();
+    Medicine medicineMock = makeMedicineMock(nameAndFormAndDose);
+    MedicineParser medicineParser = new MedicineParser();
 
-      Medicine medicineMock = makeMedicineMock(nameAndFormAndDose);
-      MedicineParser medicineParser = new MedicineParser();
+    medicineParser.parseMedicine(medicineMock);
 
-      medicineParser.parseMedicine(medicineMock);
-
-      split.add(medicineParser.getName());
-      split.add(medicineParser.getForm());
-      split.add(medicineParser.getDose());
+    split.add(medicineParser.getName());
+    split.add(medicineParser.getForm());
+    split.add(medicineParser.getDose());
 
 //      System.out.println("split = " + split);
 //      System.out.println("correct = " + correctSplit);
 
-      assertEquals(correctSplit.size(), split.size());
-      for (int i = 0; i < correctSplit.size(); i++) {
-        assertEquals(split.get(i), correctSplit.get(i));
-      }
+    assertEquals(correctSplit.size(), split.size());
+    for (int i = 0; i < correctSplit.size(); i++) {
+      assertEquals(split.get(i), correctSplit.get(i));
     }
   }
 

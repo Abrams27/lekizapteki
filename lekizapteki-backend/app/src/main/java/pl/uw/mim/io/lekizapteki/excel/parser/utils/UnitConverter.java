@@ -1,6 +1,7 @@
 package pl.uw.mim.io.lekizapteki.excel.parser.utils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -11,23 +12,28 @@ public class UnitConverter {
   private final double INTERNATIONAL_UNITS_FACTOR = 0.67; // TODO w sumie to nie wiadomo ile, różne są dane
 
   public String gramsToMilligrams(String grams) {
+    System.out.println("grams = " + grams);
     BigDecimal decimal = new BigDecimal(grams.replace(",", "."));
-    decimal = decimal.multiply(BigDecimal.valueOf(GRAMS_FACTOR));
+    BigDecimal converted = decimal.multiply(BigDecimal.valueOf(GRAMS_FACTOR));
 
-    return decimal.toString();
+    return bigDecimalToTwoDecimalPlacesString(converted);
   }
 
   public String microgramsToMilligrams(String micrograms) {
     BigDecimal decimal = new BigDecimal(micrograms.replace(",", "."));
-    decimal = decimal.multiply(BigDecimal.valueOf(MICROGRAMS_FACTOR));
+    BigDecimal converted = decimal.multiply(BigDecimal.valueOf(MICROGRAMS_FACTOR));
 
-    return decimal.toString();
+    return bigDecimalToTwoDecimalPlacesString(converted);
   }
 
   public String internationalUnitsToMilligrams(String internationalUnits) {
     BigDecimal decimal = new BigDecimal(internationalUnits.replace(",", "."));
-    decimal = decimal.multiply(BigDecimal.valueOf(INTERNATIONAL_UNITS_FACTOR));
+    BigDecimal converted = decimal.multiply(BigDecimal.valueOf(INTERNATIONAL_UNITS_FACTOR));
 
-    return decimal.toString();
+    return bigDecimalToTwoDecimalPlacesString(converted);
+  }
+
+  private String bigDecimalToTwoDecimalPlacesString(BigDecimal decimal) {
+    return decimal.setScale(2, RoundingMode.HALF_EVEN).toString();
   }
 }

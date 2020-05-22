@@ -20,6 +20,6 @@ public class ParseExcelToDatabase {
     List<Medicine> medicines = excelParser.parseExcelFile(FILE_PATH);
     List<Medicine> validatedMedicines = MedicinesValidator.filterAndParse(medicines);
 
-    medicineService.saveToRepository(validatedMedicines);
+    medicineService.saveMedicinesToRepository(validatedMedicines);
   }
 }
