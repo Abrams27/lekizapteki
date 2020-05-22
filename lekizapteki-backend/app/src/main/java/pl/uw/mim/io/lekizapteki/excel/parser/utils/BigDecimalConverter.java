@@ -8,6 +8,8 @@ public class BigDecimalConverter {
 
   private final String LUMP_SUM = "ryczałt";
   private final String FREE_UP_TO_THE_LIMIT = "bezpłatny do limitu";
+  private final int LUMP_SUM_VALUE = 0;
+  private final int FREE_UP_TO_THE_LIMIT_VALUE = -1;
 
   public BigDecimal priceToBigDecimal(String price) {
     return new BigDecimal(price.replace(",", "."));
@@ -17,10 +19,10 @@ public class BigDecimalConverter {
     BigDecimal equivalentDecimal;
     switch (chargeFactor) {
       case LUMP_SUM:
-        equivalentDecimal = new BigDecimal(0);
+        equivalentDecimal = new BigDecimal(LUMP_SUM_VALUE);
         break;
       case FREE_UP_TO_THE_LIMIT:
-        equivalentDecimal = new BigDecimal(-1);
+        equivalentDecimal = new BigDecimal(FREE_UP_TO_THE_LIMIT_VALUE);
         break;
       default:
         equivalentDecimal = new BigDecimal(chargeFactor.replace("%", "")); // na razie 30% -> 30
