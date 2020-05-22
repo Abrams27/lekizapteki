@@ -19,21 +19,21 @@ public class MedicineDetailsDtoMapper {
         .ean(medicineEntity.getEan())
         .dose(medicineEntity.getDose().getDose())
         .name(medicineEntity.getName())
-        .activeIngredient(MapIngredient(medicineEntity.getIngredient()))
-        .pricing(MapPricing(medicineEntity.getPricing()))
-        .form(MapForm(medicineEntity.getForm()))
+        .activeIngredient(mapIngredientDto(medicineEntity.getIngredient()))
+        .pricing(mapPricingDto(medicineEntity.getPricing()))
+        .form(mapFormDto(medicineEntity.getForm()))
         .build();
   }
 
-  private PricingDto MapPricing(PricingEntity pricingEntity) {
+  private PricingDto mapPricingDto(PricingEntity pricingEntity) {
     return PricingDtoMapper.map(pricingEntity);
   }
 
-  private String MapForm(FormEntity formEntity) {
+  private String mapFormDto(FormEntity formEntity) {
     return FormStringMapper.map(formEntity);
   }
 
-  private String MapIngredient(IngredientEntity ingredientEntity) {
+  private String mapIngredientDto(IngredientEntity ingredientEntity) {
     return IngredientStringMapper.map(ingredientEntity);
   }
 }
