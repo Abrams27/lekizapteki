@@ -1,8 +1,21 @@
-<app-top-bar></app-top-bar>
+<app-top-bar class="app-top-bar"></app-top-bar>
 
-<div class="container">
-<!--  <router-outlet></router-outlet>-->
-  <app-disease-selection (confirmed)="mojaFunckcjaCoPokazeKomponent()"></app-disease-selection>
-  <app-medicine-selection [hidden]="ifHidden" (confirmed)="mojaFunckcjaCoPokazeKomponent2()"> </app-medicine-selection>
-  <app-identical-medicines-details [hidden]="ifHidden2"></app-identical-medicines-details>
-</div>
+<section class="app-container">
+
+  <app-disease-selection
+    (confirmed)="mojaFunckcjaCoPokazeKomponent()"
+    class="app-disease-selection"></app-disease-selection>
+
+  <app-medicine-selection
+    [hidden]="ifHidden" (confirmed)="mojaFunckcjaCoPokazeKomponent2()"
+    class="app-medicine-selection"></app-medicine-selection>
+
+  <app-identical-medicines-details
+    [hidden]="ifHidden2"
+    class="app-identical-medicines-details"></app-identical-medicines-details>
+
+</section>
+
+<p class="app-background-text">
+  Lekizapteki
+</p>

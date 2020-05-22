@@ -1,6 +1,8 @@
-<label>Wybierz chorobę</label>
+<section class="disease-selection-section">
 
-<div>
+  <label class="disease-selection-label">
+    Wybierz chorobę
+  </label>
 
   <ng-select
     [(ngModel)]="selectedDiseaseId"
@@ -10,15 +12,15 @@
     bindLabel="name"
     placeholder="{{getPlaceholder()}}"
     appendTo="body"
-    bindValue="id">
+    bindValue="id"
+    class="disease-selection-select">
   </ng-select>
 
-  <p>
-    Ean: {{selectedDiseaseId}}
-  </p>
+  <button
+    (click)="onClickSubmitButton()"
+    class="disease-selection-button">
+    Zatwierdź
+  </button>
 
-</div>
+</section>
 
-<button (click)="onClickSubmitButton()">Zatwierdź</button>
-
-{{potwierdzonko}}
