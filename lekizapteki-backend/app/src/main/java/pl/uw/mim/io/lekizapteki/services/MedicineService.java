@@ -21,10 +21,26 @@ public class MedicineService {
         .findAllByDisease(getDiseaseWithId(diseaseId));
   }
 
+  public List<MedicineEntity> getIdenticalMedicines(String ean, Long diseaseId) {
+
+    MedicineEntity medicineEntity = getMedicineWithEanAndDiseaseId(ean, diseaseId);
+
+    return medicineRepository
+        .findAllByIngredientAndDoseAndDisease(
+            medicineEntity.getIngredient(),
+            medicineEntity.getDose(),
+            medicineEntity.getDisease()
+        );
+  }
+
+  public MedicineEntity getMedicineWithEanAndDiseaseId(String ean, Long diseaseId) {
+    return medicineRepository
+        .findByEanAndDisease(ean, getDiseaseWithId(diseaseId));
+  }
+
   private DiseaseEntity getDiseaseWithId(Long diseaseId) {
     return diseaseRepository
         .getDiseaseEntityById(diseaseId)
         .orElseThrow(NoSuchDiseaseException::new);
   }
-
 }

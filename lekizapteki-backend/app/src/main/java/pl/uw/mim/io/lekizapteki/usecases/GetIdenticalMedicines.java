@@ -1,47 +1,34 @@
 package pl.uw.mim.io.lekizapteki.usecases;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uw.mim.io.lekizapteki.mappers.dto.IdenticalMedicinesDtoMapper;
+import pl.uw.mim.io.lekizapteki.mappers.dto.MedicineDetailsDtoMapper;
 import pl.uw.mim.io.lekizapteki.models.medicine.IdenticalMedicinesDto;
 import pl.uw.mim.io.lekizapteki.models.medicine.detailed.MedicineDetailsDto;
-import pl.uw.mim.io.lekizapteki.models.medicine.detailed.PricingDto;
+import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
+import pl.uw.mim.io.lekizapteki.services.MedicineService;
 
 @Component
 @AllArgsConstructor
 public class GetIdenticalMedicines {
 
-  public List<IdenticalMedicinesDto> execute(String ean, Long diseaseId) {
-    return List.of(mockIdenticalMedicines());
+  private MedicineService medicineService;
+
+  public IdenticalMedicinesDto execute(String ean, Long diseaseId) {
+    return IdenticalMedicinesDtoMapper.map(
+        MedicineDetailsDtoMapper.map(medicineService.getMedicineWithEanAndDiseaseId(ean, diseaseId)),
+            mapMedicineEntityList(medicineService.getIdenticalMedicines(ean, diseaseId))
+        );
   }
 
-  private IdenticalMedicinesDto mockIdenticalMedicines() {
-    return IdenticalMedicinesDto.builder()
-        .medicine(mockMedicineDetails())
-        .identicalMedicines(List.of(mockMedicineDetails()))
-        .build();
+  private List<MedicineDetailsDto> mapMedicineEntityList (List<MedicineEntity> medicineEntityList) {
+    return medicineEntityList
+        .stream()
+        .map(MedicineDetailsDtoMapper::map)
+        .collect(Collectors.toList());
   }
 
-  private MedicineDetailsDto mockMedicineDetails() {
-    return MedicineDetailsDto.builder()
-        .name("Nervosol")
-        .ean("2134567890")
-        .dose("12345")
-        .activeIngredient("mock")
-        .form("mock")
-        .pricing(mockPricing())
-        .build();
-  }
-
-  private PricingDto mockPricing() {
-    return PricingDto.builder()
-        .tradePrice(BigDecimal.valueOf(1))
-        .salePrice(BigDecimal.valueOf(1))
-        .retailPrice(BigDecimal.valueOf(1))
-        .totalFunding(BigDecimal.valueOf(1))
-        .chargeFactor(BigDecimal.valueOf(1))
-        .refund(BigDecimal.valueOf(1))
-        .build();
-  }
 }

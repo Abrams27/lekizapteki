@@ -20,7 +20,7 @@ public interface MedicineApi {
 
   @CrossOrigin(origins = "*")
   @GetMapping("/medicines/identical")
-  List<IdenticalMedicinesDto> getIdenticalMedicines(
+  IdenticalMedicinesDto getIdenticalMedicines(
       @RequestParam(required = true) String ean,
       @RequestParam(required = false) Long diseaseId);
 
