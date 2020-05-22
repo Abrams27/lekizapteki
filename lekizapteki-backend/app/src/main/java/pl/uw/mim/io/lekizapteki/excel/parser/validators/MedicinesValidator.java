@@ -86,20 +86,23 @@ public class MedicinesValidator {
     String value = split[0];
     String units = split[1];
 
-    switch (units) {
-      case "g":
-        value = UnitConverter.gramsToMilligrams(value);
-        break;
-      case "µg": // to nie jest ten sam znaczek co niżej xd
-      case "μg":
-        value = UnitConverter.microgramsToMilligrams(value);
-        break;
-      case "j.m.":
-        value = UnitConverter.internationalUnitsToMilligrams(value);
-        break;
-    }
+    value = convert(value, units);
 
     return putDoseBackTogether(value, "mg");
+  }
+
+  private String convert(String value, String units) {
+    switch (units) {
+      case "g":
+        return UnitConverter.gramsToMilligrams(value);
+      case "µg": // Those are two different characters
+      case "μg":
+        return UnitConverter.microgramsToMilligrams(value);
+      case "j.m.":
+        return UnitConverter.internationalUnitsToMilligrams(value);
+      default:
+        return value;
+    }
   }
 
   // są to dawki postaci 1.5 mln j.m. i 3 mln j.m.

@@ -14,7 +14,9 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 @UtilityClass
 public class MedicineEntityMapper {
 
-  String name, form, dose;
+  private String name;
+  private String form;
+  private String dose;
 
   public MedicineEntity map(Medicine medicine) {
 

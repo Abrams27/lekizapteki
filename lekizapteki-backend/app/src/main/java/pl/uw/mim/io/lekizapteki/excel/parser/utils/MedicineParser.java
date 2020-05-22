@@ -29,11 +29,7 @@ public class MedicineParser {
   }
 
   private void executeMatcher(Matcher matcher) {
-    boolean foundAny = matcher.find();
-    if (!foundAny) {
-      // TODO nie może się zdarzyć, co tutaj dać?
-      System.err.println("ups");
-    }
+    matcher.find(); // Ignore the check, always works
   }
 
   private void mapCapturedGroupsToClassProperties(Matcher matcher) {

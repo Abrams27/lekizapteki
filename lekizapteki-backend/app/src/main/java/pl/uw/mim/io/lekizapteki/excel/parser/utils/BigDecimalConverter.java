@@ -17,10 +17,10 @@ public class BigDecimalConverter {
     BigDecimal equivalentDecimal;
     switch (chargeFactor) {
       case LUMP_SUM:
-        equivalentDecimal = new BigDecimal(0); // ryczałt
+        equivalentDecimal = new BigDecimal(0);
         break;
       case FREE_UP_TO_THE_LIMIT:
-        equivalentDecimal = new BigDecimal(-1); // bezpłatny do limitu
+        equivalentDecimal = new BigDecimal(-1);
         break;
       default:
         equivalentDecimal = new BigDecimal(chargeFactor.replace("%", "")); // na razie 30% -> 30
