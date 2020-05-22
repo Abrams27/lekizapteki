@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {DiseaseSelectionProperties} from './disease-selection.properties';
 import {DiseaseDto} from '../../services/webservices/models/disease/disease.dto';
+import {WebService} from '../../services/webservices/web.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-disease-selection',
@@ -12,33 +14,22 @@ import {DiseaseDto} from '../../services/webservices/models/disease/disease.dto'
 export class DiseaseSelectionComponent implements OnInit {
 
   @Output()
-  confirmed = new EventEmitter<void>();
+  confirmed = new EventEmitter<number>();
 
   selectedDiseaseId: number;
-  potwierdzonko = '';
 
-  private diseases: DiseaseDto[] = [];
+  private readonly diseases: Observable<DiseaseDto[]>;
   private placeholder: string = DiseaseSelectionProperties.LIST_PLACEHOLDER;
 
-  constructor() {
-    this.create10kDiseases();
+  constructor(webService: WebService) {
+    this.diseases = webService.getDiseases();
   }
 
   ngOnInit(): void { }
 
-  getDiseases(): DiseaseDto[] {
-    return this.diseases;
-  }
-
-  getPlaceholder(): string {
-    return this.placeholder;
-  }
-
   onClickSubmitButton() {
     if (this.selectedDiseaseId != null) {
-      this.confirmed.emit();
-      console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
-      this.potwierdzonko = 'Jakos sie udalo. Buziaczek. Id:' + this.selectedDiseaseId.toString();
+      this.confirmed.emit(this.selectedDiseaseId);
     }
   }
 
@@ -47,16 +38,16 @@ export class DiseaseSelectionComponent implements OnInit {
     this.hidePlaceholder();
   }
 
-  private hidePlaceholder() {
-    this.placeholder = DiseaseSelectionProperties.LIST_EMPTY_PLACEHOLDER;
+  getDiseases(): Observable<DiseaseDto[]> {
+    return this.diseases;
   }
 
-  private create10kDiseases() {
-    this.diseases = Array.from({length: 10000}, (value, key) => key)
-    .map(val => ({
-      id: val,
-      name: `disease ${val}`
-    }));
+  getPlaceholder(): string {
+    return this.placeholder;
+  }
+
+  private hidePlaceholder() {
+    this.placeholder = DiseaseSelectionProperties.LIST_EMPTY_PLACEHOLDER;
   }
 
 }

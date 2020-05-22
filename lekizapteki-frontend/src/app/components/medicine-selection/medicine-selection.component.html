@@ -5,15 +5,15 @@
   </label>
 
   <ng-select
-    [(ngModel)]="selectedMedicineId"
-    [items]="getMedicines()"
+    [(ngModel)]="selectedMedicineEan"
+    [items]="getMedicines() | async"
     [hidden]="isSearchingByEan()"
     [virtualScroll]="true"
     (open)="openFloatingList()"
     bindLabel="name"
     placeholder="{{getListPlaceholder()}}"
     appendTo="body"
-    bindValue="id"
+    bindValue="ean"
     class="medicine-selection-select">
   </ng-select>
 
