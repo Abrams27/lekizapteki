@@ -23,8 +23,8 @@ public class PricingEntityMapperTest {
   Map<String, String> chargeFactorToDecimalCorrectParsing = Map.of(
       "30%", "30",
       "50%", "50",
-      "ryczałt", "0", // TODO moze bedziemy zmieniac
-      "bezpłatny do limitu", "100" // TODO moze bedziemy zmieniac
+      "ryczałt", "0", // moze bedziemy zmieniac
+      "bezpłatny do limitu", "-1" // moze bedziemy zmieniac
   );
 
   @Test

@@ -18,7 +18,8 @@ public class ParseExcelToDatabase {
 
   public void execute() {
     List<Medicine> medicines = excelParser.parseExcelFile(FILE_PATH);
-    List<Medicine> validatedMedicines = MedicinesValidator.filter(medicines);
-    medicineService.map(validatedMedicines);
+    List<Medicine> validatedMedicines = MedicinesValidator.filterAndParse(medicines);
+
+    medicineService.saveToRepository(validatedMedicines);
   }
 }

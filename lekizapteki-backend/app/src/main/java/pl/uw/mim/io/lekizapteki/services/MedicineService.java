@@ -29,7 +29,7 @@ public class MedicineService {
         .orElseThrow(NoSuchDiseaseException::new);
   }
 
-  public void map(List<Medicine> medicines) {
+  public void saveToRepository(List<Medicine> medicines) {
 
     medicines.stream()
         .map(MedicineEntityMapper::map)

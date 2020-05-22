@@ -7,12 +7,12 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 @Builder
 public class PricingEntityMapper {
 
-  String salePrice;
-  String tradePrice;
-  String retailPrice;
-  String totalFunding;
-  String chargeFactor;
-  String refund;
+  private String salePrice;
+  private String tradePrice;
+  private String retailPrice;
+  private String totalFunding;
+  private String chargeFactor;
+  private String refund;
 
   public PricingEntity map() {
 

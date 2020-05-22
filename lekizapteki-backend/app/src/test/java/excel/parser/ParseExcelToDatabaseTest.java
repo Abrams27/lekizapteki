@@ -9,7 +9,7 @@ import pl.uw.mim.io.lekizapteki.excel.parser.ExcelParser;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 
 
-class parseExcelToDatabaseTest {
+class ParseExcelToDatabaseTest {
 
   private final static String TEST_FILE_PATH = "src/main/resources/wykaz.xlsx";
 

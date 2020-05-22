@@ -2,10 +2,12 @@ package mappers.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicinePropertyUtils;
+import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicineParser;
 
 public class MedicineEntityMapperTest {
 
@@ -23,11 +25,21 @@ public class MedicineEntityMapperTest {
   public void shouldSplitNameAndFormAndDose() {
 
     for (Map.Entry<String, List<String>> entry : correctSplitsOfNameAndFormAndDose.entrySet()) {
+
       String nameAndFormAndDose = entry.getKey();
       List<String> correctSplit = entry.getValue();
 
-      List<String> split = MedicinePropertyUtils.splitNameAndFormAndDose(nameAndFormAndDose);
-//
+      List<String> split = new ArrayList<>();
+
+      Medicine medicineMock = makeMedicineMock(nameAndFormAndDose);
+      MedicineParser medicineParser = new MedicineParser();
+
+      medicineParser.parseMedicine(medicineMock);
+
+      split.add(medicineParser.getName());
+      split.add(medicineParser.getForm());
+      split.add(medicineParser.getDose());
+
 //      System.out.println("split = " + split);
 //      System.out.println("correct = " + correctSplit);
 
@@ -36,5 +48,13 @@ public class MedicineEntityMapperTest {
         assertEquals(split.get(i), correctSplit.get(i));
       }
     }
+  }
+
+  private Medicine makeMedicineMock(String nameAndFormAndDose) {
+    Medicine medicine = new Medicine();
+
+    medicine.setNameAndFormAndDose(nameAndFormAndDose);
+
+    return medicine;
   }
 }

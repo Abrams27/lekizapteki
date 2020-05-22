@@ -1,9 +1,8 @@
 package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
 
-import java.util.List;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
-import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicinePropertyUtils;
+import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicineParser;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.FormEntity;
@@ -18,7 +17,8 @@ public class MedicineEntityMapper {
   String name, form, dose;
 
   public MedicineEntity map(Medicine medicine) {
-    moveNameAndFormAndDoseToSeperateVariables(medicine);
+
+    moveNameAndFormAndDoseToSeparateVariables(medicine);
 
     DoseEntity doseEntity = DoseEntityMapper.map(dose);
     IngredientEntity ingredientEntity = IngredientEntityMapper.map(medicine.getIngredient());
@@ -26,15 +26,7 @@ public class MedicineEntityMapper {
     DiseaseEntity diseaseEntity = DiseaseEntityMapper.map(medicine.getDisease());
     PackageEntity packageEntity = PackageEntityMapper.map(medicine.getPack());
 
-    PricingEntity pricingEntity = PricingEntityMapper.builder()
-        .salePrice(medicine.getSalePrice())
-        .tradePrice(medicine.getTradePrice())
-        .retailPrice(medicine.getRetailPrice())
-        .totalFunding(medicine.getTotalFunding())
-        .chargeFactor(medicine.getChargeFactor())
-        .refund(medicine.getRefund())
-        .build()
-        .map();
+    PricingEntity pricingEntity = buildPricingEntityMapper(medicine).map();
 
     return MedicineEntity.builder()
         .ean(medicine.getEan())
@@ -48,11 +40,23 @@ public class MedicineEntityMapper {
         .build();
   }
 
-  private void moveNameAndFormAndDoseToSeperateVariables(Medicine medicine) {
-    List<String> nameAndFormAndDoseSplit = MedicinePropertyUtils.splitNameAndFormAndDose(medicine.getNameAndFormAndDose());
+  private void moveNameAndFormAndDoseToSeparateVariables(Medicine medicine) {
+    MedicineParser medicineParser = new MedicineParser();
 
-    name = nameAndFormAndDoseSplit.get(0);
-    form = nameAndFormAndDoseSplit.get(1);
-    dose = nameAndFormAndDoseSplit.get(2);
+    medicineParser.parseMedicine(medicine);
+    name = medicineParser.getName();
+    form = medicineParser.getForm();
+    dose = medicineParser.getDose();
+  }
+
+  private PricingEntityMapper buildPricingEntityMapper(Medicine medicine) {
+    return PricingEntityMapper.builder()
+        .salePrice(medicine.getSalePrice())
+        .tradePrice(medicine.getTradePrice())
+        .retailPrice(medicine.getRetailPrice())
+        .totalFunding(medicine.getTotalFunding())
+        .chargeFactor(medicine.getChargeFactor())
+        .refund(medicine.getRefund())
+        .build();
   }
 }
