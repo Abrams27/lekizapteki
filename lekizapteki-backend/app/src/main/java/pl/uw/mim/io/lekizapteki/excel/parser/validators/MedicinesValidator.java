@@ -86,12 +86,12 @@ public class MedicinesValidator {
     String value = split[0];
     String units = split[1];
 
-    value = convert(value, units);
+    value = convertToMg(value, units);
 
     return putDoseBackTogether(value, "mg");
   }
 
-  private String convert(String value, String units) {
+  private String convertToMg(String value, String units) {
     switch (units) {
       case "g":
         return UnitConverter.gramsToMilligrams(value);
