@@ -11,14 +11,14 @@
   </p>
 
   <p class="identical-medicines-details-selected-medicine-retail-price-top">
-    {{getSelectedMedicinePricing().retailPrice}}
+    {{getSelectedMedicine().pricing.retailPrice}}
   </p>
 
   <p class="identical-medicines-details-selected-medicine-ean">
     EAN:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicine().ean}}
+       {{getSelectedMedicine().ean}}
     </span>
   </p>
 
@@ -26,7 +26,7 @@
     dawka:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicine().dose}}
+       {{getSelectedMedicine().dose}}
     </span>
   </p>
 
@@ -34,7 +34,7 @@
     postać:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicine().form}}
+       {{getSelectedMedicine().form}}
     </span>
   </p>
 
@@ -42,7 +42,7 @@
     Urzędowa cena zbytu:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicinePricing().tradePrice}}
+       {{getSelectedMedicine().pricing.tradePrice}} PLN
     </span>
   </p>
 
@@ -50,7 +50,7 @@
     Cena hurtowa brutto:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicinePricing().salePrice}}
+       {{getSelectedMedicine().pricing.salePrice}} PLN
     </span>
   </p>
 
@@ -58,7 +58,7 @@
     Cena detaliczna:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicinePricing().retailPrice}}
+       {{getSelectedMedicine().pricing.retailPrice}} PLN
     </span>
   </p>
 
@@ -66,7 +66,7 @@
     Wysokość limitu finansowania:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicinePricing().totalFunding}}
+       {{getSelectedMedicine().pricing.totalFunding}} PLN
     </span>
   </p>
 
@@ -74,7 +74,7 @@
     Poziom odpłatności:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicinePricing().chargeFactor}}
+       {{getSelectedMedicine().pricing.chargeFactor}} %
     </span>
   </p>
 
@@ -82,14 +82,14 @@
     Wysokość dopłaty świadczeniobiorcy:
 
     <span class="identical-medicines-bolder-text">
-      {{getSelectedMedicinePricing().refund}}
+       {{getSelectedMedicine().pricing.refund}} PLN
     </span>
   </p>
 
 </section>
 
 <table mat-table
-       [dataSource]="getDataSource()" multiTemplateDataRows
+       [dataSource]="getIdenticalMedicinesDetails()" multiTemplateDataRows
        class="identical-medicines-details-table">
 
   <ng-container matColumnDef="{{column}}" *ngFor="let column of getColumnsToDisplay()">
@@ -122,7 +122,7 @@
             EAN:
 
             <span class="identical-medicines-bolder-text">
-              {{element.ean}}
+               {{element.ean}}
             </span>
           </p>
 
@@ -170,7 +170,7 @@
             Wysokość limitu finansowania:
 
             <span class="identical-medicines-bolder-text">
-              {{element.pricing.totalFunding}} PLn
+              {{element.pricing.totalFunding}} PLN
             </span>
           </p>
 

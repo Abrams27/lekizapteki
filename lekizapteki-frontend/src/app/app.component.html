@@ -3,15 +3,19 @@
 <section class="app-container">
 
   <app-disease-selection
-    (confirmed)="mojaFunckcjaCoPokazeKomponent()"
+    (confirmed)="confirmedDiseaseSelection($event)"
     class="app-disease-selection"></app-disease-selection>
 
   <app-medicine-selection
-    [hidden]="ifHidden" (confirmed)="mojaFunckcjaCoPokazeKomponent2()"
+    [hidden]="isMedicineSelectionHidden"
+    [selectedDiseaseId]="selectedDiseaseId"
+    (confirmed)="confirmedMedicineSelection($event)"
     class="app-medicine-selection"></app-medicine-selection>
 
   <app-identical-medicines-details
-    [hidden]="ifHidden2"
+    [hidden]="areIdenticalMedicinesHidden"
+    [selectedDiseaseId]="selectedDiseaseId"
+    [selectedMedicineEan]="selectedMedicineEan"
     class="app-identical-medicines-details"></app-identical-medicines-details>
 
 </section>

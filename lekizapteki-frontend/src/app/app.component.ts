@@ -6,14 +6,26 @@ import { Component } from '@angular/core';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  ifHidden = true;
-  ifHidden2 = true;
-  mojaFunckcjaCoPokazeKomponent() {
-    this.ifHidden = false;
+
+  isMedicineSelectionHidden = true;
+  areIdenticalMedicinesHidden = true;
+
+  selectedDiseaseId: number;
+  selectedMedicineEan: string;
+
+  constructor() {
+    this.selectedDiseaseId = -1;
+    this.selectedMedicineEan = '';
   }
 
-  mojaFunckcjaCoPokazeKomponent2() {
-    this.ifHidden2 = false;
+  confirmedDiseaseSelection($event) {
+    this.isMedicineSelectionHidden = false;
+    this.selectedDiseaseId = $event;
+  }
+
+  confirmedMedicineSelection($event) {
+    this.areIdenticalMedicinesHidden = false;
+    this.selectedMedicineEan = $event;
   }
 }
 

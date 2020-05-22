@@ -6,7 +6,7 @@
 
   <ng-select
     [(ngModel)]="selectedDiseaseId"
-    [items]="getDiseases()"
+    [items]="getDiseases() | async"
     [virtualScroll]="true"
     (open)="openFloatingList()"
     bindLabel="name"

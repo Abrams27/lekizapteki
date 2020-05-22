@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MedicineDetailsDto} from '../../services/webservices/models/medicine/detailed/medicine-details.dto';
 import {IdenticalMedicinesDetailsComponentProperties} from './identical-medicines-details.properties';
 import {PricingDto} from '../../services/webservices/models/medicine/detailed/pricing.dto';
+import {WebService} from '../../services/webservices/web.service';
+import {Observable, of} from 'rxjs';
+import {IdenticalMedicinesDto} from '../../services/webservices/models/medicine/identical-medicines.dto';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-identical-medicines-details',
@@ -16,23 +20,14 @@ import {PricingDto} from '../../services/webservices/models/medicine/detailed/pr
     ]),
   ],
 })
-export class IdenticalMedicinesDetailsComponent implements OnInit {
+export class IdenticalMedicinesDetailsComponent implements OnChanges {
 
-  private dataSource = MEDICINE_DETAILS_MOCK;
-  private expandedElement: MedicineDetailsDto | null;
-
-  private columnsToDisplay: string[] = [
-    IdenticalMedicinesDetailsComponentProperties.MEDICINE_NAME_HEADER,
-    IdenticalMedicinesDetailsComponentProperties.ACTIVE_INGREDIENT_HEADER,
-    IdenticalMedicinesDetailsComponentProperties.RETAIL_PRICE_HEADER
-  ];
-
-  private selectedMedicine: MedicineDetailsDto = {
-    ean: 'EAN 0',
-    name: 'NAME 0',
-    activeIngredient: 'activeIngredient 0',
-    dose: 'dose 0',
-    form: 'form 0',
+  private static MEDICINE_DETAILS_INIT: MedicineDetailsDto = {
+    ean: '',
+    name: '',
+    activeIngredient: '',
+    dose: '',
+    form: '',
     pricing: {
       tradePrice: 0,
       salePrice: 0,
@@ -43,24 +38,58 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  @Input()
+  selectedDiseaseId: number;
 
-  ngOnInit(): void { }
+  @Input()
+  selectedMedicineEan: string;
 
-  getDataSource(): MedicineDetailsDto[] {
-    return this.dataSource;
+  private identicalMedicines: Observable<IdenticalMedicinesDto>;
+  private expandedElement: MedicineDetailsDto | null;
+
+  private columnsToDisplay: string[] = [
+    IdenticalMedicinesDetailsComponentProperties.MEDICINE_NAME_HEADER,
+    IdenticalMedicinesDetailsComponentProperties.ACTIVE_INGREDIENT_HEADER,
+    IdenticalMedicinesDetailsComponentProperties.RETAIL_PRICE_HEADER
+  ];
+
+  private selectedMedicine: MedicineDetailsDto;
+  private identicalMedicinesArray: MedicineDetailsDto[];
+
+  private webService: WebService;
+
+  constructor(webService: WebService) {
+    this.selectedMedicine = IdenticalMedicinesDetailsComponent.MEDICINE_DETAILS_INIT;
+    this.identicalMedicinesArray = [];
+
+    this.identicalMedicines = of();
+    this.webService = webService;
   }
 
-  getColumnsToDisplay(): string[] {
-    return this.columnsToDisplay;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.selectedDiseaseId >= 0 && this.selectedMedicineEan !== '') {
+      this.identicalMedicines = this.webService
+        .getMedicinesForDiseaseIdenticalToGiven(this.selectedMedicineEan, this.selectedDiseaseId.toString());
+
+      this.identicalMedicines
+        .subscribe(identicalMedicines => this.selectedMedicine = identicalMedicines.medicine);
+
+      this.identicalMedicines
+        .subscribe(identicalMedicines => this.identicalMedicinesArray = identicalMedicines.identicalMedicines);
+    }
+
   }
 
   getSelectedMedicine(): MedicineDetailsDto {
     return this.selectedMedicine;
   }
 
-  getSelectedMedicinePricing(): PricingDto {
-    return this.selectedMedicine.pricing;
+  getIdenticalMedicinesDetails(): MedicineDetailsDto[] {
+    return this.identicalMedicinesArray;
+  }
+
+  getColumnsToDisplay(): string[] {
+    return this.columnsToDisplay;
   }
 
   getExpandedElement(): MedicineDetailsDto | null {
@@ -86,36 +115,3 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
   }
 
 }
-
-const MEDICINE_DETAILS_MOCK: MedicineDetailsDto[] = [
-  {
-    ean: 'EAN 1',
-    name: 'NAME 1',
-    activeIngredient: 'activeIngredient 1',
-    dose: 'dose 1',
-    form: 'form 1',
-    pricing: {
-      tradePrice: 1,
-      salePrice: 1,
-      retailPrice: 1,
-      totalFunding: 1,
-      chargeFactor: 1,
-      refund: 1
-    }
-  },
-  {
-    ean: 'EAN 2',
-    name: 'NAME 2',
-    activeIngredient: 'activeIngredient 2',
-    dose: 'dose 2',
-    form: 'form 2',
-    pricing: {
-      tradePrice: 2,
-      salePrice: 2,
-      retailPrice: 2,
-      totalFunding: 2,
-      chargeFactor: 2,
-      refund: 2
-    }
-  }
-];
