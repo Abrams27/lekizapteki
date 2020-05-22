@@ -11,9 +11,11 @@ export class AppComponent  {
   areIdenticalMedicinesHidden = true;
 
   selectedDiseaseId: number;
+  selectedMedicineEan: string;
 
   constructor() {
     this.selectedDiseaseId = -1;
+    this.selectedMedicineEan = '';
   }
 
   confirmedDiseaseSelection($event) {
@@ -21,8 +23,9 @@ export class AppComponent  {
     this.selectedDiseaseId = $event;
   }
 
-  mojaFunckcjaCoPokazeKomponent2() {
+  confirmedMedicineSelection($event) {
     this.areIdenticalMedicinesHidden = false;
+    this.selectedMedicineEan = $event;
   }
 }
 

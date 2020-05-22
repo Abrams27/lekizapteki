@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MedicineDetailsDto} from '../../services/webservices/models/medicine/detailed/medicine-details.dto';
 import {IdenticalMedicinesDetailsComponentProperties} from './identical-medicines-details.properties';
-import {PricingDto} from '../../services/webservices/models/medicine/detailed/pricing.dto';
+import {WebService} from '../../services/webservices/web.service';
+import {Observable, of} from 'rxjs';
+import {IdenticalMedicinesDto} from '../../services/webservices/models/medicine/identical-medicines.dto';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-identical-medicines-details',
@@ -16,9 +19,15 @@ import {PricingDto} from '../../services/webservices/models/medicine/detailed/pr
     ]),
   ],
 })
-export class IdenticalMedicinesDetailsComponent implements OnInit {
+export class IdenticalMedicinesDetailsComponent implements OnChanges {
 
-  private dataSource = MEDICINE_DETAILS_MOCK;
+  @Input()
+  selectedDiseaseId: number;
+
+  @Input()
+  selectedMedicineEan: string;
+
+  private identicalMedicines: Observable<IdenticalMedicinesDto>;
   private expandedElement: MedicineDetailsDto | null;
 
   private columnsToDisplay: string[] = [
@@ -43,24 +52,36 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  private webService: WebService;
 
-  ngOnInit(): void { }
+  constructor(webService: WebService) {
+    this.webService = webService;
+  }
 
-  getDataSource(): MedicineDetailsDto[] {
-    return this.dataSource;
+  ngOnChanges(changes: SimpleChanges): void {
+    // this.identicalMedicines = this.webService
+    //   .getMedicinesForDiseaseIdenticalToGiven(this.selectedMedicineEan, this.selectedDiseaseId.toString());
+    this.identicalMedicines = of({
+      medicine: this.selectedMedicine,
+      identicalMedicines: ELEMENT_DATA
+    });
+    console.log(this.selectedDiseaseId);
+    console.log(this.selectedMedicineEan);
+
+  }
+
+  getIdenticalMedicinesDetails(): Observable<MedicineDetailsDto[]> {
+    return this.identicalMedicines
+      .pipe(map(identicalMedicines => identicalMedicines.identicalMedicines));
   }
 
   getColumnsToDisplay(): string[] {
     return this.columnsToDisplay;
   }
 
-  getSelectedMedicine(): MedicineDetailsDto {
-    return this.selectedMedicine;
-  }
-
-  getSelectedMedicinePricing(): PricingDto {
-    return this.selectedMedicine.pricing;
+  getSelectedMedicine(): Observable<MedicineDetailsDto> {
+    return this.identicalMedicines
+      .pipe(map(identicalMedicines => identicalMedicines.medicine));
   }
 
   getExpandedElement(): MedicineDetailsDto | null {
@@ -87,7 +108,7 @@ export class IdenticalMedicinesDetailsComponent implements OnInit {
 
 }
 
-const MEDICINE_DETAILS_MOCK: MedicineDetailsDto[] = [
+const ELEMENT_DATA: MedicineDetailsDto[] = [
   {
     ean: 'EAN 1',
     name: 'NAME 1',
@@ -117,5 +138,4 @@ const MEDICINE_DETAILS_MOCK: MedicineDetailsDto[] = [
       chargeFactor: 2,
       refund: 2
     }
-  }
-];
+  }];

@@ -6,6 +6,7 @@ import {MedicineDto} from './models/medicine/medicine.dto';
 import {UrlBuilder} from './url-builder.service';
 import {LoggingHttpClient} from './logging-http-client.service';
 import {environment} from '../../../environments/environment';
+import {IdenticalMedicinesDto} from "./models/medicine/identical-medicines.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class WebService {
       .get<MedicineDto[]>(this.getMedicinesForDisease.name, this.httpClient, url);
   }
 
-  public getMedicinesForDiseaseIdenticalToGiven(ean: string, diseaseId: string): Observable<MedicineDto[]> {
+  public getMedicinesForDiseaseIdenticalToGiven(ean: string, diseaseId: string): Observable<IdenticalMedicinesDto> {
     const url: string = UrlBuilder.builder(WebService.SERVER_URL)
       .addPath(environment.IDENTICAL_MEDICINES_ENDPOINT_PATH)
       .addParam('ean', ean)
@@ -45,7 +46,7 @@ export class WebService {
       .buildUrl();
 
     return LoggingHttpClient
-      .get<MedicineDto[]>(this.getMedicinesForDiseaseIdenticalToGiven.name, this.httpClient, url);
+      .get<IdenticalMedicinesDto>(this.getMedicinesForDiseaseIdenticalToGiven.name, this.httpClient, url);
   }
 
 }

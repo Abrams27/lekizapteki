@@ -9,11 +9,13 @@
   <app-medicine-selection
     [hidden]="isMedicineSelectionHidden"
     [selectedDiseaseId]="selectedDiseaseId"
-    (confirmed)="mojaFunckcjaCoPokazeKomponent2()"
+    (confirmed)="confirmedMedicineSelection($event)"
     class="app-medicine-selection"></app-medicine-selection>
 
   <app-identical-medicines-details
     [hidden]="areIdenticalMedicinesHidden"
+    [selectedDiseaseId]="selectedDiseaseId"
+    [selectedMedicineEan]="selectedMedicineEan"
     class="app-identical-medicines-details"></app-identical-medicines-details>
 
 </section>

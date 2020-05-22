@@ -16,13 +16,13 @@ export class MedicineSelectionComponent implements OnChanges {
   selectedDiseaseId: number;
 
   @Output()
-  confirmed = new EventEmitter<void>();
+  confirmed = new EventEmitter<string>();
 
   selectedMedicineEan: string;
 
+  private webService: WebService;
   private medicines: Observable<MedicineDto[]>;
   private searchingByEan = false;
-  private webService: WebService;
 
   private searchTypeButtonName: string = MedicineSelectionProperties.SEARCH_TYPE_EAN_BUTTON_NAME;
   private placeholder: string = MedicineSelectionProperties.LIST_PLACEHOLDER;
@@ -61,9 +61,7 @@ export class MedicineSelectionComponent implements OnChanges {
 
   onClickSubmitButton() {
     if (this.selectedMedicineEan != null) {
-      this.confirmed.emit();
-      console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
-      console.log(this.selectedMedicineEan);
+      this.confirmed.emit(this.selectedMedicineEan);
     }
   }
 
@@ -74,7 +72,5 @@ export class MedicineSelectionComponent implements OnChanges {
   openFloatingList() {
     this.placeholder = '';
   }
-
-
 
 }
