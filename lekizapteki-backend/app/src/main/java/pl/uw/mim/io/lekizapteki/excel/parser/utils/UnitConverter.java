@@ -12,7 +12,6 @@ public class UnitConverter {
   private final double INTERNATIONAL_UNITS_FACTOR = 0.67; // TODO w sumie to nie wiadomo ile, różne są dane
 
   public String gramsToMilligrams(String grams) {
-    System.out.println("grams = " + grams);
     BigDecimal decimal = new BigDecimal(grams.replace(",", "."));
     BigDecimal converted = decimal.multiply(BigDecimal.valueOf(GRAMS_FACTOR));
 

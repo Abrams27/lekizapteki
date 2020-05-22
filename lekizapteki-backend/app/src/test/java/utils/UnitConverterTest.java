@@ -31,28 +31,30 @@ public class UnitConverterTest {
   );
 
   private static final Map<String, String> microgramsToMilligramsCorrectParsing = Map.of(
-      "100", "30",
-      "50", "50",
-      "75 μg", "0,075"
+      "100", "0.10",
+      "50", "0.05",
+      "75", "0.08"
   );
 
-//  Map<String, String> microgramsToMilligramsCorrectParsing = Map.of(
-//      // pierwsze µg
-//      "100 µg ", "30",
-//      "50 µg", "50",
-//      // drugie μg
-//      "100 μg ", "30",
-//      "50 μg", "50",
-        // nie wiem jakie:
-//  "75 μg"
-//  );
+  // TODO
+  private static final Map<String, String> microgramsToMilligramsWithUnitsCorrectParsing = Map.of(
+      // pierwsze µg:
+      "100 µg ", "30",
+      "50 µg", "50",
+      // drugie μg:
+      "100 μg ", "30",
+      "50 μg", "50",
+      // nie wiem jakie:
+      "75 μg", "75"
+  );
 
-//  Map<String, String> internationalUnitsToMilligramsCorrectParsing = Map.of(
-//      "1000000 j.m.", "30",
-//      "1500000 j.m.", "50",
-//      "3 mln j.m.", "0", // moze bedziemy zmieniac
-//      "1.5 mln j.m.", "-1" // moze bedziemy zmieniac
-//  );
+  // TODO
+  private static final Map<String, String> internationalUnitsToMilligramsCorrectParsing = Map.of(
+      "1000000 j.m.", "0",
+      "1500000 j.m.", "0",
+      "3 mln j.m.", "0",
+      "1.5 mln j.m.", "0"
+  );
 
   @Test
   public void shouldParseGramsToMilligrams() {
@@ -66,4 +68,19 @@ public class UnitConverterTest {
       assertEquals(correctMilligrams, converted);
     }
   }
+
+  @Test
+  public void shouldParseMicrogramsToMilligrams() {
+
+    for (Map.Entry<String, String> entry : microgramsToMilligramsCorrectParsing.entrySet()) {
+      String micrograms = entry.getKey();
+      String correctMilligrams = entry.getValue();
+
+      String converted = UnitConverter.microgramsToMilligrams(micrograms);
+
+      assertEquals(correctMilligrams, converted);
+    }
+  }
+
+
 }

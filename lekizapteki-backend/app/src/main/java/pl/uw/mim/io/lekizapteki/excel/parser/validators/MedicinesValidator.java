@@ -48,14 +48,16 @@ public class MedicinesValidator {
 
   private List<Medicine> parseMedicines(List<Medicine> medicines) {
 
+    List<Medicine> parsedMedicines = new ArrayList<>();
+
     for (Medicine medicine : medicines) {
-      parseMedicine(medicine);
+      parsedMedicines.add(parseMedicine(medicine));
     }
 
-    return medicines;
+    return parsedMedicines;
   }
 
-  private void parseMedicine(Medicine medicine) {
+  public Medicine parseMedicine(Medicine medicine) {
     MedicineParser medicineParser = new MedicineParser();
 
     medicineParser.parseMedicine(medicine);
@@ -70,6 +72,8 @@ public class MedicinesValidator {
 
     medicine.setNameAndFormAndDose(putNameAndFormAndDoseTogether(name, form, parsedDose));
     medicine.setPack(parsedPack);
+
+    return medicine;
   }
 
   private String parseMedicineDose(String dose) {
@@ -119,10 +123,10 @@ public class MedicinesValidator {
     String[] split = pack.split(" ");
 
     if (pack.startsWith(SPECIAL_MEDICINE_PACK_PREFIX)) {
-      return split[2];
+      return putPackageBackTogether(split[2]);
     }
 
-    return split[0];
+    return putPackageBackTogether(split[0]);
   }
 
   private String putNameAndFormAndDoseTogether(String name, String form, String dose) {
@@ -131,5 +135,9 @@ public class MedicinesValidator {
 
   private String putDoseBackTogether(String value, String units) {
     return value + " " + units;
+  }
+
+  private String putPackageBackTogether(String value) {
+    return value + " szt.";
   }
 }
