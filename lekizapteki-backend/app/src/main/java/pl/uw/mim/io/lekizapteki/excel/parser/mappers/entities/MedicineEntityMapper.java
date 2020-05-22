@@ -15,12 +15,10 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 @UtilityClass
 public class MedicineEntityMapper {
 
-  public MedicineEntity map(Medicine medicine) {
-    List<String> nameAndFormAndDose = MedicinePropertyUtils.splitNameAndFormAndDose(medicine.getNameAndFormAndDose());
+  String name, form, dose;
 
-    String name = nameAndFormAndDose.get(0);
-    String form = nameAndFormAndDose.get(1);
-    String dose = nameAndFormAndDose.get(2);
+  public MedicineEntity map(Medicine medicine) {
+    moveNameAndFormAndDoseToSeperateVariables(medicine);
 
     DoseEntity doseEntity = DoseEntityMapper.map(dose);
     IngredientEntity ingredientEntity = IngredientEntityMapper.map(medicine.getIngredient());
@@ -28,10 +26,15 @@ public class MedicineEntityMapper {
     DiseaseEntity diseaseEntity = DiseaseEntityMapper.map(medicine.getDisease());
     PackageEntity packageEntity = PackageEntityMapper.map(medicine.getPack());
 
-    PricingEntity pricingEntity = PricingEntityMapper.map(
-        medicine.getSalePrice(), medicine.getTradePrice(), medicine.getRetailPrice(),
-        medicine.getTotalFunding(), medicine.getChargeFactor(), medicine.getRefund()
-    );
+    PricingEntity pricingEntity = PricingEntityMapper.builder()
+        .salePrice(medicine.getSalePrice())
+        .tradePrice(medicine.getTradePrice())
+        .retailPrice(medicine.getRetailPrice())
+        .totalFunding(medicine.getTotalFunding())
+        .chargeFactor(medicine.getChargeFactor())
+        .refund(medicine.getRefund())
+        .build()
+        .map();
 
     return MedicineEntity.builder()
         .ean(medicine.getEan())
@@ -43,5 +46,13 @@ public class MedicineEntityMapper {
         .pack(packageEntity)
         .pricing(pricingEntity)
         .build();
+  }
+
+  private void moveNameAndFormAndDoseToSeperateVariables(Medicine medicine) {
+    List<String> nameAndFormAndDoseSplit = MedicinePropertyUtils.splitNameAndFormAndDose(medicine.getNameAndFormAndDose());
+
+    name = nameAndFormAndDoseSplit.get(0);
+    form = nameAndFormAndDoseSplit.get(1);
+    dose = nameAndFormAndDoseSplit.get(2);
   }
 }

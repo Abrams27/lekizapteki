@@ -1,13 +1,20 @@
 package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
 
-import lombok.experimental.UtilityClass;
+import lombok.Builder;
 import pl.uw.mim.io.lekizapteki.excel.parser.utils.BigDecimalConverter;
 import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 
-@UtilityClass
+@Builder
 public class PricingEntityMapper {
 
-  public PricingEntity map(String salePrice, String tradePrice, String retailPrice, String totalFunding, String chargeFactor, String refund) {
+  String salePrice;
+  String tradePrice;
+  String retailPrice;
+  String totalFunding;
+  String chargeFactor;
+  String refund;
+
+  public PricingEntity map() {
 
     return PricingEntity.builder()
         .salePrice(BigDecimalConverter.priceToBigDecimal(salePrice))

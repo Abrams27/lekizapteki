@@ -31,7 +31,7 @@ public class MedicineEntityMapperTest {
 //      System.out.println("split = " + split);
 //      System.out.println("correct = " + correctSplit);
 
-      assert(split.size() == correctSplit.size());
+      assertEquals(correctSplit.size(), split.size());
       for (int i = 0; i < correctSplit.size(); i++) {
         assertEquals(split.get(i), correctSplit.get(i));
       }

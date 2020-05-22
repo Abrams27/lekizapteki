@@ -8,23 +8,30 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class MedicinePropertyUtils {
+  final String PATTERN = "^(.+), (tabl[^,]+), (.+)$";
 
   public List<String> splitNameAndFormAndDose(String nameAndFormAndDose) {
-    final String PATTERN = "^(.+), (tabl[^,]+), (.+)$";
 
-    Pattern r = Pattern.compile(PATTERN);
-    Matcher m = r.matcher(nameAndFormAndDose);
+    Pattern pattern = Pattern.compile(PATTERN);
+    Matcher matcher = pattern.matcher(nameAndFormAndDose);
 
-    List<String> groups = new ArrayList<>();
+    executeMatcher(matcher);
+    return getOnlyCapturedGropus(matcher);
+  }
 
-    if (m.find()) {
-      for (int i = 1; i <= m.groupCount(); i++) {
-        groups.add(m.group(i));
-      }
-    } else {
-      System.out.println("COS BARDZO ZLE");
+  private void executeMatcher(Matcher matcher) {
+    boolean foundAny = matcher.find();
+    if (!foundAny) {
+      // nie może się zdarzyć, co tutaj dać?
+      System.err.println("ups");
     }
+  }
 
-    return groups;
+  private List<String> getOnlyCapturedGropus(Matcher matcher) {
+    List<String> capturedGroups = new ArrayList<>();
+    for (int i = 1; i <= matcher.groupCount(); i++) {
+      capturedGroups.add(matcher.group(i));
+    }
+    return capturedGroups;
   }
 }

@@ -8,6 +8,9 @@ import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 @UtilityClass
 public class MedicinesValidator {
 
+  final String MULTIPLE_INGREDIENT_DELIMITER = " + ";
+  final String PILL_FORM_SUBSTRING = "tabl";
+
   public List<Medicine> filter(List<Medicine> medicines) {
     return filterInvalidMedicines(medicines);
   }
@@ -25,22 +28,15 @@ public class MedicinesValidator {
   }
 
   private boolean isValidMedicine(Medicine medicine) {
-    // 1. ma być pojedyncza substancja czynna
-    // 2. jedyna dopuszczalna forma to tabletki'
-    // 3. TODO zweryfikować disease (będziemy to robić?)
     return hasSingleIngredient(medicine) && hasPillForm(medicine);
   }
 
-  // pojedyncza substancja czynna -> zawartość komórki 'substancja czynna' nie ma w sobie znaku +
   private boolean hasSingleIngredient(Medicine medicine) {
-    return !medicine.getIngredient().contains(" + ");
+    return !medicine.getIngredient().contains(MULTIPLE_INGREDIENT_DELIMITER);
   }
 
-  // tylko w formie tabletek -> zawartość komórki 'nazwa, postać, dawka' ma w sobie podciąg 'tabl'
   private boolean hasPillForm(Medicine medicine) {
-    return medicine.getNameAndFormAndDose().contains("tabl");
+    return medicine.getNameAndFormAndDose().contains(PILL_FORM_SUBSTRING);
   }
-
-  // TODO zweryfikować disease (będziemy to robić?)
 
 }

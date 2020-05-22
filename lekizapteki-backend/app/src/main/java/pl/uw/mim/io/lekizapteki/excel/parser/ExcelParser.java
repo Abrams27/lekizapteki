@@ -43,8 +43,11 @@ public class ExcelParser {
 
   @SneakyThrows
   public List<Medicine> parseExcelFile(String filePath) {
-    @Cleanup FileInputStream excelFile = new FileInputStream(new File(filePath));
-    @Cleanup Workbook workbook = new XSSFWorkbook(excelFile);
+    @Cleanup
+    FileInputStream excelFile = new FileInputStream(new File(filePath));
+    @Cleanup
+    Workbook workbook = new XSSFWorkbook(excelFile);
+
     Sheet sheet = workbook.getSheetAt(0);
 
     return mapSheetToMedicineList(sheet);
