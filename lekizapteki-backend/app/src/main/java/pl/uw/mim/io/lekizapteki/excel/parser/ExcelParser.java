@@ -1,5 +1,7 @@
 package pl.uw.mim.io.lekizapteki.excel.parser;
 
+import static java.util.Map.entry;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -25,17 +27,18 @@ public class ExcelParser {
 
   private static final int FIRST_VALID_ROW = 3; // pierwsze 3 wiersze to nagłówki
 
-  private static final Map<Integer, ColumnType> columnIndexToColumnType = Map.of(
-      1, ColumnType.INGREDIENT,
-      2, ColumnType.NAME_FORM_DOSE,
-      3, ColumnType.PACKAGE,
-      4, ColumnType.EAN,
-      8, ColumnType.SALE_PRICE,
-      9, ColumnType.TRADE_PRICE,
-      10, ColumnType.RETAIL_PRICE,
-      11, ColumnType.TOTAL_REFUNDING,
-      14, ColumnType.CHARGE_FACTOR,
-      15, ColumnType.REFUND
+  private static final Map<Integer, ColumnType> columnIndexToColumnType = Map.ofEntries(
+      entry(1, ColumnType.INGREDIENT),
+      entry(2, ColumnType.NAME_FORM_DOSE),
+      entry(3, ColumnType.PACKAGE),
+      entry(4, ColumnType.EAN),
+      entry(8, ColumnType.SALE_PRICE),
+      entry(9, ColumnType.TRADE_PRICE),
+      entry(10, ColumnType.RETAIL_PRICE),
+      entry(11, ColumnType.TOTAL_REFUNDING),
+      entry(12, ColumnType.DISEASE),
+      entry(14, ColumnType.CHARGE_FACTOR),
+      entry(15, ColumnType.REFUND)
   );
 
   @SneakyThrows

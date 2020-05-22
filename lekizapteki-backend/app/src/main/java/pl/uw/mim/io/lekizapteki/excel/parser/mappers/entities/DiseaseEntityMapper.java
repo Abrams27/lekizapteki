@@ -8,8 +8,7 @@ public class DiseaseEntityMapper {
 
   public DiseaseEntity map(String disease) {
     return DiseaseEntity.builder()
-//        .name(disease)
-        .name("dupa")
+        .name(disease)
         .build();
   }
 }

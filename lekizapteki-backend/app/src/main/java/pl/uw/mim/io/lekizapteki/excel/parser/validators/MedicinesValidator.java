@@ -27,7 +27,7 @@ public class MedicinesValidator {
   private boolean isValidMedicine(Medicine medicine) {
     // 1. ma być pojedyncza substancja czynna
     // 2. jedyna dopuszczalna forma to tabletki'
-    // 3. TODO zweryfikować disease
+    // 3. TODO zweryfikować disease (będziemy to robić?)
     return hasSingleIngredient(medicine) && hasPillForm(medicine);
   }
 
@@ -41,6 +41,6 @@ public class MedicinesValidator {
     return medicine.getNameAndFormAndDose().contains("tabl");
   }
 
-  // TODO zweryfikować disease
+  // TODO zweryfikować disease (będziemy to robić?)
 
 }
