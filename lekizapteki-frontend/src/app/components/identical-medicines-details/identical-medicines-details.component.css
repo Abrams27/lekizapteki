@@ -17,9 +17,9 @@
     "identical-medicines-details-selected-medicine-ean       identical-medicines-details-selected-medicine-form      identical-medicines-details-selected-medicine-sale-price   identical-medicines-details-selected-medicine-total-founding         identical-medicines-details-selected-medicine-refund";
 
 
-  margin-left: 5%;
-  margin-top: 5%;
-  width: 90%;
+  margin-left: 2.5%;
+  margin-top: 2.5%;
+  width: 95%;
   padding: 16px;
 }
 
@@ -76,9 +76,10 @@
 }
 
 .identical-medicines-details-table {
-  margin-left: 5%;
   margin-top: 2%;
-  width: 90%;
+
+  margin-left: 2.5%;
+  width: 95%;
 }
 
 .identical-medicines-details-table-header {

@@ -74,7 +74,7 @@
     Poziom odpłatności:
 
     <span class="identical-medicines-bolder-text">
-       {{getSelectedMedicine().pricing.chargeFactor}} %
+       {{getChargeFactorMessage(getSelectedMedicine().pricing.chargeFactor)}}
     </span>
   </p>
 
@@ -178,7 +178,7 @@
             Poziom odpłatności:
 
             <span class="identical-medicines-bolder-text">
-              {{element.pricing.chargeFactor}} %
+              {{getChargeFactorMessage(element.pricing.chargeFactor)}}
             </span>
           </p>
 
@@ -186,7 +186,7 @@
             Wysokość dopłaty świadczeniobiorcy:
 
             <span class="identical-medicines-bolder-text">
-              {{element.pricing.refund}} PLN ?
+              {{element.pricing.refund}} PLN
             </span>
           </p>
 

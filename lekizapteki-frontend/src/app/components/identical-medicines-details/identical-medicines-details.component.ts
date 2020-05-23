@@ -96,6 +96,28 @@ export class IdenticalMedicinesDetailsComponent implements OnChanges {
     return this.expandedElement;
   }
 
+  getChargeFactorMessage(chargeFactor: number): string {
+    if (chargeFactor === 0) {
+      return this.getChargeFactorFor0();
+    } else if (chargeFactor === 100) {
+      return this.getChargeFactorFor100();
+    }
+
+    return this.getChargeFactorDefault(chargeFactor);
+  }
+
+  private getChargeFactorDefault(chargeFactor: number): string {
+    return `${chargeFactor} %`;
+  }
+
+  private getChargeFactorFor0(): string {
+    return 'ryczałt';
+  }
+
+  private getChargeFactorFor100(): string {
+    return 'bezpłatny do limitu';
+  }
+
   getColumnContentForHeader(header: string, element: MedicineDetailsDto): string | number {
     if (header === IdenticalMedicinesDetailsComponentProperties.MEDICINE_NAME_HEADER) {
       return element.name;
