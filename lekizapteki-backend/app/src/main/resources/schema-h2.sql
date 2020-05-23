@@ -35,6 +35,8 @@ CREATE TABLE PACKAGE (
 
 CREATE TABLE PRICING (
      id                  IDENTITY            NOT NULL,
+
+     tradePrice          DECIMAL             NOT NULL,
      salePrice           DECIMAL             NOT NULL,
      retailPrice         DECIMAL             NOT NULL,
      totalFunding        DECIMAL             NOT NULL,

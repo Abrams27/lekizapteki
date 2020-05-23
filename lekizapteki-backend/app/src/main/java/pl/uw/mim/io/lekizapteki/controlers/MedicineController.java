@@ -22,7 +22,7 @@ public class MedicineController implements MedicineApi {
   }
 
   @Override
-  public List<IdenticalMedicinesDto> getIdenticalMedicines(String ean, Long diseaseId) {
+  public IdenticalMedicinesDto getIdenticalMedicines(String ean, Long diseaseId) {
     return getIdenticalMedicines.execute(ean, diseaseId);
   }
 

@@ -25,6 +25,7 @@ public class PricingEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  private BigDecimal tradePrice;
   private BigDecimal salePrice;
   private BigDecimal tradePrice;
   private BigDecimal retailPrice;

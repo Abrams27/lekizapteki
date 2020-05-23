@@ -1,6 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {MedicineSelectionProperties} from './medicine-selection.properties';
 import {MedicineDto} from '../../services/webservices/models/medicine/medicine.dto';
+import {WebService} from '../../services/webservices/web.service';
+import {Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 
 @Component({
@@ -8,41 +11,52 @@ import {MedicineDto} from '../../services/webservices/models/medicine/medicine.d
   templateUrl: './medicine-selection.component.html',
   styleUrls: ['./medicine-selection.component.css']
 })
-export class MedicineSelectionComponent implements OnInit {
+export class MedicineSelectionComponent implements OnChanges {
+
+  @Input()
+  selectedDiseaseId: number;
+
   @Output()
-  confirmed = new EventEmitter<void>();
+  confirmed = new EventEmitter<string>();
 
-  selectedMedicineId: number;
   selectedMedicineEan: string;
-  potwierdzonko = '';
 
-  private medicines: MedicineDto[] = [];
+  private webService: WebService;
+  private medicines: Observable<MedicineDto[]>;
+  private medicinesWithNamesWithDose: MedicineWithNameAndDose[];
+
   private searchingByEan = false;
+
   private searchTypeButtonName: string = MedicineSelectionProperties.SEARCH_TYPE_EAN_BUTTON_NAME;
   private placeholder: string = MedicineSelectionProperties.LIST_PLACEHOLDER;
 
-  constructor() {
-    this.create10kMedicines();
+  constructor(webService: WebService) {
+    this.webService = webService;
+    this.medicines = of([]);
+    this. medicinesWithNamesWithDose = [];
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.selectedDiseaseId >= 0) {
+      this.medicines = this.webService
+        .getMedicinesForDisease(this.selectedDiseaseId.toString());
+
+      this.medicines
+        .subscribe(medicinesDtoArray =>
+          this.medicinesWithNamesWithDose = this.mapMedicineDtoArray(medicinesDtoArray));
+    }
   }
 
   isSearchingByEan(): boolean {
     return this.searchingByEan;
   }
 
-  setSeatchingByEan() {
-    this.searchingByEan = true;
-  }
-
-  setSeatchingFromList() {
-    this.searchingByEan = false;
-  }
-
   getSearchTypeButtonName(): string {
     return this.searchTypeButtonName;
   }
 
-  getMedicines(): MedicineDto[] {
-    return this.medicines;
+  getMedicinesWithNameAndDose(): MedicineWithNameAndDose[] {
+    return this.medicinesWithNamesWithDose;
   }
 
   getListPlaceholder(): string {
@@ -53,25 +67,10 @@ export class MedicineSelectionComponent implements OnInit {
     return MedicineSelectionProperties.INPUT_PLACEHOLDER;
   }
 
-  private create10kMedicines() {
-
-    this.medicines = Array.from({length: 10000}, (value, key) => key)
-    .map(val => ({
-      id: val,
-      name: `medicine ${val}`,
-      ean: 'xd',
-      dose: 'xd'
-    }));
-  }
-
-  ngOnInit(): void {
-  }
 
   onClickSubmitButton() {
-    if (this.selectedMedicineId != null) {
-      this.confirmed.emit();
-      console.log('Tu pewnie bedzie jakas inna metoda, ale abrams kc, jakos sie udalo');
-      this.potwierdzonko = 'Jakos sie udalo. Buziaczek. Id:' + this.selectedMedicineId.toString();
+    if (this.selectedMedicineEan != null) {
+      this.confirmed.emit(this.selectedMedicineEan);
     }
   }
 
@@ -81,9 +80,27 @@ export class MedicineSelectionComponent implements OnInit {
 
   openFloatingList() {
     this.placeholder = '';
-    this.selectedMedicineId = null;
   }
 
+  private mapMedicineDtoArray(medicineDtoArray: MedicineDto[]): MedicineWithNameAndDose[] {
+    const result: MedicineWithNameAndDose[] = [];
 
+    medicineDtoArray.forEach(
+      medicineDto => result
+        .push(this.mapMedicineDto(medicineDto)));
 
+    return result;
+  }
+
+  private mapMedicineDto(medicineDto: MedicineDto): MedicineWithNameAndDose {
+    return {
+      ean: medicineDto.ean,
+      nameWithDose: `${medicineDto.name} - ${medicineDto.dose}`
+    };
+  }
+}
+
+interface MedicineWithNameAndDose {
+  ean: string;
+  nameWithDose: string;
 }
