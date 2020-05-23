@@ -7,8 +7,8 @@ import pl.uw.mim.io.lekizapteki.models.medicine.detailed.MedicineDetailsDto;
 
 @UtilityClass
 public class IdenticalMedicinesDtoMapper {
-  public IdenticalMedicinesDto map(MedicineDetailsDto medicineDetails,
-      List<MedicineDetailsDto> identicalMedicinesDetails) {
+
+  public IdenticalMedicinesDto map(MedicineDetailsDto medicineDetails, List<MedicineDetailsDto> identicalMedicinesDetails) {
     return IdenticalMedicinesDto.builder()
         .medicine(medicineDetails)
         .identicalMedicines(identicalMedicinesDetails)

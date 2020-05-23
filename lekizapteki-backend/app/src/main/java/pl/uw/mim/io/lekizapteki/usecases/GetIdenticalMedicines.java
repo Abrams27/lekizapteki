@@ -18,15 +18,21 @@ public class GetIdenticalMedicines {
   private MedicineService medicineService;
 
   public IdenticalMedicinesDto execute(String ean, Long diseaseId) {
+    List<MedicineEntity> medicineEntityList = medicineService.getIdenticalMedicines(ean, diseaseId);
+
     return IdenticalMedicinesDtoMapper.map(
-        MedicineDetailsDtoMapper.map(medicineService.getMedicineWithEanAndDiseaseId(ean, diseaseId)),
-            mapMedicineEntityList(medicineService.getIdenticalMedicines(ean, diseaseId))
-        );
+        mapMedicineDetailsDto(ean, diseaseId),
+        mapMedicineDtoList(medicineEntityList));
   }
 
-  private List<MedicineDetailsDto> mapMedicineEntityList (List<MedicineEntity> medicineEntityList) {
-    return medicineEntityList
-        .stream()
+  private MedicineDetailsDto mapMedicineDetailsDto(String ean, Long diseaseId) {
+    MedicineEntity medicineEntity = medicineService.getMedicineWithEanAndDiseaseIdOrThrow(ean, diseaseId);
+
+    return MedicineDetailsDtoMapper.map(medicineEntity);
+  }
+
+  private List<MedicineDetailsDto> mapMedicineDtoList(List<MedicineEntity> medicineEntityList) {
+    return medicineEntityList.stream()
         .map(MedicineDetailsDtoMapper::map)
         .collect(Collectors.toList());
   }

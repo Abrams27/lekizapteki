@@ -12,7 +12,7 @@ import pl.uw.mim.io.lekizapteki.services.MedicineService;
 @AllArgsConstructor
 public class GetMedicines {
 
-  MedicineService medicineService;
+  private MedicineService medicineService;
 
   public List<MedicineDto> execute(Long diseaseId) {
     return medicineService
