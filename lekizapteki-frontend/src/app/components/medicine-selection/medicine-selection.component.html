@@ -6,11 +6,11 @@
 
   <ng-select
     [(ngModel)]="selectedMedicineEan"
-    [items]="getMedicines() | async"
+    [items]="getMedicinesWithNameAndDose()"
     [hidden]="isSearchingByEan()"
     [virtualScroll]="true"
     (open)="openFloatingList()"
-    bindLabel="name"
+    bindLabel="nameWithDose"
     placeholder="{{getListPlaceholder()}}"
     appendTo="body"
     bindValue="ean"
