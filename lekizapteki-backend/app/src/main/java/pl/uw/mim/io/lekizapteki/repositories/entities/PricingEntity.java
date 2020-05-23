@@ -27,7 +27,6 @@ public class PricingEntity {
 
   private BigDecimal tradePrice;
   private BigDecimal salePrice;
-  private BigDecimal tradePrice;
   private BigDecimal retailPrice;
   private BigDecimal totalFunding;
   private BigDecimal chargeFactor;
