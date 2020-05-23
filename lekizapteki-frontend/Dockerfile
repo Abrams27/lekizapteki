@@ -14,8 +14,7 @@ COPY tsconfig.app.json tsconfig.app.json
 COPY tsconfig.json tsconfig.json
 COPY tsconfig.spec.json tsconfig.spec.json
 COPY tslint.json tslint.json
-COPY entrypoint.sh entrypoint.sh
 
 RUN npm install
 
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ng serve --host 0.0.0.0
