@@ -1,11 +1,12 @@
 FROM adoptopenjdk/maven-openjdk11
 
+WORKDIR /lekizapteki
 
-COPY api/ lekizapteki/api
-COPY app/ lekizapteki/app
-COPY pom.xml lekizapteki/pom.xml
-COPY entrypoint.sh lekizapteki/entrypoint.sh
+COPY api/ api
+COPY app/ app
+COPY pom.xml pom.xml
+COPY entrypoint.sh entrypoint.sh
 
-EXPOSE 7312:7312
+RUN mvn clean install
 
-ENTRYPOINT ["./lekizapteki/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]

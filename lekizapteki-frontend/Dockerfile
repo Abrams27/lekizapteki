@@ -1,23 +1,21 @@
 FROM node:12.2.0
 
-# install chrome for protractor tests
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -yq google-chrome-stable
+WORKDIR /lekizapteki
 
-# set working directory
-WORKDIR /app
+ENV PATH /lekizapteki/node_modules/.bin:$PATH
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+COPY e2e/ e2e
+COPY src/ src
+COPY angular.json angular.json
+COPY karma.conf.js karma.conf.js
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+COPY tsconfig.app.json tsconfig.app.json
+COPY tsconfig.json tsconfig.json
+COPY tsconfig.spec.json tsconfig.spec.json
+COPY tslint.json tslint.json
+COPY entrypoint.sh entrypoint.sh
 
-# install and cache app dependencies
-COPY package.json /app/package.json
 RUN npm install
-RUN npm install -g @angular/cli@7.3.9
 
-# add app
-COPY . /app
-
-# start app
-CMD ng serve --host 0.0.0.0
+ENTRYPOINT ["./entrypoint.sh"]
