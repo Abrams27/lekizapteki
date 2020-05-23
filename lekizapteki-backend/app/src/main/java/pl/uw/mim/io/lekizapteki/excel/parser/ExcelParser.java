@@ -1,11 +1,14 @@
 package pl.uw.mim.io.lekizapteki.excel.parser;
 
+import static java.util.Map.entry;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
+import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -14,8 +17,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 import pl.uw.mim.io.lekizapteki.excel.parser.editors.medicine.MedicinePropertySetterFactory;
-import pl.uw.mim.io.lekizapteki.excel.parser.enums.ColumnType;
 import pl.uw.mim.io.lekizapteki.excel.parser.editors.medicine.setter.MedicinePropertySetter;
+import pl.uw.mim.io.lekizapteki.excel.parser.enums.ColumnType;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 
 @Component
@@ -24,22 +27,27 @@ public class ExcelParser {
 
   private static final int FIRST_VALID_ROW = 3; // pierwsze 3 wiersze to nagłówki
 
-  private static final Map<Integer, ColumnType> columnIndexToColumnType = Map.of(
-      1, ColumnType.INGREDIENT,
-      2, ColumnType.NAME_FORM_DOSE,
-      3, ColumnType.PACKAGE,
-      4, ColumnType.EAN,
-      8, ColumnType.SALE_PRICE,
-      10, ColumnType.RETAIL_PRICE,
-      11, ColumnType.TOTAL_REFUNDING,
-      14, ColumnType.CHARGE_FACTOR,
-      15, ColumnType.REFUND
+  private static final Map<Integer, ColumnType> columnIndexToColumnType = Map.ofEntries(
+      entry(1, ColumnType.INGREDIENT),
+      entry(2, ColumnType.NAME_FORM_DOSE),
+      entry(3, ColumnType.PACKAGE),
+      entry(4, ColumnType.EAN),
+      entry(8, ColumnType.SALE_PRICE),
+      entry(9, ColumnType.TRADE_PRICE),
+      entry(10, ColumnType.RETAIL_PRICE),
+      entry(11, ColumnType.TOTAL_REFUNDING),
+      entry(12, ColumnType.DISEASE),
+      entry(14, ColumnType.CHARGE_FACTOR),
+      entry(15, ColumnType.REFUND)
   );
 
   @SneakyThrows
   public List<Medicine> parseExcelFile(String filePath) {
+    @Cleanup
     FileInputStream excelFile = new FileInputStream(new File(filePath));
+    @Cleanup
     Workbook workbook = new XSSFWorkbook(excelFile);
+
     Sheet sheet = workbook.getSheetAt(0);
 
     return mapSheetToMedicineList(sheet);
@@ -86,7 +94,6 @@ public class ExcelParser {
 
     MedicinePropertySetter medicinePropertySetter = MedicinePropertySetterFactory
         .forMedicineAndColumnType(medicine, columnType);
-
     medicinePropertySetter.setMedicineProperty(cellValue);
   }
 

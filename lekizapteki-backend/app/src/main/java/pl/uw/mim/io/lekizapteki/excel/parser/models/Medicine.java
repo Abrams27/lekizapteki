@@ -10,8 +10,10 @@ public class Medicine {
   private String pack;
   private String ean;
   private String salePrice;
+  private String tradePrice;
   private String retailPrice;
   private String totalFunding;
+  private String disease;
   private String chargeFactor;
   private String refund;
 }
