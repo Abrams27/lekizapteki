@@ -26,4 +26,5 @@ public class DiseaseEntity {
   private Long id;
 
   private String name;
+
 }

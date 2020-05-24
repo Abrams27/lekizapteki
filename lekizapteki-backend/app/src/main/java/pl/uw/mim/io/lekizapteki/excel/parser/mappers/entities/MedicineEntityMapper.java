@@ -18,14 +18,13 @@ public class MedicineEntityMapper {
   private String form;
   private String dose;
 
-  public MedicineEntity map(Medicine medicine) {
+  public MedicineEntity map(Medicine medicine, DiseaseEntity diseaseEntity) {
 
     moveNameAndFormAndDoseToSeparateVariables(medicine);
 
     DoseEntity doseEntity = DoseEntityMapper.map(dose);
     IngredientEntity ingredientEntity = IngredientEntityMapper.map(medicine.getIngredient());
     FormEntity formEntity = FormEntityMapper.map(form);
-    DiseaseEntity diseaseEntity = DiseaseEntityMapper.map(medicine.getDisease());
     PackageEntity packageEntity = PackageEntityMapper.map(medicine.getPack());
 
     PricingEntity pricingEntity = buildPricingEntityMapper(medicine).map();

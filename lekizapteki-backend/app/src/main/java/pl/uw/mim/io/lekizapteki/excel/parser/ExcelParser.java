@@ -10,6 +10,7 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -23,6 +24,7 @@ import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 
 @Component
 @AllArgsConstructor
+@Slf4j
 public class ExcelParser {
 
   private static final int FIRST_VALID_ROW = 3; // pierwsze 3 wiersze to nagłówki
@@ -45,6 +47,7 @@ public class ExcelParser {
   public List<Medicine> parseExcelFile(String filePath) {
     @Cleanup
     FileInputStream excelFile = new FileInputStream(new File(filePath));
+
     @Cleanup
     Workbook workbook = new XSSFWorkbook(excelFile);
 

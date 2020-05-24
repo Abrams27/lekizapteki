@@ -25,4 +25,5 @@ public class IngredientEntity {
   private Long id;
 
   private String name;
+
 }

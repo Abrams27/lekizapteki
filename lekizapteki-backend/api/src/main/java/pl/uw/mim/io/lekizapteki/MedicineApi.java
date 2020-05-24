@@ -11,14 +11,10 @@ import pl.uw.mim.io.lekizapteki.models.medicine.MedicineDto;
 @RequestMapping("/lekizapteki")
 public interface MedicineApi {
 
-
-  // TODO @CrossOrigin do usuniecia, jedynie potrzebne do testowania lokalnie
-  @CrossOrigin(origins = "*")
   @GetMapping("/medicines")
   List<MedicineDto> getMedicines(
       @RequestParam(required = false) Long diseaseId);
 
-  @CrossOrigin(origins = "*")
   @GetMapping("/medicines/identical")
   IdenticalMedicinesDto getIdenticalMedicines(
       @RequestParam(required = true) String ean,
