@@ -9,6 +9,7 @@ import pl.uw.mim.io.lekizapteki.models.disease.DiseaseDto;
 @RequestMapping("/lekizapteki")
 public interface DiseaseApi {
 
+  @CrossOrigin(origins = "*")
   @GetMapping("/diseases")
   List<DiseaseDto> getDiseases();
 
