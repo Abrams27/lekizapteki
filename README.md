@@ -2,7 +2,10 @@
 Zespołowy projekt programistyczny na IO (Inżynieria Oprogramowania)
 
 # URUCHAMIANIE
-`./run/docker/runDockerCompose.sh`
+```
+cd run/docker
+./runDockerCompose.sh
+```
 
 Backend będzie dostępny na porcie `7312`
 
