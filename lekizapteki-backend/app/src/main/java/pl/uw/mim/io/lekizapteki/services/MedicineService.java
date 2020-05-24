@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities.MedicineEntityMapper;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 import pl.uw.mim.io.lekizapteki.exceptions.WrongMedicineForDiseaseException;
+import pl.uw.mim.io.lekizapteki.repositories.DiseaseRepository;
+import pl.uw.mim.io.lekizapteki.repositories.DoseRepository;
+import pl.uw.mim.io.lekizapteki.repositories.IngredientRepository;
 import pl.uw.mim.io.lekizapteki.repositories.MedicineRepository;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
@@ -16,6 +19,10 @@ public class MedicineService {
 
   private MedicineRepository medicineRepository;
   private DiseaseService diseaseService;
+
+  private DoseRepository doseRepository;
+  private DiseaseRepository diseaseRepository;
+  private IngredientRepository ingredientRepository;
 
   public List<MedicineEntity> getMedicinesForDiseaseId(Long diseaseId) {
     DiseaseEntity diseaseEntity = diseaseService.getDiseaseWithIdOrThrow(diseaseId);
@@ -28,10 +35,10 @@ public class MedicineService {
     MedicineEntity medicineEntity = getMedicineWithEanAndDiseaseIdOrThrow(ean, diseaseId);
 
     return medicineRepository
-        .findAllByIngredientAndDoseAndDisease(
-            medicineEntity.getIngredient(),
-            medicineEntity.getDose(),
-            medicineEntity.getDisease());
+        .findAllByIngredientInAndDoseInAndDiseaseIn(
+            ingredientRepository.findAllByName(medicineEntity.getIngredient().getName()),
+            doseRepository.findAllByDose(medicineEntity.getDose().getDose()),
+            diseaseRepository.findAllByName(medicineEntity.getDisease().getName()));
   }
 
   public MedicineEntity getMedicineWithEanAndDiseaseIdOrThrow(String ean, Long diseaseId) {
