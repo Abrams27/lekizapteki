@@ -3,19 +3,19 @@ package pl.uw.mim.io.lekizapteki.excel.parser.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 
+@Getter
 public class MedicineParser {
-  private final String NAME_FORM_DOSE_PATTERN = "^(.+), (tabl[^,]+), (.+)$";
-  private final int NAME_CAPTURE_GROUP_NUMBER = 1;
-  private final int FORM_CAPTURE_GROUP_NUMBER = 2;
-  private final int DOSE_CAPTURE_GROUP_NUMBER = 3;
 
-  @Getter
+  private final static String NAME_FORM_DOSE_PATTERN = "^(.+),\\s+(tabl[^,]+), (.+)$";
+  private final static int NAME_CAPTURE_GROUP_NUMBER = 1;
+  private final static int FORM_CAPTURE_GROUP_NUMBER = 2;
+  private final static int DOSE_CAPTURE_GROUP_NUMBER = 3;
+
   private String name;
-  @Getter
   private String form;
-  @Getter
   private String dose;
 
   public void parseMedicine(Medicine medicine) {

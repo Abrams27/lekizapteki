@@ -31,4 +31,5 @@ public class PricingEntity {
   private BigDecimal totalFunding;
   private BigDecimal chargeFactor;
   private BigDecimal refund;
+
 }

@@ -1,5 +1,6 @@
 package pl.uw.mim.io.lekizapteki.repositories.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "MEDICINE")
 public class MedicineEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -31,27 +33,27 @@ public class MedicineEntity {
   private String ean;
   private String name;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "dose_id")
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "dose_id", nullable = false)
   private DoseEntity dose;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "ingredient_id")
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "ingredient_id", nullable = false)
   private IngredientEntity ingredient;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "form_id")
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "form_id", nullable = false)
   private FormEntity form;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "disease_id")
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "disease_id", nullable = false)
   private DiseaseEntity disease;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "pack_id")
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "package_id", nullable = false)
   private PackageEntity pack;
 
-  @OneToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "pricing_id")
+  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "pricing_id", nullable = false)
   private PricingEntity pricing;
 }
