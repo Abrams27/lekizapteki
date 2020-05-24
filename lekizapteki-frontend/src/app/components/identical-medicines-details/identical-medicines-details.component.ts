@@ -111,11 +111,11 @@ export class IdenticalMedicinesDetailsComponent implements OnChanges {
   }
 
   private getChargeFactorFor0(): string {
-    return 'ryczałt';
+    return IdenticalMedicinesDetailsComponentProperties.CHARGE_FACTOR_0_MESSAGE;
   }
 
   private getChargeFactorFor100(): string {
-    return 'bezpłatny do limitu';
+    return IdenticalMedicinesDetailsComponentProperties.CHARGE_FACTOR_100_MESSAGE;
   }
 
   getColumnContentForHeader(header: string, element: MedicineDetailsDto): string | number {
