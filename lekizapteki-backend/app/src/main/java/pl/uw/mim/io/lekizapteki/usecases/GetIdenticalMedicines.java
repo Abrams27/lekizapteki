@@ -10,6 +10,7 @@ import pl.uw.mim.io.lekizapteki.models.medicine.IdenticalMedicinesDto;
 import pl.uw.mim.io.lekizapteki.models.medicine.detailed.MedicineDetailsDto;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 import pl.uw.mim.io.lekizapteki.services.MedicineService;
+import pl.uw.mim.io.lekizapteki.utility.MedicineValueSorter;
 
 @Component
 @AllArgsConstructor
@@ -32,7 +33,9 @@ public class GetIdenticalMedicines {
   }
 
   private List<MedicineDetailsDto> mapMedicineDtoList(List<MedicineEntity> medicineEntityList) {
-    return medicineEntityList.stream()
+    List<MedicineEntity> sortedMedicineEntityList = MedicineValueSorter.sort(medicineEntityList);
+
+    return sortedMedicineEntityList.stream()
         .map(MedicineDetailsDtoMapper::map)
         .collect(Collectors.toList());
   }

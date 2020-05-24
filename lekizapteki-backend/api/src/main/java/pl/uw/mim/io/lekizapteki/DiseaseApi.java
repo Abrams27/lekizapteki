@@ -9,8 +9,6 @@ import pl.uw.mim.io.lekizapteki.models.disease.DiseaseDto;
 @RequestMapping("/lekizapteki")
 public interface DiseaseApi {
 
-  // TODO @CrossOrigin do usuniecia, jedynie potrzebne do testowania lokalnie
-  @CrossOrigin(origins = "*")
   @GetMapping("/diseases")
   List<DiseaseDto> getDiseases();
 
