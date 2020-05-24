@@ -8,4 +8,5 @@ public interface DiseaseRepository extends JpaRepository<DiseaseEntity, Long> {
 
   Optional<DiseaseEntity> getDiseaseEntityById(Long id);
 
+  Optional<DiseaseEntity> findFirstByName(String name);
 }

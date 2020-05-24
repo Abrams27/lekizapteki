@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities.MedicineEntityMapper;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
-import pl.uw.mim.io.lekizapteki.exceptions.NoSuchDiseaseException;
 import pl.uw.mim.io.lekizapteki.exceptions.WrongMedicineForDiseaseException;
-import pl.uw.mim.io.lekizapteki.repositories.DiseaseRepository;
 import pl.uw.mim.io.lekizapteki.repositories.MedicineRepository;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
@@ -17,10 +15,10 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 public class MedicineService {
 
   private MedicineRepository medicineRepository;
-  private DiseaseRepository diseaseRepository;
+  private DiseaseService diseaseService;
 
   public List<MedicineEntity> getMedicinesForDiseaseId(Long diseaseId) {
-    DiseaseEntity diseaseEntity = getDiseaseWithIdOrThrow(diseaseId);
+    DiseaseEntity diseaseEntity = diseaseService.getDiseaseWithIdOrThrow(diseaseId);
 
     return medicineRepository
         .findAllByDisease(diseaseEntity);
@@ -37,7 +35,7 @@ public class MedicineService {
   }
 
   public MedicineEntity getMedicineWithEanAndDiseaseIdOrThrow(String ean, Long diseaseId) {
-    DiseaseEntity diseaseEntity = getDiseaseWithIdOrThrow(diseaseId);
+    DiseaseEntity diseaseEntity = diseaseService.getDiseaseWithIdOrThrow(diseaseId);
 
     return medicineRepository
         .findByEanAndDisease(ean, diseaseEntity)
@@ -45,17 +43,15 @@ public class MedicineService {
   }
 
 
-  private DiseaseEntity getDiseaseWithIdOrThrow(Long diseaseId) {
-    return diseaseRepository
-        .getDiseaseEntityById(diseaseId)
-        .orElseThrow(NoSuchDiseaseException::new);
+  public void saveMedicinesToRepository(List<Medicine> medicines) {
+    medicines.stream()
+        .map(medicine -> MedicineEntityMapper.map(medicine, getDiseaseWithNameOrCreateNew(medicine)))
+        .forEach(medicineRepository::save);
   }
 
-  public void saveMedicinesToRepository(List<Medicine> medicines) {
-
-    medicines.stream()
-        .map(MedicineEntityMapper::map)
-        .forEach(medicineRepository::save);
+  private DiseaseEntity getDiseaseWithNameOrCreateNew(Medicine medicine) {
+    return diseaseService
+        .getDiseaseWithNameOrCreateNew(medicine.getDisease());
   }
 
 }

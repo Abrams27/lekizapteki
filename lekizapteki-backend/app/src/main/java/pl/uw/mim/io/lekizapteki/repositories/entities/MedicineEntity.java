@@ -45,7 +45,7 @@ public class MedicineEntity {
   @JoinColumn(name = "form_id", nullable = false)
   private FormEntity form;
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
   @JoinColumn(name = "disease_id", nullable = false)
   private DiseaseEntity disease;
 
