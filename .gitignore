@@ -32,3 +32,4 @@ out/
 *.iml
 target/
 arkusz.xlsx
+node_modules/

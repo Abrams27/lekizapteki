@@ -16,6 +16,7 @@ basicstyle=\fontsize{6}{6}\selectfont\ttfamily,
 }
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
+\usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \title{
 Lekizapteki\\
@@ -32,7 +33,9 @@ Lekizapteki\\
       \hline
       1. & 25.03.2020 & Utworzenie dokumentu oraz jego pierwsza wersja. \\
       \hline
-      2. & 29.04.2020 & Poprawki w endpointach i schema. \\
+      1. & 29.04.2020 & Poprawki w endpointach i schema. \\
+      \hline
+      2. & 29.06.2020 & Współczynnik opłacalności w wyświetlanej tabeli oraz mała modyfikacja api. \\
     \end{tabular}
 
   \section{Ogólna struktura}
@@ -53,8 +56,7 @@ Lekizapteki\\
     \href{https://en.wikipedia.org/wiki/Representational_state_transfer}{RESTful API},
     obsługując żądania w formacie
     \href{https://en.wikipedia.org/wiki/JSON}{json}.
-    Serwer jest dostępny na
-    \href{http://students.mimuw.edu.pl:7312}{serwerze Students na porcie `7312`},
+    Serwer jest dostępny na ``Google cloud'' na porcie 7312
     natomiast frontend wykonuje zapytania za pomocą
     \href{https://angular.io/guide/http}{HttpClient'a} służącego do wykonywania zapytań http.
     Nie ma stosowanych żadnych form zabezpieczeń, żądania i odpowiedzi nie są szyfrowane, ani nie ma wymiany tokenów.
@@ -104,6 +106,9 @@ Lekizapteki\\
            "totalFunding": Decimal,
            "chargeFactor": Decimal,
            "refund": Decimal,
+           "isLumpSum": boolean,
+           "isFree": boolean,
+           "profitabilityRate": Decimal
         }
 
      \end{lstlisting}
@@ -153,15 +158,15 @@ Lekizapteki\\
 
     \subsection{Makiety}
       \subsubsection{Wybór choroby}
-      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-wybor-choroby}
+      \includegraphics[width=8cm]{images/lekizapteki-wybor-choroby}
 
       \subsubsection{Wybór leku za pomocą nazwy i numeru EAN}
-      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-wybor-leku-nazwa}
-      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-wybor-leku-ean}
+      \includegraphics[width=8cm]{images/lekizapteki-wybor-leku-nazwa}
+      \includegraphics[width=8cm]{images/lekizapteki-wybor-leku-ean}
 
       \subsubsection{Wyniki i rozwinięte szczegóły dla pozycji}
-      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-leki-identyczne}
-      \includegraphics[width=6.4cm, height=4cm]{lekizapteki-leki-identyczne-rozwiniete}
+      \includegraphics[width=8cm]{images/lekizapteki-leki-identyczne}
+      \includegraphics[width=8cm]{images/lekizapteki-leki-identyczne-rozwiniete}
 
   \section{Backend}
   Backend jest podzielony na dwa moduły: ``API'' i ``APP''.
