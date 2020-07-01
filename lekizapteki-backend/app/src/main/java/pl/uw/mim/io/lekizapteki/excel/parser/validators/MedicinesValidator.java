@@ -177,15 +177,6 @@ public class MedicinesValidator {
     if (pack.startsWith(SPECIAL_MEDICINE_PACK_PREFIX)) {
       return putPackageBackTogether(split[2]);
     }
-//    if (!pack.contains("szt")
-//        && !pack.contains("tabl")
-//        && !pack.contains("kaps")
-//        && !pack.contains("daw")
-//        && !pack.contains("implant")
-//        && !pack.contains("wstrzykiwaczy")
-//        && !pack.contains("sasz")) {
-//      System.out.println(pack);
-//    }
 
     return putPackageBackTogether(split[0]);
   }

@@ -35,7 +35,7 @@ class ParseExcelToDatabaseTest {
 //    assertEquals(3638, filteredMedicines.size());
 
     // to z normalnymi dawkami
-//    assertEquals(3586, filteredMedicines.size());
+    assertEquals(3584, filteredMedicines.size());
 
     filteredMedicines.forEach(Assertions::assertNotNull);
   }
