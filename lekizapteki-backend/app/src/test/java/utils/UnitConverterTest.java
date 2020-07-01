@@ -36,26 +36,6 @@ public class UnitConverterTest {
       "75", "0.08"
   );
 
-  // TODO
-  private static final Map<String, String> microgramsToMilligramsWithUnitsCorrectParsing = Map.of(
-      // pierwsze µg:
-      "100 µg ", "30",
-      "50 µg", "50",
-      // drugie μg:
-      "100 μg ", "30",
-      "50 μg", "50",
-      // nie wiem jakie:
-      "75 μg", "75"
-  );
-
-  // TODO
-  private static final Map<String, String> internationalUnitsToMilligramsCorrectParsing = Map.of(
-      "1000000 j.m.", "0",
-      "1500000 j.m.", "0",
-      "3 mln j.m.", "0",
-      "1.5 mln j.m.", "0"
-  );
-
   @Test
   public void shouldParseGramsToMilligrams() {
 

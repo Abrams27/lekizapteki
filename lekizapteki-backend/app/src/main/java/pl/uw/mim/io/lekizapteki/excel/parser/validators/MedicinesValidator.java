@@ -2,6 +2,7 @@ package pl.uw.mim.io.lekizapteki.excel.parser.validators;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
@@ -14,6 +15,15 @@ public class MedicinesValidator {
   private final String MULTIPLE_INGREDIENT_DELIMITER = "+";
   private final String PILL_FORM_SUBSTRING = "tabl";
   private final String SPECIAL_MEDICINE_PACK_PREFIX = "1 but.po";
+  private final String WEIRD_DOSE = "160+12,5 mg mg";
+
+  private final List<String> UNSUPPORTED_NAME_FORM_DOSE = List.of(
+      "Aprepitant Sandoz, kaps. twarde, 125 mg, 80 mg",
+      "Aprepitant Teva, kaps. twarde, 125 mg, 80 mg",
+      "Emend, kaps. twarde, 125 mg, 80 mg",
+      "Divina, tabl., 2 mg, 2+10 mg"
+  );
+
 
   public List<Medicine> filterAndParse(List<Medicine> medicines) {
 
@@ -35,7 +45,16 @@ public class MedicinesValidator {
   }
 
   private boolean isValidMedicine(Medicine medicine) {
-    return hasSingleIngredient(medicine) && hasPillForm(medicine);
+    if (UNSUPPORTED_NAME_FORM_DOSE.contains(medicine.getNameAndFormAndDose())) {
+      return false;
+    }
+    return hasSupportedDose(medicine) || (hasSingleIngredient(medicine) && hasPillForm(medicine));
+  }
+
+  private boolean hasSupportedDose(Medicine medicine) {
+    return medicine.getNameAndFormAndDose().endsWith("g")
+        && !medicine.getNameAndFormAndDose().contains("/")
+        && !medicine.getNameAndFormAndDose().contains(";");
   }
 
   private boolean hasSingleIngredient(Medicine medicine) {
@@ -64,11 +83,8 @@ public class MedicinesValidator {
     String name = medicineParser.getName();
     String form = medicineParser.getForm();
 
-    // TODO MEME
-    String dose = "";
-//    String dose = medicineParser.getDose();
+    String dose = medicineParser.getDose();
     String pack = medicine.getPack();
-
 
     String parsedDose = parseMedicineDose(dose);
     String parsedPack = parseMedicinePack(pack);
@@ -82,9 +98,12 @@ public class MedicinesValidator {
   private String parseMedicineDose(String dose) {
     String[] split = dose.split(" ");
 
-    if (split.length > 2) {
+    // czyli te z plusem i w j.m.
+    if (dose.contains("+") || dose.contains("j.m.")) {
       return parseSpecialMedicineDose(dose);
     }
+
+    assert (split.length == 2);
 
     String value = split[0];
     String units = split[1];
@@ -108,8 +127,30 @@ public class MedicinesValidator {
     }
   }
 
-  // są to dawki postaci 1.5 mln j.m. i 3 mln j.m.
+  // są to dawki postaci 1.5 mln j.m. i 3 mln j.m. lub te z plusem
   private String parseSpecialMedicineDose(String specialDose) {
+
+    if (specialDose.equals(WEIRD_DOSE)) {
+      return "160+12,5 mg";
+    }
+
+    if (specialDose.contains("+")) {
+      String[] splitted = specialDose.split(" ");
+      if (splitted.length == 2) {
+        String[] dosages = splitted[0].split("\\+");
+        String units = splitted[1];
+        dosages[0] = convertToMg(dosages[0], units);
+        dosages[1] = convertToMg(dosages[1], units);
+        return dosages[0] + "+" + dosages[1] + " mg";
+      } else if (splitted.length == 4) {
+        return splitted[0] + '+' + splitted[2] + " mg";
+      } else if (splitted.length == 5) {
+        return splitted[0] + '+' + splitted[3] + " mg";
+      } else {
+        assert (false);
+      }
+      return specialDose;
+    }
 
     final int MLN = 1000000000;
 
@@ -118,7 +159,10 @@ public class MedicinesValidator {
     String value = split[0];
 
     BigDecimal decimalValue = new BigDecimal(value);
-    decimalValue = decimalValue.multiply(BigDecimal.valueOf(MLN));
+
+    if (specialDose.contains("mln")) {
+      decimalValue = decimalValue.multiply(BigDecimal.valueOf(MLN));
+    }
 
     value = UnitConverter.internationalUnitsToMilligrams(decimalValue.toString());
 
@@ -136,7 +180,7 @@ public class MedicinesValidator {
   }
 
   private String putNameAndFormAndDoseTogether(String name, String form, String dose) {
-    return name + ", " + form + ", " + dose;
+    return name + ";" + form + ";" + dose;
   }
 
   private String putDoseBackTogether(String value, String units) {

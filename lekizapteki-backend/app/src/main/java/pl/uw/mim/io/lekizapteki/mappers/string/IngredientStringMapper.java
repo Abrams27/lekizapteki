@@ -8,7 +8,7 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.IngredientEntity;
 @UtilityClass
 public class IngredientStringMapper {
 
-  private final static String JOINING_DELIMITER = "-";
+  private final String JOINING_DELIMITER = "-";
 
   public String mapDoses(Set<IngredientEntity> ingredientEntity) {
     return ingredientEntity.stream()
