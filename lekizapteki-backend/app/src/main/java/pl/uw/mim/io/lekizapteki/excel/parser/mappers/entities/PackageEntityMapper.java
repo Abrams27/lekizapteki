@@ -8,7 +8,8 @@ public class PackageEntityMapper {
 
   public PackageEntity map(String content) {
     return PackageEntity.builder()
-        .content(content)
+        // todo
+//        .content(content)
         .build();
   }
 }

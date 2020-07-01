@@ -25,12 +25,12 @@ public class ValueSorterTest {
     assertEquals(2L, resultMedicineEntityList.get(1).getId());
     assertEquals(3L, resultMedicineEntityList.get(2).getId());
   }
-
+// todo
   private MedicineEntity buildTestMedicineEntity(Long id, String name, String dose, String ean, String content) {
     return MedicineEntity.builder()
         .id(id)
         .name(name)
-        .dose(buildTestDoseEntity(id, dose))
+//        .dose(buildTestDoseEntity(id, dose))
         .ean(ean)
         .pack(buildTestPackageEntity(id, content))
         .pricing(buildTestPricingEntity(id))
@@ -40,14 +40,14 @@ public class ValueSorterTest {
   private DoseEntity buildTestDoseEntity(Long id, String dose) {
     return DoseEntity.builder()
         .id(id)
-        .dose(dose)
+//        .dose(dose)
         .build();
   }
 
   private PackageEntity buildTestPackageEntity(Long id, String content) {
     return PackageEntity.builder()
         .id(id)
-        .content(content)
+//        .content(content)
         .build();
   }
 

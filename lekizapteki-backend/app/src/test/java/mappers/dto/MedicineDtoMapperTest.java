@@ -28,11 +28,12 @@ class MedicineDtoMapperTest {
     assertEquals(MEDICINE_EAN, medicineDto.getEan());
   }
 
+  // todo
   private MedicineEntity buildTestMedicineEntity() {
     return MedicineEntity.builder()
         .id(MEDICINE_ID)
         .name(MEDICINE_NAME)
-        .dose(buildTestDoseEntity())
+//        .dose(buildTestDoseEntity())
         .ean(MEDICINE_EAN)
         .build();
   }
@@ -40,7 +41,7 @@ class MedicineDtoMapperTest {
   private DoseEntity buildTestDoseEntity() {
     return DoseEntity.builder()
         .id(DOSE_ID)
-        .dose(DOSE_DOSE)
+//        .dose(DOSE_DOSE)
         .build();
   }
 

@@ -5,28 +5,6 @@ CREATE TABLE DISEASE (
     CONSTRAINT disease_pk PRIMARY KEY (id)
 );
 
-CREATE TABLE INGREDIENT (
-    id                  IDENTITY            NOT NULL,
-    name                TEXT                NOT NULL,
-
-    dose_id             NUMERIC             NOT NULL,
-    medicine_id         NUMERIC             NOT NULL,
-
-    CONSTRAINT ingredient_pky PRIMARY KEY (id),
-
-    CONSTRAINT medicine_fk FOREIGN KEY (medicine_id)
-        REFERENCES MEDICINE (id),
-    CONSTRAINT dose_fk FOREIGN KEY (dose_id)
-        REFERENCES DOSE (id)
-);
-
-CREATE TABLE DOSE (
-    id                  IDENTITY            NOT NULL,
-    dose                NUMERIC             NOT NULL,
-
-    CONSTRAINT dose_pk PRIMARY KEY (id)
-);
-
 CREATE TABLE FORM (
     id                  IDENTITY            NOT NULL,
     name                TEXT                NOT NULL,
@@ -73,4 +51,26 @@ CREATE TABLE MEDICINE (
         REFERENCES PACKAGE (id),
     CONSTRAINT disease_fk FOREIGN KEY (disease_id)
         REFERENCES DISEASE (id)
+);
+
+CREATE TABLE DOSE (
+    id                  IDENTITY            NOT NULL,
+    dose                NUMERIC             NOT NULL,
+
+    CONSTRAINT dose_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE INGREDIENT (
+    id                  IDENTITY            NOT NULL,
+    name                TEXT                NOT NULL,
+
+    dose_id             NUMERIC             NOT NULL,
+    medicine_id         NUMERIC             NOT NULL,
+
+    CONSTRAINT ingredient_pky PRIMARY KEY (id),
+
+    CONSTRAINT medicine_fk FOREIGN KEY (medicine_id)
+        REFERENCES MEDICINE (id),
+    CONSTRAINT dose_fk FOREIGN KEY (dose_id)
+        REFERENCES DOSE (id)
 );

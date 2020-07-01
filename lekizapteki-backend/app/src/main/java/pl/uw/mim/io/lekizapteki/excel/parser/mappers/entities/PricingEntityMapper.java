@@ -28,7 +28,6 @@ public class PricingEntityMapper {
         .refund(BigDecimalConverter.priceToBigDecimal(refund))
         .isLumpSum(true)
         .isFree(true)
-        .profitabilityRate(new BigDecimal((1)))
         .build();
   }
 }

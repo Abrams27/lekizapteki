@@ -29,11 +29,12 @@ public class MedicineEntityMapper {
 
     PricingEntity pricingEntity = buildPricingEntityMapper(medicine).map();
 
+    // todo
     return MedicineEntity.builder()
         .ean(medicine.getEan())
         .name(name)
-        .dose(doseEntity)
-        .ingredient(ingredientEntity)
+//        .dose(doseEntity)
+//        .ingredient(ingredientEntity)
         .form(formEntity)
         .disease(diseaseEntity)
         .pack(packageEntity)

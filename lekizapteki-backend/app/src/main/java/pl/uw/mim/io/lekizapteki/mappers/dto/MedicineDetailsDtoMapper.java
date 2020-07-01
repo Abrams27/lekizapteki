@@ -16,9 +16,10 @@ public class MedicineDetailsDtoMapper {
   public MedicineDetailsDto map(MedicineEntity medicineEntity) {
     return MedicineDetailsDto.builder()
         .ean(medicineEntity.getEan())
-        .dose(medicineEntity.getDose().getDose())
+        // todo
+//        .dose(medicineEntity.getDose().getDose())
         .name(medicineEntity.getName())
-        .activeIngredient(mapIngredientDto(medicineEntity.getIngredient()))
+//        .activeIngredient(mapIngredientDto(medicineEntity.getIngredient()))
         .pricing(mapPricingDto(medicineEntity.getPricing()))
         .form(mapFormDto(medicineEntity.getForm()))
         .build();

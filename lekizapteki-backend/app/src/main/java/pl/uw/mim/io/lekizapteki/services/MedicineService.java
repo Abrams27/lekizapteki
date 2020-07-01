@@ -33,12 +33,12 @@ public class MedicineService {
 
   public List<MedicineEntity> getIdenticalMedicines(String ean, Long diseaseId) {
     MedicineEntity medicineEntity = getMedicineWithEanAndDiseaseIdOrThrow(ean, diseaseId);
-
-    return medicineRepository
-        .findAllByIngredientInAndDoseInAndDiseaseIn(
-            ingredientRepository.findAllByName(medicineEntity.getIngredient().getName()),
-            doseRepository.findAllByDose(medicineEntity.getDose().getDose()),
-            diseaseRepository.findAllByName(medicineEntity.getDisease().getName()));
+return List.of();
+//    return medicineRepository
+//        .findAllByIngredientInAndDoseInAndDiseaseIn(
+//            ingredientRepository.findAllByName(medicineEntity.getIngredient().getName()),
+//            doseRepository.findAllByDose(medicineEntity.getDose().getDose()),
+//            diseaseRepository.findAllByName(medicineEntity.getDisease().getName()));
   }
 
   public MedicineEntity getMedicineWithEanAndDiseaseIdOrThrow(String ean, Long diseaseId) {

@@ -8,7 +8,8 @@ public class DoseEntityMapper {
 
   public DoseEntity map(String dose) {
     return DoseEntity.builder()
-        .dose(dose)
+        // todo
+//        .dose(dose)
         .build();
   }
 }

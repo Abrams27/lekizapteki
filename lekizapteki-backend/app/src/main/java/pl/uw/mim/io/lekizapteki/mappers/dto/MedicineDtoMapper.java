@@ -10,7 +10,8 @@ public class MedicineDtoMapper {
   public MedicineDto map(MedicineEntity medicineEntity) {
     return MedicineDto.builder()
         .ean(medicineEntity.getEan())
-        .dose(medicineEntity.getDose().getDose())
+        //todo
+//        .dose(medicineEntity.getDose().getDose())
         .name(medicineEntity.getName())
         .build();
   }

@@ -15,9 +15,8 @@ public class PricingDtoMapper {
         .totalFunding(pricingEntity.getTotalFunding())
         .chargeFactor(pricingEntity.getChargeFactor())
         .refund(pricingEntity.getRefund())
-        .isLumpSum(pricingEntity.isLumpSum())
-        .isFree(pricingEntity.isFree())
-        .profitabilityRate(pricingEntity.getProfitabilityRate())
+        .isLumpSum(pricingEntity.getIsLumpSum())
+        .isFree(pricingEntity.getIsFree())
         .build();
   }
 }

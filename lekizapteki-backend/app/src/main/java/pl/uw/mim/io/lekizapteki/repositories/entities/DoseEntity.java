@@ -24,5 +24,5 @@ public class DoseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String dose;
+  private Long dose;
 }
