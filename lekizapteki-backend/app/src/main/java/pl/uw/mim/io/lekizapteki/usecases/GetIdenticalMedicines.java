@@ -10,7 +10,6 @@ import pl.uw.mim.io.lekizapteki.models.medicine.IdenticalMedicinesDto;
 import pl.uw.mim.io.lekizapteki.models.medicine.detailed.MedicineDetailsDto;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 import pl.uw.mim.io.lekizapteki.services.MedicineService;
-import pl.uw.mim.io.lekizapteki.profitability.MedicineProfitabilityRateEnricher;
 import pl.uw.mim.io.lekizapteki.profitability.MedicineValueSorter;
 
 @Component
@@ -18,7 +17,6 @@ import pl.uw.mim.io.lekizapteki.profitability.MedicineValueSorter;
 public class GetIdenticalMedicines {
 
   private MedicineService medicineService;
-  private MedicineProfitabilityRateEnricher medicineProfitabilityRateEnricher;
   private MedicineValueSorter medicineValueSorter;
 
   public IdenticalMedicinesDto execute(String ean, Long diseaseId) {
@@ -36,7 +34,6 @@ public class GetIdenticalMedicines {
   }
 
   private List<MedicineDetailsDto> mapMedicineDtoList(List<MedicineEntity> medicineEntityList) {
-//    List<MedicineEntity>
     List<MedicineEntity> sortedMedicineEntityList = medicineValueSorter.sort(medicineEntityList);
 
     return sortedMedicineEntityList.stream()

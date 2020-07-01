@@ -16,12 +16,26 @@ public class MedicineValueSorter {
   }
 
   private int compareMedicineValue(MedicineEntity firstMedicine, MedicineEntity secondMedicine) {
-    int result = getMultiplicationResult(firstMedicine, secondMedicine);
+    int result = compareMedicinesRates(firstMedicine, secondMedicine);
     if (result == 0) {
       return getCompareResult(firstMedicine, secondMedicine);
     }
 
     return result;
+  }
+
+  private int compareMedicinesRates(MedicineEntity firstMedicine, MedicineEntity secondMedicine) {
+    BigDecimal firstMedicineRate = MedicineProfitabilityRateResolver.getRate(firstMedicine);
+    BigDecimal secondMedicineRate = MedicineProfitabilityRateResolver.getRate(secondMedicine);
+
+    return firstMedicineRate.compareTo(secondMedicineRate);
+  }
+
+  private int getCompareResult(MedicineEntity firstMedicine, MedicineEntity secondMedicine) {
+    String firstMedicineName = firstMedicine.getName();
+    String secondMedicineName = secondMedicine.getName();
+
+    return secondMedicineName.compareTo(firstMedicineName);
   }
 
 }
