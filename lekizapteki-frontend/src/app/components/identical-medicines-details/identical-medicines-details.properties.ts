@@ -2,8 +2,8 @@ export const IdenticalMedicinesDetailsComponentProperties = {
 
   MEDICINE_NAME_HEADER:           'Nazwa leku',
   ACTIVE_INGREDIENT_HEADER:       'Substancja czynna',
-  RETAIL_PRICE_HEADER:            'Cena detaliczna w PLN',
+  PROFITABILITY_RATE_HEADER:      'Współczynnik opłacalnośći',
 
-  CHARGE_FACTOR_0_MESSAGE:        'ryczałt',
-  CHARGE_FACTOR_100_MESSAGE:      'bezpłatny do limitu'
+  CHARGE_FACTOR_LUMP_SUM_MESSAGE: 'ryczałt',
+  CHARGE_FACTOR_FREE_MESSAGE:     'bezpłatny do limitu'
 };
