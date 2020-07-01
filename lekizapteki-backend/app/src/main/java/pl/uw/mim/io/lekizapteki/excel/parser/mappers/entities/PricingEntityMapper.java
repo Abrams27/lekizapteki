@@ -5,6 +5,8 @@ import lombok.Builder;
 import pl.uw.mim.io.lekizapteki.excel.parser.utils.BigDecimalConverter;
 import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 
+//@TODO wpisac sensowne wartosci w tych nowych atrybutach z 2 sprintu
+
 @Builder
 public class PricingEntityMapper {
 

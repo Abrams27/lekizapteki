@@ -49,7 +49,7 @@ CREATE TABLE PRICING (
      refund              DECIMAL             NOT NULL,
      is_lump_sum         BOOLEAN             NOT NULL,
      is_free             BOOLEAN             NOT NULL,
-     profitability_rate  NUMBER              NOT NULL,
+     profitability_rate  DECIMAL             NOT NULL,
 
      CONSTRAINT pricing_pk PRIMARY KEY (id)
 );

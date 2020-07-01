@@ -31,7 +31,7 @@ public class PricingEntity {
   private BigDecimal totalFunding;
   private BigDecimal chargeFactor;
   private BigDecimal refund;
-  private boolean isLumpSum;
-  private boolean isFree;
+  private Boolean isLumpSum;
+  private Boolean isFree;
   private BigDecimal profitabilityRate;
 }
