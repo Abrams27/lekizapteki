@@ -14,5 +14,8 @@ public class PricingDto {
   private BigDecimal totalFunding;
   private BigDecimal chargeFactor;
   private BigDecimal refund;
+  private Boolean isLumpSum;
+  private Boolean isFree;
+  private BigDecimal profitabilityRate;
 
 }
