@@ -9,7 +9,7 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.PackageEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
-import pl.uw.mim.io.lekizapteki.utility.MedicineValueSorter;
+import pl.uw.mim.io.lekizapteki.profitability.MedicineValueSorter;
 
 public class ValueSorterTest {
 
