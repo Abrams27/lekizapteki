@@ -1,4 +1,4 @@
-package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
+package pl.uw.mim.io.lekizapteki.mappers.entity;
 
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;

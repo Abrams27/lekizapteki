@@ -1,5 +1,6 @@
 package pl.uw.mim.io.lekizapteki.mappers.dto;
 
+import java.util.Set;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.mappers.string.FormStringMapper;
 import pl.uw.mim.io.lekizapteki.mappers.string.IngredientStringMapper;
@@ -13,12 +14,13 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 @UtilityClass
 public class MedicineDetailsDtoMapper {
 
+
   public MedicineDetailsDto map(MedicineEntity medicineEntity) {
     return MedicineDetailsDto.builder()
         .ean(medicineEntity.getEan())
-        .dose(medicineEntity.getDose().getDose())
+        .dose(mapDoseDto(medicineEntity.getIngredients()))
         .name(medicineEntity.getName())
-        .activeIngredient(mapIngredientDto(medicineEntity.getIngredient()))
+        .activeIngredient(mapIngredientDto(medicineEntity.getIngredients()))
         .pricing(mapPricingDto(medicineEntity.getPricing()))
         .form(mapFormDto(medicineEntity.getForm()))
         .build();
@@ -32,7 +34,11 @@ public class MedicineDetailsDtoMapper {
     return FormStringMapper.map(formEntity);
   }
 
-  private String mapIngredientDto(IngredientEntity ingredientEntity) {
-    return IngredientStringMapper.map(ingredientEntity);
+  private String mapDoseDto(Set<IngredientEntity> ingredientEntity) {
+    return IngredientStringMapper.mapDoses(ingredientEntity);
+  }
+
+  private String mapIngredientDto(Set<IngredientEntity> ingredientEntity) {
+    return IngredientStringMapper.mapIngredients(ingredientEntity);
   }
 }

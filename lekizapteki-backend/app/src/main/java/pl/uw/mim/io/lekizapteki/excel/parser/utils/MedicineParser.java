@@ -16,7 +16,7 @@ public class MedicineParser {
 
   private String name;
   private String form;
-  private String dose;
+  private Long dose;
 
   public void parseMedicine(Medicine medicine) {
     String nameAndFormAndDose = medicine.getNameAndFormAndDose();
@@ -35,7 +35,9 @@ public class MedicineParser {
   private void mapCapturedGroupsToClassProperties(Matcher matcher) {
     this.name = matcher.group(NAME_CAPTURE_GROUP_NUMBER);
     this.form = matcher.group(FORM_CAPTURE_GROUP_NUMBER);
-    this.dose = matcher.group(DOSE_CAPTURE_GROUP_NUMBER);
+    // TODO MATEUSZ
+    this.dose = 0L;
+//    this.dose = matcher.group(DOSE_CAPTURE_GROUP_NUMBER);
   }
 
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 
+// TODO do przerobienia w nastepnym
 @UtilityClass
 public class MedicineValueSorter {
 
@@ -23,19 +24,21 @@ public class MedicineValueSorter {
 
     return new BigDecimal(getQuantityValue(medicineEntity));
   }
-
+//
   private String getDoseValue(MedicineEntity medicineEntity) {
-    return medicineEntity
-        .getDose()
-        .getDose()
-        .split(" ")[0];
+    return "";
+//    return medicineEntity
+//        .getDose()
+//        .getDose()
+//        .split(" ")[0];
   }
 
   private String getQuantityValue(MedicineEntity medicineEntity) {
-    return medicineEntity
-        .getPack()
-        .getContent()
-        .split(" ")[0];
+    return "";
+//    return medicineEntity
+//        .getPack()
+//        .getContent()
+//        .split(" ")[0];
   }
 
 

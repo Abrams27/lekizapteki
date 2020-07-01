@@ -1,10 +1,10 @@
-package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
+package pl.uw.mim.io.lekizapteki.mappers.entity;
 
+import java.util.Set;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicineParser;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
-import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.FormEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.IngredientEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
@@ -14,40 +14,27 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 @UtilityClass
 public class MedicineEntityMapper {
 
-  private String name;
-  private String form;
-  private String dose;
-
   public MedicineEntity map(Medicine medicine, DiseaseEntity diseaseEntity) {
+    MedicineParser medicineParser = new MedicineParser();
 
-    moveNameAndFormAndDoseToSeparateVariables(medicine);
+    IngredientEntity ingredientEntity = IngredientEntityMapper.map(medicine.getIngredient(), medicineParser.getDose());
+    FormEntity formEntity = FormEntityMapper.map(medicineParser.getForm());
 
-    DoseEntity doseEntity = DoseEntityMapper.map(dose);
-    IngredientEntity ingredientEntity = IngredientEntityMapper.map(medicine.getIngredient());
-    FormEntity formEntity = FormEntityMapper.map(form);
-    PackageEntity packageEntity = PackageEntityMapper.map(medicine.getPack());
+    // TODO MATEUSZ MAPOWANIE Z PACZKI NA QUANTITY
+    PackageEntity packageEntity = PackageEntityMapper.map(0L);
 
     PricingEntity pricingEntity = buildPricingEntityMapper(medicine).map();
 
     return MedicineEntity.builder()
         .ean(medicine.getEan())
-        .name(name)
-        .dose(doseEntity)
-        .ingredient(ingredientEntity)
+        .name(medicineParser.getName())
+        // todo MATEUSZ pewnie inaczej to mapowac jak juz wiecej bd mogl miec
+        .ingredients(Set.of(ingredientEntity))
         .form(formEntity)
         .disease(diseaseEntity)
         .pack(packageEntity)
         .pricing(pricingEntity)
         .build();
-  }
-
-  private void moveNameAndFormAndDoseToSeparateVariables(Medicine medicine) {
-    MedicineParser medicineParser = new MedicineParser();
-
-    medicineParser.parseMedicine(medicine);
-    name = medicineParser.getName();
-    form = medicineParser.getForm();
-    dose = medicineParser.getDose();
   }
 
   private PricingEntityMapper buildPricingEntityMapper(Medicine medicine) {
