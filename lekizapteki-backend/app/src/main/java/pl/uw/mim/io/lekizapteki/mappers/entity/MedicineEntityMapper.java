@@ -3,9 +3,7 @@ package pl.uw.mim.io.lekizapteki.mappers.entity;
 import java.util.Set;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
-import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicineParser;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
-import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.FormEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.IngredientEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
@@ -21,8 +19,6 @@ public class MedicineEntityMapper {
   private Long sndDose;
 
   public MedicineEntity map(Medicine medicine, DiseaseEntity diseaseEntity) {
-    MedicineParser medicineParser = new MedicineParser();
-
     moveNameAndFormAndDoseToSeparateVariables(medicine);
 
     Set<IngredientEntity> setOfIngredients;
@@ -76,6 +72,8 @@ public class MedicineEntityMapper {
         .totalFunding(medicine.getTotalFunding())
         .chargeFactor(medicine.getChargeFactor())
         .refund(medicine.getRefund())
+        .isLumpSum(medicine.getChargeFactor().equals("ryczałt"))
+        .isFree(medicine.getChargeFactor().equals("bezpłatny do limitu"))
         .build();
   }
 }
