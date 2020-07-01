@@ -83,9 +83,7 @@ public class MedicinesValidator {
     String name = medicineParser.getName();
     String form = medicineParser.getForm();
 
-    // TODO MEME
-    String dose = "";
-//    String dose = medicineParser.getDose();
+    String dose = medicineParser.getDose();
     String pack = medicine.getPack();
 
     String parsedDose = parseMedicineDose(dose);

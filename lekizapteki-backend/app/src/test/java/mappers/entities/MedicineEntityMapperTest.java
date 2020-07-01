@@ -39,7 +39,7 @@ public class MedicineEntityMapperTest {
 
     split.add(medicineParser.getName());
     split.add(medicineParser.getForm());
-//    split.add(medicineParser.getDose());
+    split.add(medicineParser.getDose());
 
 //      System.out.println("split = " + split);
 //      System.out.println("correct = " + correctSplit);

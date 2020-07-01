@@ -8,7 +8,7 @@ public class MedicineParser {
 
   private String name;
   private String form;
-  private String dose; // Long
+  private String dose;
 
   public void parseMedicine(Medicine medicine) {
     String nameAndFormAndDose = medicine.getNameAndFormAndDose();
@@ -34,22 +34,5 @@ public class MedicineParser {
     } else {
       assert(false);
     }
-
-//    Pattern pattern = Pattern.compile(NAME_FORM_DOSE_PATTERN);
-//    Matcher matcher = pattern.matcher(nameAndFormAndDose);
-//
-//    executeMatcher(matcher);
-//    mapCapturedGroupsToClassProperties(matcher);
   }
-
-//  private void executeMatcher(Matcher matcher) {
-//    matcher.find(); // Ignore the check, always works
-//  }
-//
-//  private void mapCapturedGroupsToClassProperties(Matcher matcher) {
-//    this.name = matcher.group(NAME_CAPTURE_GROUP_NUMBER);
-//    this.form = matcher.group(FORM_CAPTURE_GROUP_NUMBER);
-//    this.dose = matcher.group(DOSE_CAPTURE_GROUP_NUMBER);
-//  }
-
 }
