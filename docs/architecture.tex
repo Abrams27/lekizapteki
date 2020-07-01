@@ -36,6 +36,8 @@ Lekizapteki\\
     1. & 29.04.2020 & Poprawki w endpointach i schema. \\
     \hline
     2. & 29.06.2020 & Współczynnik opłacalności w wyświetlanej tabeli oraz mała modyfikacja api. \\
+    \hline
+    2. & 01.06.2020 & Aktualizacja bazy danych.
   \end{tabular}
 
   \section{Ogólna struktura}
@@ -242,6 +244,7 @@ Lekizapteki\\
     \begin{lstlisting}
       CREATE TABLE PRICING (
       id              IDENTITY    NOT NULL,
+      trade_price     DECIMAL     NOT NULL,
       sale_price      DECIMAL     NOT NULL,
       retail_price    DECIMAL     NOT NULL,
       total_funding   DECIMAL     NOT NULL,
