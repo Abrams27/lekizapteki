@@ -10,8 +10,8 @@
     {{getSelectedMedicine().activeIngredient}}
   </p>
 
-  <p class="identical-medicines-details-selected-medicine-retail-price-top">
-    {{getSelectedMedicine().pricing.retailPrice}}
+  <p class="identical-medicines-details-selected-medicine-profitability-rate-top">
+    {{getSelectedMedicine().pricing.profitabilityRate}}
   </p>
 
   <p class="identical-medicines-details-selected-medicine-ean">
@@ -74,7 +74,7 @@
     Poziom odpłatności:
 
     <span class="identical-medicines-bolder-text">
-       {{getChargeFactorMessage(getSelectedMedicine().pricing.chargeFactor)}}
+       {{getChargeFactorMessage(getSelectedMedicine().pricing.chargeFactor, getSelectedMedicine().pricing.isLumpSum, getSelectedMedicine().pricing.isFree)}}
     </span>
   </p>
 
@@ -178,7 +178,7 @@
             Poziom odpłatności:
 
             <span class="identical-medicines-bolder-text">
-              {{getChargeFactorMessage(element.pricing.chargeFactor)}}
+              {{getChargeFactorMessage(element.pricing.chargeFactor, element.pricing.isLumpSum, element.pricing.isFree)}}
             </span>
           </p>
 

@@ -2,11 +2,9 @@ import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MedicineDetailsDto} from '../../services/webservices/models/medicine/detailed/medicine-details.dto';
 import {IdenticalMedicinesDetailsComponentProperties} from './identical-medicines-details.properties';
-import {PricingDto} from '../../services/webservices/models/medicine/detailed/pricing.dto';
 import {WebService} from '../../services/webservices/web.service';
 import {Observable, of} from 'rxjs';
 import {IdenticalMedicinesDto} from '../../services/webservices/models/medicine/identical-medicines.dto';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-identical-medicines-details',
@@ -34,7 +32,10 @@ export class IdenticalMedicinesDetailsComponent implements OnChanges {
       retailPrice: 0,
       totalFunding: 0,
       chargeFactor: 0,
-      refund: 0
+      refund: 0,
+      isLumpSum: false,
+      isFree: false,
+      profitabilityRate: 0
     }
   };
 
@@ -50,7 +51,7 @@ export class IdenticalMedicinesDetailsComponent implements OnChanges {
   private columnsToDisplay: string[] = [
     IdenticalMedicinesDetailsComponentProperties.MEDICINE_NAME_HEADER,
     IdenticalMedicinesDetailsComponentProperties.ACTIVE_INGREDIENT_HEADER,
-    IdenticalMedicinesDetailsComponentProperties.RETAIL_PRICE_HEADER
+    IdenticalMedicinesDetailsComponentProperties.PROFITABILITY_RATE_HEADER
   ];
 
   private selectedMedicine: MedicineDetailsDto;
@@ -96,11 +97,11 @@ export class IdenticalMedicinesDetailsComponent implements OnChanges {
     return this.expandedElement;
   }
 
-  getChargeFactorMessage(chargeFactor: number): string {
-    if (chargeFactor === 0) {
-      return this.getChargeFactorFor0();
-    } else if (chargeFactor === 100) {
-      return this.getChargeFactorFor100();
+  getChargeFactorMessage(chargeFactor: number, isLumpSum: boolean, isFree: boolean): string {
+    if (isLumpSum) {
+      return this.getChargeFactorForLumpSum();
+    } else if (isFree) {
+      return this.getChargeFactorForFree();
     }
 
     return this.getChargeFactorDefault(chargeFactor);
@@ -110,12 +111,12 @@ export class IdenticalMedicinesDetailsComponent implements OnChanges {
     return `${chargeFactor} %`;
   }
 
-  private getChargeFactorFor0(): string {
-    return IdenticalMedicinesDetailsComponentProperties.CHARGE_FACTOR_0_MESSAGE;
+  private getChargeFactorForLumpSum(): string {
+    return IdenticalMedicinesDetailsComponentProperties.CHARGE_FACTOR_LUMP_SUM_MESSAGE;
   }
 
-  private getChargeFactorFor100(): string {
-    return IdenticalMedicinesDetailsComponentProperties.CHARGE_FACTOR_100_MESSAGE;
+  private getChargeFactorForFree(): string {
+    return IdenticalMedicinesDetailsComponentProperties.CHARGE_FACTOR_FREE_MESSAGE;
   }
 
   getColumnContentForHeader(header: string, element: MedicineDetailsDto): string | number {
@@ -127,8 +128,8 @@ export class IdenticalMedicinesDetailsComponent implements OnChanges {
       return element.activeIngredient;
     }
 
-    if (header === IdenticalMedicinesDetailsComponentProperties.RETAIL_PRICE_HEADER) {
-      return element.pricing.retailPrice;
+    if (header === IdenticalMedicinesDetailsComponentProperties.PROFITABILITY_RATE_HEADER) {
+      return element.pricing.profitabilityRate;
     }
   }
 
