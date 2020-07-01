@@ -24,6 +24,7 @@ CREATE TABLE PRICING (
     sale_price          DECIMAL             NOT NULL,
     retail_price        DECIMAL             NOT NULL,
     total_funding       DECIMAL             NOT NULL,
+    trade_price         DECIMAL             NOT NULL,
     charge_factor       DECIMAL             NOT NULL,
     refund              DECIMAL             NOT NULL,
     is_lump_sum         BOOLEAN             NOT NULL,
