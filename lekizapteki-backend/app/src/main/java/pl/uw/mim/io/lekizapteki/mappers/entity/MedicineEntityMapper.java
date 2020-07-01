@@ -5,6 +5,7 @@ import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 import pl.uw.mim.io.lekizapteki.excel.parser.utils.MedicineParser;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
+import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.FormEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.IngredientEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
@@ -13,6 +14,10 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 
 @UtilityClass
 public class MedicineEntityMapper {
+
+  private String name;
+  private String form;
+  private String dose;
 
   public MedicineEntity map(Medicine medicine, DiseaseEntity diseaseEntity) {
     MedicineParser medicineParser = new MedicineParser();
@@ -35,6 +40,14 @@ public class MedicineEntityMapper {
         .pack(packageEntity)
         .pricing(pricingEntity)
         .build();
+  }
+
+  private void moveNameAndFormAndDoseToSeparateVariables(Medicine medicine) {
+    String[] splitNameAndFormAndDose = medicine.getNameAndFormAndDose().split(";");
+
+    name = splitNameAndFormAndDose[0];
+    form = splitNameAndFormAndDose[1];
+    dose = splitNameAndFormAndDose[2];
   }
 
   private PricingEntityMapper buildPricingEntityMapper(Medicine medicine) {
