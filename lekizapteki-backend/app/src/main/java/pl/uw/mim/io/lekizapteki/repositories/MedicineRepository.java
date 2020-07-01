@@ -15,5 +15,5 @@ public interface MedicineRepository extends JpaRepository<MedicineEntity, Long> 
 
   Optional<MedicineEntity> findByEanAndDisease(String ean, DiseaseEntity disease);
 
-//  List<MedicineEntity> findAllByDisease(DiseaseEntity disease);
+  List<MedicineEntity> findAllByDiseaseIn(List<DiseaseEntity> diseases);
 }
