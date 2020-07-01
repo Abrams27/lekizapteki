@@ -1,8 +1,10 @@
 package pl.uw.mim.io.lekizapteki.mappers.entity;
 
+import java.math.BigDecimal;
 import java.util.Set;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
+import pl.uw.mim.io.lekizapteki.excel.parser.utils.BigDecimalConverter;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.FormEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.IngredientEntity;
@@ -59,8 +61,10 @@ public class MedicineEntityMapper {
     sndDose = 0L;
     if (dose.contains("+")) {
       String[] dosages = dose.split("\\+");
-      fstDose = Long.parseLong(dosages[0]);
-      sndDose = Long.parseLong(dosages[1]);
+      fstDose = new BigDecimal(dosages[0]).longValue();
+      sndDose = new BigDecimal(dosages[1]).longValue();
+    } else {
+      fstDose = new BigDecimal(dose).longValue();
     }
   }
 
