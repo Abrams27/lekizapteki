@@ -131,7 +131,7 @@ public class MedicinesValidator {
   private String parseSpecialMedicineDose(String specialDose) {
 
     if (specialDose.equals(WEIRD_DOSE)) {
-      return "160+12,5 mg";
+      return "160+12.5 mg";
     }
 
     if (specialDose.contains("+")) {

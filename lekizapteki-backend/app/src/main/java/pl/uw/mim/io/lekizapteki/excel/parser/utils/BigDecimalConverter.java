@@ -11,6 +11,10 @@ public class BigDecimalConverter {
   private final int LUMP_SUM_VALUE = 0;
   private final int FREE_UP_TO_THE_LIMIT_VALUE = -1;
 
+  public BigDecimal doseToBigDecimal(String dose) {
+    return new BigDecimal(dose.replace(",", "."));
+  }
+
   public BigDecimal priceToBigDecimal(String price) {
     return new BigDecimal(price.replace(",", "."));
   }
