@@ -15,7 +15,7 @@ public class MedicinesValidator {
   private final String MULTIPLE_INGREDIENT_DELIMITER = "+";
   private final String PILL_FORM_SUBSTRING = "tabl";
   private final String SPECIAL_MEDICINE_PACK_PREFIX = "1 but.po";
-  private final String WEIRD_DOSE = "160+12,5 mg mg";
+  private final String WEIRD_DOSE = "160+12.5 mg mg";
 
   private final List<String> UNSUPPORTED_NAME_FORM_DOSE = List.of(
       "Aprepitant Sandoz, kaps. twarde, 125 mg, 80 mg",

@@ -34,5 +34,7 @@ public class MedicineParser {
     } else {
       assert(false);
     }
+
+    dose = dose.replace(',', '.');
   }
 }
