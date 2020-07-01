@@ -36,7 +36,7 @@ public class MedicineEntity {
   private String name;
 
   @OneToMany(mappedBy = "medicine")
-  private Set<IngredientEntity> ingredient;
+  private Set<IngredientEntity> ingredients;
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "form_id", nullable = false)

@@ -3,12 +3,9 @@ package pl.uw.mim.io.lekizapteki.services;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities.MedicineEntityMapper;
+import pl.uw.mim.io.lekizapteki.mappers.entity.MedicineEntityMapper;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 import pl.uw.mim.io.lekizapteki.exceptions.WrongMedicineForDiseaseException;
-import pl.uw.mim.io.lekizapteki.repositories.DiseaseRepository;
-import pl.uw.mim.io.lekizapteki.repositories.DoseRepository;
-import pl.uw.mim.io.lekizapteki.repositories.IngredientRepository;
 import pl.uw.mim.io.lekizapteki.repositories.MedicineRepository;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
@@ -20,9 +17,9 @@ public class MedicineService {
   private MedicineRepository medicineRepository;
   private DiseaseService diseaseService;
 
-  private DoseRepository doseRepository;
-  private DiseaseRepository diseaseRepository;
-  private IngredientRepository ingredientRepository;
+//  private DoseRepository doseRepository;
+//  private DiseaseRepository diseaseRepository;
+//  private IngredientRepository ingredientRepository;
 
   public List<MedicineEntity> getMedicinesForDiseaseId(Long diseaseId) {
     DiseaseEntity diseaseEntity = diseaseService.getDiseaseWithIdOrThrow(diseaseId);
@@ -33,12 +30,9 @@ public class MedicineService {
 
   public List<MedicineEntity> getIdenticalMedicines(String ean, Long diseaseId) {
     MedicineEntity medicineEntity = getMedicineWithEanAndDiseaseIdOrThrow(ean, diseaseId);
-return List.of();
-//    return medicineRepository
-//        .findAllByIngredientInAndDoseInAndDiseaseIn(
-//            ingredientRepository.findAllByName(medicineEntity.getIngredient().getName()),
-//            doseRepository.findAllByDose(medicineEntity.getDose().getDose()),
-//            diseaseRepository.findAllByName(medicineEntity.getDisease().getName()));
+
+    return medicineRepository
+        .findAllByDisease(medicineEntity.getDisease());
   }
 
   public MedicineEntity getMedicineWithEanAndDiseaseIdOrThrow(String ean, Long diseaseId) {

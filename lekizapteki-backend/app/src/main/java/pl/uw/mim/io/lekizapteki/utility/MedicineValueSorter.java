@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 
+// TODO do przerobienia w nastepnym
 @UtilityClass
 public class MedicineValueSorter {
 

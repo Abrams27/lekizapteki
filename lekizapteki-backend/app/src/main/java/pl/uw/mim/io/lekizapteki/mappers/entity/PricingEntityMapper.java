@@ -1,11 +1,8 @@
-package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
+package pl.uw.mim.io.lekizapteki.mappers.entity;
 
-import java.math.BigDecimal;
 import lombok.Builder;
 import pl.uw.mim.io.lekizapteki.excel.parser.utils.BigDecimalConverter;
 import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
-
-//@TODO wpisac sensowne wartosci w tych nowych atrybutach z 2 sprintu
 
 @Builder
 public class PricingEntityMapper {
@@ -16,6 +13,8 @@ public class PricingEntityMapper {
   private String totalFunding;
   private String chargeFactor;
   private String refund;
+  private Boolean isLumpSum;
+  private Boolean isFree;
 
   public PricingEntity map() {
 
@@ -26,8 +25,8 @@ public class PricingEntityMapper {
         .totalFunding(BigDecimalConverter.priceToBigDecimal(totalFunding))
         .chargeFactor(BigDecimalConverter.chargeFactorToBigDecimal(chargeFactor))
         .refund(BigDecimalConverter.priceToBigDecimal(refund))
-        .isLumpSum(true)
-        .isFree(true)
+        .isLumpSum(isLumpSum)
+        .isFree(isFree)
         .build();
   }
 }

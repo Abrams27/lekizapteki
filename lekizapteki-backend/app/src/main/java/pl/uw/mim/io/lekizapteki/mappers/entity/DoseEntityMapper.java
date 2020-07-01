@@ -1,4 +1,4 @@
-package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
+package pl.uw.mim.io.lekizapteki.mappers.entity;
 
 import lombok.experimental.UtilityClass;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
@@ -6,10 +6,9 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.DoseEntity;
 @UtilityClass
 public class DoseEntityMapper {
 
-  public DoseEntity map(String dose) {
+  public DoseEntity map(Long dose) {
     return DoseEntity.builder()
-        // todo
-//        .dose(dose)
+        .dose(dose)
         .build();
   }
 }
