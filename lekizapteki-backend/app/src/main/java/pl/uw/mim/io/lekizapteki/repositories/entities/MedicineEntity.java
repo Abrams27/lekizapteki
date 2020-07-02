@@ -1,5 +1,6 @@
 package pl.uw.mim.io.lekizapteki.repositories.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class MedicineEntity {
   private String name;
 
   @OneToMany(mappedBy = "medicine")
-  private Set<IngredientEntity> ingredients;
+  private Set<IngredientEntity> ingredients = new HashSet<>();
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "form_id", nullable = false)

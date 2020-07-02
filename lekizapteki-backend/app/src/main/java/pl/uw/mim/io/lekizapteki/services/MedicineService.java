@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.uw.mim.io.lekizapteki.mappers.entity.MedicineEntityMapper;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 import pl.uw.mim.io.lekizapteki.exceptions.WrongMedicineForDiseaseException;
 import pl.uw.mim.io.lekizapteki.repositories.DiseaseRepository;
+import pl.uw.mim.io.lekizapteki.repositories.IngredientRepository;
 import pl.uw.mim.io.lekizapteki.repositories.MedicineRepository;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.IngredientEntity;
@@ -16,12 +18,14 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class MedicineService {
 
   private MedicineRepository medicineRepository;
   private DiseaseService diseaseService;
 
   private DiseaseRepository diseaseRepository;
+  private IngredientRepository ingredientRepository;
 
   public List<MedicineEntity> getMedicinesForDiseaseId(Long diseaseId) {
     DiseaseEntity diseaseEntity = diseaseService.getDiseaseWithIdOrThrow(diseaseId);
@@ -68,7 +72,7 @@ public class MedicineService {
   public void saveMedicinesToRepository(List<Medicine> medicines) {
     medicines.stream()
         .map(medicine -> MedicineEntityMapper.map(medicine, getDiseaseWithNameOrCreateNew(medicine)))
-        .forEach(medicineRepository::save);
+        .forEach(this::saveMedicineAndIngredients);
   }
 
   private DiseaseEntity getDiseaseWithNameOrCreateNew(Medicine medicine) {
@@ -76,4 +80,11 @@ public class MedicineService {
         .getDiseaseWithNameOrCreateNew(medicine.getDisease());
   }
 
+  private void saveMedicineAndIngredients(MedicineEntity medicineEntity) {
+    medicineRepository.save(medicineEntity);
+
+    medicineEntity.getIngredients().stream()
+      .peek(o -> o.setMedicine(medicineEntity))
+      .forEach(ingredientRepository::save);
+  }
 }

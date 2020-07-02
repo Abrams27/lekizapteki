@@ -12,7 +12,7 @@
   grid-template-rows: auto auto auto;
   grid-template-columns: auto auto auto auto auto;
   grid-template-areas:
-    ".                                                       identical-medicines-details-selected-medicine-name-top  identical-medicines-details-selected-medicine-name-top     identical-medicines-details-selected-medicine-active-ingredient-top  identical-medicines-details-selected-medicine-retail-price-top"
+    ".                                                       identical-medicines-details-selected-medicine-name-top  identical-medicines-details-selected-medicine-active-ingredient-top     identical-medicines-details-selected-medicine-active-ingredient-top  identical-medicines-details-selected-medicine-retail-price-top"
     "identical-medicines-details-selected-medicine-ean       identical-medicines-details-selected-medicine-dose      identical-medicines-details-selected-medicine-trade-price  identical-medicines-details-selected-medicine-retail-price           identical-medicines-details-selected-medicine-charge-factor"
     "identical-medicines-details-selected-medicine-ean       identical-medicines-details-selected-medicine-form      identical-medicines-details-selected-medicine-sale-price   identical-medicines-details-selected-medicine-total-founding         identical-medicines-details-selected-medicine-refund";
 
@@ -20,7 +20,7 @@
   margin-left: 2.5%;
   margin-top: 2.5%;
   width: 95%;
-  padding: 16px;
+  padding: 32px;
 }
 
 .identical-medicines-details-selected-medicine-name-top {

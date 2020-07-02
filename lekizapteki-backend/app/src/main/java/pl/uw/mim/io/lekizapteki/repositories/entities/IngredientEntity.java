@@ -35,8 +35,8 @@ public class IngredientEntity {
   @JoinColumn(name = "dose_id", referencedColumnName = "id")
   private DoseEntity dose;
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinColumn(name = "medicine_id", nullable = false, insertable = false, updatable = false)
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+  @JoinColumn(name="medicine_id", nullable=false)
   private MedicineEntity medicine;
 
 }

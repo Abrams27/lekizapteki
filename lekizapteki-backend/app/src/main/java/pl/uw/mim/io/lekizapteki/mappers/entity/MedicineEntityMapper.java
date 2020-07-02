@@ -3,6 +3,7 @@ package pl.uw.mim.io.lekizapteki.mappers.entity;
 import java.math.BigDecimal;
 import java.util.Set;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
 import pl.uw.mim.io.lekizapteki.excel.parser.utils.BigDecimalConverter;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
@@ -13,6 +14,7 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.PackageEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.PricingEntity;
 
 @UtilityClass
+@Slf4j
 public class MedicineEntityMapper {
 
   private String name;
@@ -31,7 +33,6 @@ public class MedicineEntityMapper {
     } else {
       setOfIngredients = Set.of(fstIngredientEntity);
     }
-
 
     FormEntity formEntity = FormEntityMapper.map(form);
 
