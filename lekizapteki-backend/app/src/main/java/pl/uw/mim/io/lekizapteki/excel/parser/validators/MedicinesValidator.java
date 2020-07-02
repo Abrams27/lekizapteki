@@ -21,7 +21,8 @@ public class MedicinesValidator {
       "Aprepitant Sandoz, kaps. twarde, 125 mg, 80 mg",
       "Aprepitant Teva, kaps. twarde, 125 mg, 80 mg",
       "Emend, kaps. twarde, 125 mg, 80 mg",
-      "Divina, tabl., 2 mg, 2+10 mg"
+      "Divina, tabl., 2 mg, 2+10 mg",
+      "Seebri Breezhaler, proszek do inhalacji w kaps. twardej, 44 µg"
   );
 
 

@@ -5,7 +5,6 @@ import java.util.Set;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import pl.uw.mim.io.lekizapteki.excel.parser.models.Medicine;
-import pl.uw.mim.io.lekizapteki.excel.parser.utils.BigDecimalConverter;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.FormEntity;
 import pl.uw.mim.io.lekizapteki.repositories.entities.IngredientEntity;
@@ -36,7 +35,7 @@ public class MedicineEntityMapper {
 
     FormEntity formEntity = FormEntityMapper.map(form);
 
-    PackageEntity packageEntity = PackageEntityMapper.map(Long.parseLong(medicine.getPack().substring(0, 1)));
+    PackageEntity packageEntity = PackageEntityMapper.map(Long.parseLong(medicine.getPack().split(" ")[0]));
 
     PricingEntity pricingEntity = buildPricingEntityMapper(medicine).map();
 
@@ -62,10 +61,10 @@ public class MedicineEntityMapper {
     sndDose = 0L;
     if (dose.contains("+")) {
       String[] dosages = dose.split("\\+");
-      fstDose = new BigDecimal(dosages[0]).longValue();
-      sndDose = new BigDecimal(dosages[1]).longValue();
+      fstDose = new BigDecimal(dosages[0]).multiply(BigDecimal.valueOf(1000)).longValue();
+      sndDose = new BigDecimal(dosages[1]).multiply(BigDecimal.valueOf(1000)).longValue();
     } else {
-      fstDose = new BigDecimal(dose).longValue();
+      fstDose = new BigDecimal(dose).multiply(BigDecimal.valueOf(1000)).longValue();
     }
   }
 
