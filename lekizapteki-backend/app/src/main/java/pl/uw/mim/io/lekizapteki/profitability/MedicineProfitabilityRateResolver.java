@@ -11,10 +11,12 @@ import pl.uw.mim.io.lekizapteki.repositories.entities.MedicineEntity;
 public class MedicineProfitabilityRateResolver {
 
   private final static int DIVIDE_SCALE = 4;
+  private final static BigDecimal MG_SCALE = new BigDecimal(1000);
+
 
   public BigDecimal getRate(MedicineEntity medicineEntity) {
     BigDecimal price = getRetailPrice(medicineEntity);
-    BigDecimal ingredientQuantity = getIngredientQuantity(medicineEntity);
+    BigDecimal ingredientQuantity = getIngredientQuantity(medicineEntity).divide(MG_SCALE, DIVIDE_SCALE * 2, RoundingMode.HALF_DOWN);
 
     return price.divide(ingredientQuantity, DIVIDE_SCALE, RoundingMode.HALF_DOWN);
   }
