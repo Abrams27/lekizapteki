@@ -6,5 +6,8 @@ export interface PricingDto {
   totalFunding: number;
   chargeFactor: number;
   refund: number;
+  isLumpSum: boolean;
+  isFree: boolean;
+  profitabilityRate: number;
 
 }

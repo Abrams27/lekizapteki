@@ -3,7 +3,7 @@ package pl.uw.mim.io.lekizapteki.services;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities.DiseaseEntityMapper;
+import pl.uw.mim.io.lekizapteki.mappers.entity.DiseaseEntityMapper;
 import pl.uw.mim.io.lekizapteki.exceptions.NoSuchDiseaseException;
 import pl.uw.mim.io.lekizapteki.repositories.DiseaseRepository;
 import pl.uw.mim.io.lekizapteki.repositories.entities.DiseaseEntity;

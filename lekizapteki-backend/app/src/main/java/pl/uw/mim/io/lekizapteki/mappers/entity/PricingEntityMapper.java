@@ -1,4 +1,4 @@
-package pl.uw.mim.io.lekizapteki.excel.parser.mappers.entities;
+package pl.uw.mim.io.lekizapteki.mappers.entity;
 
 import lombok.Builder;
 import pl.uw.mim.io.lekizapteki.excel.parser.utils.BigDecimalConverter;
@@ -13,6 +13,8 @@ public class PricingEntityMapper {
   private String totalFunding;
   private String chargeFactor;
   private String refund;
+  private Boolean isLumpSum;
+  private Boolean isFree;
 
   public PricingEntity map() {
 
@@ -23,6 +25,8 @@ public class PricingEntityMapper {
         .totalFunding(BigDecimalConverter.priceToBigDecimal(totalFunding))
         .chargeFactor(BigDecimalConverter.chargeFactorToBigDecimal(chargeFactor))
         .refund(BigDecimalConverter.priceToBigDecimal(refund))
+        .isLumpSum(isLumpSum)
+        .isFree(isFree)
         .build();
   }
 }

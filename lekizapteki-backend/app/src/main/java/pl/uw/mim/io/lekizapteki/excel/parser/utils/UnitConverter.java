@@ -15,24 +15,28 @@ public class UnitConverter {
     BigDecimal decimal = new BigDecimal(grams.replace(",", "."));
     BigDecimal converted = decimal.multiply(BigDecimal.valueOf(GRAMS_FACTOR));
 
-    return bigDecimalToTwoDecimalPlacesString(converted);
+    return bigDecimalToString(converted);
   }
 
   public String microgramsToMilligrams(String micrograms) {
     BigDecimal decimal = new BigDecimal(micrograms.replace(",", "."));
     BigDecimal converted = decimal.multiply(BigDecimal.valueOf(MICROGRAMS_FACTOR));
 
-    return bigDecimalToTwoDecimalPlacesString(converted);
+    return bigDecimalToString(converted);
   }
 
   public String internationalUnitsToMilligrams(String internationalUnits) {
     BigDecimal decimal = new BigDecimal(internationalUnits.replace(",", "."));
     BigDecimal converted = decimal.multiply(BigDecimal.valueOf(INTERNATIONAL_UNITS_FACTOR));
 
-    return bigDecimalToTwoDecimalPlacesString(converted);
+    return bigDecimalToString(converted);
   }
 
   private String bigDecimalToTwoDecimalPlacesString(BigDecimal decimal) {
     return decimal.setScale(2, RoundingMode.HALF_EVEN).toString();
+  }
+
+  private String bigDecimalToString(BigDecimal decimal) {
+    return decimal.toString();
   }
 }
